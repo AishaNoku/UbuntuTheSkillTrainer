@@ -5,14 +5,14 @@
 }
 
 :root {
-  --primary: #15803d;
-  --primary-dark: #166534;
-  --secondary: #22c55e;
-  --accent: #facc15;
-  --dark: #1f2937;
-  --dark-light: #4b5563;
-  --gray: #9ca3af;
-  --light: #f3f4f6;
+  --primary: #F3E9DD;        /* main beige background */
+  --primary-dark: #E8DACB;   /* deeper beige for sections/cards */
+  --secondary: #D9B8A9;      /* peach-tan supporting colour */
+  --accent: #A8603A;         /* rustic burnt sienna for buttons / highlights */
+  --dark: #6B2F14;           /* deep chestnut for titles */
+  --dark-light: #A4532A;     /* warm terracotta for large handwritten text */
+  --gray: #D7C4B8;           /* soft taupe accent */
+  --light: #FCEFE2;          /* pale ivory used in button text / highlights */
   --white: #ffffff;
 }
 
@@ -50,7 +50,7 @@ header .btn-primary{
 .logo {
   font-size: 1.5rem;
   font-weight: 700;
-  color: var(--primary);
+  color: var(--dark);
   text-decoration: none;
 }
 
@@ -91,7 +91,7 @@ nav a:hover {
 }
 
 .btn-primary:hover {
-  background-color: var(--primary-dark);
+  background-color: var(--dark);
 
 }
 
@@ -109,7 +109,7 @@ nav a:hover {
 /* Hero Section */
 .hero {
   background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-  color: var(--white);
+  color: var(--dark);
   padding: 6rem 2rem;
   text-align: center;
 }
@@ -276,7 +276,7 @@ nav a:hover {
 /* Testimonials */
 .testimonials {
   padding: 5rem 2rem;
-  background: linear-gradient(135deg, #f0f9ff 0%, #f0fdfa 100%);
+  background: linear-gradient(135deg, #E1CEC8 0%, #DED4D1 100%);
 }
 
 .testimonials-grid {
@@ -437,7 +437,7 @@ nav a:hover {
 
 /* CTA Section */
 .cta {
-  background: linear-gradient(135deg, var(--secondary) 0%, #0891b2 100%);
+  background: linear-gradient(135deg, var(--secondary) 0%, #a88e85 100%);
   color: var(--white);
   padding: 4rem 2rem;
   text-align: center;
@@ -492,9 +492,9 @@ footer {
   grid-column: 1/-1;
   margin: 0 auto;
   padding-top: 2rem;
-  border-top: 1px solid #475569;
+  border-top: 1px solid #a88e85;
   text-align: center;
-  color: #cbd5e1;
+  color: #DBC7BB;
   font-size: 0.9rem;
 }
 
