@@ -11,7 +11,7 @@ function openModule(moduleNumber) {
 
 }
 
-// MODULE 1 PROGRESS (Temporary value for now)
+// MODULE 1 PROGRESS
 let module1Progress = 0;
 
 document.getElementById("module1-progress-fill").style.width = module1Progress + "%";
@@ -39,9 +39,9 @@ function checkAnswer() {
         return;
     }
 
-    if (answer.includes("acrylic") ) {
+    if (answer.includes("medium weight") || answer.includes("acrylic") || answer.includes("4")) {
         feedback.style.color = "green";
-        feedback.textContent = "Correct! Acrylic Yarn is best for beginners.";
+        feedback.textContent = "Correct! Medium weight Acrylic Yarn is best for beginners.";
     } else {
         feedback.style.color = "red";
         feedback.textContent = "Not quite. Try again!";
@@ -60,11 +60,24 @@ function submitExercise() {
     }
 
     status.style.color = "green";
-    status.textContent = "Exercise submitted successfully! 🎉";
+    status.textContent = "Exercise submitted successfully!";
 }
 
 function completeModule() {
     alert("Module 1 marked as complete! You can now proceed to Module 2.");
+    window.location.href = "module2.html";
 }
+
+function checkAnswer1(ans) {
+            let feedback = document.getElementById("feedback");
+
+            if (ans === "5mm" || ans === "acrylic") {
+                feedback.innerHTML = "Correct! Well done!";
+                feedback.style.color = "green";
+            } else {
+                feedback.innerHTML = "Try again!";
+                feedback.style.color = "red";
+            }
+        }
 
 
