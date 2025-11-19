@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 1- Introduction to Bead-Making</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">Ubuntu</a>
+        <nav id="nav-menu">
+            <a href="bead-making.html">Back to Course</a>
+        </nav>
+    </header>
+
+    <section class="module-content">
+        <h1>Module 1: Introduction to Bead-Making & Materials</h1>
+        <p>In this module, learners are introduced to the world of beadmaking. 
+        You will learn the different types of beads, their cultural relevance, 
+        the primary tools used, and how to choose safe and durable materials 
+        for professional beadwork.</p>
+
+    <h2>Lesson Video</h2>
+    <iframe  width="560" height="315" 
+        src="https://www.youtube.com/embed/9uE6Xv5Yl-Y" 
+        frameborder="0" allowfullscreen>
+    </iframe>
+
+    <h2> End of Module Quiz</h2>
+    <form id="bquiz1">
+        <p>1. Which of the following is a common beading tool?</p>
+        <input type="radio" name="q1" value="a"> Hammer<br>
+        <input type="radio" name="q1" value="b"> Needle-nose pliers<br>
+        <input type="radio" name="q1" value="c"> Wood saw<br>
+
+        <p>2. Which material is commonly used for bead cord?</p>
+        <input type="radio" name="q2" value="a"> Elastic thread<br>
+        <input type="radio" name="q2" value="b"> Cement<br>
+        <input type="radio" name="q2" value="c"> Roofing wire<br>
+    </form>
+    
+    <p id="result"></p>
+
+    </section>
+
+    <script>
+        function gradeQuiz(){
+            let score=0;
+            if(document.querySelector('input[name="q1"]:checked')?.value === "b")score++;
+            if(document.querySelector('input[name="q2"]:checked')?.value === "a")score++;
+            document.getElementById("result").innerHTML="Your score: "+score +"/2";
+        }
+    </script>
+    
+</body>
+</html>
