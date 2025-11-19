@@ -1,0 +1,361 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background: url("crochet2.jpg");
+    background-size: cover;
+    background-attachment: fixed;
+    color: #333;
+    
+}
+
+header {
+    text-align: center;
+    padding: 30px 20px;
+    background-color: #ffe7c7;
+    border-bottom: 3px solid pink;
+}
+
+.subtitle {
+    margin-top: 10px;
+    color: #555;
+    font-size: 17px;
+}
+
+/* Progress Section */
+.progress-section {
+    width: 90%;
+    margin: 20px auto;
+}
+
+.progress-bar {
+    width: 100%;
+    height: 18px;
+    background-color: #e4e4e4;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#progress-fill {
+    height: 100%;
+    width: 0%;
+    background-color: #ffa74f;
+    transition: 0.5s;
+}
+
+#progress-text {
+    font-size: 15px;
+    margin-top: 6px;
+}
+
+/* Module Cards */
+.modules {
+    padding: 20px;
+}
+
+.modules h2 {
+    margin-bottom: 10px;
+}
+
+.module-card {
+    background: white;
+    padding: 15px 20px;
+    margin: 15px 0;
+    border-radius: 10px;
+    border-left: 5px solid #ffa74f;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.1);
+}
+
+.module-card:hover {
+    transform: translateY(-3px);
+    background-color: #fff6eb;
+}
+
+/* Module Description */
+.module-description {
+    width: 90%;
+    margin: 20px auto;
+    padding: 15px;
+    background: white;
+    border-left: 5px solid #ffa74f;
+    border-radius: 10px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.module-description h2 {
+    margin-top: 0;
+}
+
+/* Lesson Cards */
+.lessons-section {
+    padding: 20px;
+}
+
+.lesson-card {
+    background: white;
+    padding: 15px 20px;
+    margin: 15px 0;
+    border-left: 5px solid #ffbb77;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.1);
+}
+
+.lesson-card:hover {
+    background: #fff5e8;
+    transform: translateY(-3px);
+}
+
+/* Start Button */
+.start-btn {
+    display: block;
+    width: 90%;
+    margin: 20px auto;
+    padding: 15px;
+    font-size: 18px;
+    background-color: #ffa74f;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.start-btn:hover {
+    background-color: #ff8e1a;
+}
+
+.video-section {
+  width: 90%;
+  margin: 20px auto;
+  text-align: center;
+}
+
+.video-container {
+  position: relative;
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.video-container iframe {
+  width: 100%;
+  height: 390px;
+  border-radius: 10px;
+}
+
+.module-exercise {
+    background: #fff;
+    padding: 25px;
+    width: 90%;
+    max-width: 800px;
+    margin: 30px auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.module-exercise h2, 
+.module-exercise h3 {
+    color: #333;
+}
+
+.quiz-section input,
+.reflection-section textarea {
+    width: 100%;
+    padding: 12px;
+    margin-top: 10px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+}
+
+.quiz-btn, .submit-exercise-btn, .complete-module-btn {
+    margin-top: 20px;
+    padding: 12px 20px;
+    border: none;
+    background-color: #5A60FF;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.quiz-btn:hover,
+.submit-exercise-btn:hover,
+.complete-module-btn:hover {
+    background-color: #454BFF;
+}
+
+.reflection-section textarea {
+    height: 120px;
+    resize: vertical;
+}
+
+#quizFeedback {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+#exerciseStatus {
+    margin-top: 15px;
+    font-weight: bold;
+    color: green;
+}
+
+.lesson-section {
+    background: #fff;
+    padding: 25px;
+    width: 90%;
+    max-width: 850px;
+    margin: 30px auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.lesson-section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.lesson-content h3 {
+    margin-top: 20px;
+    color: #444;
+}
+
+.lesson-content p, 
+.lesson-content ul {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #555;
+}
+
+.lesson-content ul {
+    margin-left: 20px;
+}
+
+.lesson-section {
+    background: #fff;
+    padding: 25px;
+    width: 90%;
+    max-width: 850px;
+    margin: 30px auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.lesson-section h2 {
+    text-align: center;
+    margin-bottom: 20px;
+    color: #333;
+}
+
+.lesson-content h3 {
+    margin-top: 20px;
+    color: #444;
+}
+
+.lesson-content p, 
+.lesson-content ul {
+    font-size: 16px;
+    line-height: 1.7;
+    color: #555;
+}
+
+.lesson-content ul {
+    margin-left: 20px;
+}
+
+.subtitle {
+  margin-top: 5px;
+  font-size: 1rem;
+  color: #333;
+}
+
+/* Content */
+.content {
+  width: 90%;
+  margin: 20px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.content h2 {
+  margin-top: 25px;
+  color: #ff8c66;
+}
+
+.styled-list {
+  padding-left: 20px;
+}
+
+.styled-list li {
+  margin-bottom: 8px;
+}
+
+.note-box {
+  background: #ffe1d6;
+  padding: 15px;
+  border-left: 5px solid #ff8c66;
+  margin: 20px 0;
+  border-radius: 5px;
+}
+
+.hook-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.hook-table th, .hook-table td {
+  border: 1px solid #ffb8a1;
+  padding: 10px;
+  text-align: center;
+}
+
+.hook-table th {
+  background: #ffd6c8;
+}
+
+/* Exercise */
+.exercise {
+  width: 90%;
+  margin: 30px auto;
+  background: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.quiz-box button {
+  display: block;
+  width: 100%;
+  margin: 8px 0;
+  padding: 10px;
+  background: #ff8c66;
+  border: none;
+  border-radius: 8px;
+  color: white;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.quiz-box button:hover {
+  background: #ff6f3d;
+}
+
+#feedback {
+  margin-top: 15px;
+  font-size: 1.1rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+
+
+
+
