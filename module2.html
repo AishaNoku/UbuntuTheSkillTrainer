@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 2 – Crochet Stitches</title>
+    <link rel="stylesheet" href="crochet.css">
+</head>
+<body>
+
+<header>
+    <h1>Module 2: Crochet Stitches</h1>
+    <p class="subtitle2">Learn the essential stitches every crocheter needs</p>
+</header>
+
+
+<!-- Stitch Cards -->
+<section class="lessons-section2">
+    <h2>Lessons in This Module</h2>
+
+    <div class="lesson-grid">
+
+        <a href="lesson2-1.html" class="lesson-card">
+            <h3>Lesson 1</h3>
+            <p>Slip Stitch (sl st)</p>
+        </a>
+
+        <a href="lesson2-2.html" class="lesson-card">
+            <h3>Lesson 2</h3>
+            <p>Single Crochet (sc)</p>
+        </a>
+
+        <a href="lesson2-3.html" class="lesson-card">
+            <h3>Lesson 3</h3>
+            <p>Half Double Crochet (hdc)</p>
+        </a>
+
+        <a href="lesson2-4.html" class="lesson-card">
+            <h3>Lesson 4</h3>
+            <p>Double Crochet (dc)</p>
+        </a>
+
+        <a href="lesson2-5.html" class="lesson-card">
+            <h3>Lesson 5</h3>
+            <p>Treble Crochet (tr)</p>
+        </a>
+
+        <a href="practicePatterns.html" class="lesson-card pattern">
+            <h3>Practice Patterns</h3>
+            <p>Apply the stitches you learned</p>
+        </a>
+
+        
+    </div>
+
+</section>
+
+<section class="assessment-section">
+        <h2>End of Module 2 Assessment</h2>
+        <p>Answer the questions below to test your understanding of crochet stitches.</p>
+
+        <div class="question">
+            <p><strong>1. Which stitch is usually the foundation of most crochet projects?</strong></p>
+            <label><input type="radio" name="q1" value="a"> Single Crochet</label><br>
+            <label><input type="radio" name="q1" value="b"> Chain Stitch</label><br>
+            <label><input type="radio" name="q1" value="c"> Double Crochet</label>
+        </div>
+
+        <div class="question">
+            <p><strong>2. Which stitch is taller than a Single Crochet but shorter than a Double Crochet?</strong></p>
+            <label><input type="radio" name="q2" value="a"> Half Double Crochet</label><br>
+            <label><input type="radio" name="q2" value="b"> Triple Crochet</label><br>
+            <label><input type="radio" name="q2" value="c"> Chain Stitch</label>
+        </div>
+
+        <div class="question">
+            <p><strong>3. The abbreviation DC stands for:</strong></p>
+            <label><input type="radio" name="q3" value="a"> Double Chain</label><br>
+            <label><input type="radio" name="q3" value="b"> Double Crochet</label><br>
+            <label><input type="radio" name="q3" value="c"> Downward Crochet</label>
+        </div>
+
+        <button onclick="checkAnswersModule2()">Submit Answers</button>
+        <p id="result"></p>
+    </section>
+
+   <button class="complete-module-btn" onclick="completeModule(2)">Mark Module as Complete</button>
+</section>
+  
+
+<script src="crochet.js"></script>
+
+</body>
+</html>
