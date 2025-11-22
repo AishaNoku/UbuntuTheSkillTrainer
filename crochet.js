@@ -110,5 +110,28 @@ function checkAnswersModule2() {
   document.getElementById("result").innerHTML = feedback;
 }
 
+function checkAnswersModule3() {
+  let score = 0;
+  let correct = [];
+
+  if (document.querySelector('input[name="q1"]:checked')?.value === "b") {
+    score++; 
+  } else correct.push("Q1: The correct answer is B (To shape and widen the project)");
+
+  if (document.querySelector('input[name="q2"]:checked')?.value === "b") {
+    score++;
+  } else correct.push("Q2: The correct answer is B (Single crochet two together)");
+
+  if (document.querySelector('input[name="q3"]:checked')?.value === "a") {
+    score++;
+  } else correct.push("Q3: The correct answer is A (Holding the yarn the same way)");
+
+  document.getElementById("module3Result").innerHTML =
+    "You scored " + score + " out of 3.";
+
+  document.getElementById("module3CorrectAnswers").innerHTML =
+    correct.length === 0 ? "Perfect! All answers correct 🎉" : correct.join("<br>");
+}
+
 
 
