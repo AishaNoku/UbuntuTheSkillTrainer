@@ -26,10 +26,32 @@
         <iframe width="560" height="315" src="https://www.youtube.com/embed/V1CdPdtSJ6c" frameborder="0" allowfullscreen></iframe>
 
         <h2>End of Module Quiz</h2>
-        <form id="quiz2">
-            <p>1. Which principle helps in balancing bead colours?</p>
-            <input type="radio"
-        </form>
+    <form id="quiz2">
+        <p>1. Which principle helps in balancing bead colors?</p>
+        <input type="radio" name="q1" value="a"> Color harmony<br>
+        <input type="radio" name="q1" value="b"> Weight lifting<br>
+        <input type="radio" name="q1" value="c"> Hammering<br>
+
+        <p>2. Which of these is a common beaded accessory?</p>
+        <input type="radio" name="q2" value="a"> Necklace<br>
+        <input type="radio" name="q2" value="b"> Car engine<br>
+        <input type="radio" name="q2" value="c"> Laptop battery<br>
+
+        <button type="button" onclick="gradeQuiz2()">Submit</button>
+    </form>
+
+    <p id="result2"></p>
+
+</section>
+
+<script>
+function gradeQuiz2() {
+    let score = 0;
+    if (document.querySelector('input[name="q1"]:checked')?.value === "a") score++;
+    if (document.querySelector('input[name="q2"]:checked')?.value === "a") score++;
+    document.getElementById("result2").innerHTML = "Your score: " + score + "/2";
+}
+</script>
     </section>
     
 </body>

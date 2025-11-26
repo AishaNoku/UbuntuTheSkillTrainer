@@ -1,3 +1,7 @@
+/* ==================================== */
+/* 1. GLOBALS & UTILITIES               */
+/* ==================================== */
+
 * {
   margin: 0;
   padding: 0;
@@ -23,11 +27,35 @@ body {
   line-height: 1.6;
 }
 
-/* Header & Navigation */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-title {
+  text-align: center;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.section-subtitle {
+  text-align: center;
+  color: var(--gray);
+  margin-bottom: 3rem;
+  font-size: 1rem;
+}
+
+/* ==================================== */
+/* 2. HEADER, NAVIGATION & BUTTONS      */
+/* ==================================== */
+
 header {
   position: sticky;
   display: flex;
   justify-content: space-between;
+  align-items: center; 
+  padding: 1rem 2rem; 
   top: 0;
   z-index: 100;
   background-color: var(--white);
@@ -35,14 +63,6 @@ header {
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
-.header-container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 1rem 2rem;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
 header .btn-primary{
     margin-left: auto;
 }
@@ -54,6 +74,7 @@ header .btn-primary{
   text-decoration: none;
 }
 
+/* Nav Positioning Reverted to original but fixed for display */
 header nav {
   position: absolute;
   left:50%;
@@ -74,6 +95,7 @@ nav a:hover {
   color: var(--primary);
 }
 
+/* Button Styles */
 .btn {
   padding: 0.75rem 1.5rem;
   border: none;
@@ -92,7 +114,6 @@ nav a:hover {
 
 .btn-primary:hover {
   background-color: var(--dark);
-
 }
 
 .btn-secondary {
@@ -106,7 +127,21 @@ nav a:hover {
   color: var(--white);
 }
 
-/* Hero Section */
+/* Mobile Menu Toggle */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--dark);
+}
+
+/* ==================================== */
+/* 3. HOMEPAGE SECTIONS (ORIGINAL STYLES) */
+/* ==================================== */
+
+/* Hero Section (Reverted to Original) */
 .hero {
   background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
   color: var(--dark);
@@ -172,29 +207,10 @@ nav a:hover {
   opacity: 0.9;
 }
 
-/* Featured Skills */
+/* Featured Skills (Reverted to Original) */
 .featured-skills {
   padding: 5rem 2rem;
   background-color: var(--light);
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.section-title {
-  text-align: center;
-  font-size: clamp(1.75rem, 4vw, 2.5rem);
-  margin-bottom: 0.5rem;
-  font-weight: 700;
-}
-
-.section-subtitle {
-  text-align: center;
-  color: var(--gray);
-  margin-bottom: 3rem;
-  font-size: 1rem;
 }
 
 .skills-grid {
@@ -214,6 +230,7 @@ nav a:hover {
 }
 
 .skill-card:hover {
+  /* Original was empty, keeping it as is */
 }
 
 .skill-icon {
@@ -231,7 +248,7 @@ nav a:hover {
   font-size: 0.9rem;
 }
 
-/* How It Works */
+/* How It Works (Reverted to Original) */
 .how-it-works {
   padding: 5rem 2rem;
   background-color: var(--white);
@@ -273,7 +290,7 @@ nav a:hover {
   font-size: 0.9rem;
 }
 
-/* Testimonials */
+/* Testimonials (Reverted to Original) */
 .testimonials {
   padding: 5rem 2rem;
   background: linear-gradient(135deg, #E1CEC8 0%, #DED4D1 100%);
@@ -335,7 +352,7 @@ nav a:hover {
   font-size: 0.85rem;
 }
 
-/* Community Section */
+/* Community Section (Reverted to Original) */
 .community {
   padding: 5rem 2rem;
   background-color: var(--white);
@@ -413,29 +430,7 @@ nav a:hover {
   font-size: 0.85rem;
 }
 
-@media (max-width: 768px) {
-  .community-content {
-    grid-template-columns: 1fr;
-  }
-
-  .community-stats {
-    grid-template-columns: 1fr;
-  }
-
-  nav {
-    gap: 1rem;
-  }
-
-  .hero-buttons {
-    flex-direction: column;
-  }
-
-  .hero-stats {
-    flex-direction: column;
-  }
-}
-
-/* CTA Section */
+/* CTA Section (Reverted to Original) */
 .cta {
   background: linear-gradient(135deg, var(--secondary) 0%, #a88e85 100%);
   color: var(--white);
@@ -454,7 +449,135 @@ nav a:hover {
   opacity: 0.95;
 }
 
-/* Footer */
+
+/* ==================================== */
+/* 4. COURSE-SPECIFIC STYLES (FIXED)    */
+/* ==================================== */
+
+/* --- Course Home Page (bead_making.html) --- */
+
+.course-content {
+    padding: 5rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.course-content h1 {
+    text-align: center;
+    margin-bottom: 0.5rem;
+    font-size: 2.5rem;
+    color: var(--dark);
+}
+.course-content > p { 
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 1.1rem;
+    color: var(--dark-light);
+}
+
+.modules {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+    gap: 3rem; 
+    margin-top: 3rem;
+}
+
+.module-card {
+    background-color: var(--light); 
+    padding: 2.5rem; 
+    border-radius: 1rem; 
+    text-align: left;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 15px rgba(107, 47, 20, 0.1); 
+    border-left: 5px solid var(--accent); 
+}
+
+.module-card:hover {
+    transform: translateY(-8px); 
+    box-shadow: 0 12px 20px rgba(107, 47, 20, 0.15);
+}
+
+.module-card h2 {
+    font-size: 1.6rem;
+    color: var(--dark);
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.module-card p {
+    color: var(--dark);
+    margin-bottom: 2rem;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* --- Individual Module Pages (beadsmoduleX.html) --- */
+
+.module-content {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 2.5rem;
+    background-color: var(--light);
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.module-content h1 {
+    font-size: 2.2rem;
+    color: var(--dark);
+    border-bottom: 2px solid var(--secondary);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.module-content h2 {
+    font-size: 1.6rem;
+    color: var(--dark-light);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+iframe {
+    display: block;
+    width: 100%;
+    max-width: 560px;
+    height: 315px;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 1.5rem auto 2.5rem auto;
+}
+
+/* Quiz Styles */
+form {
+    background-color: var(--white);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+form p {
+    font-weight: 600;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--dark);
+}
+
+input[type="radio"] {
+    margin-right: 0.5rem;
+}
+
+#result, #result2, #result3 {
+    margin-top: 1.5rem;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--accent);
+    text-align: center;
+}
+
+/* ==================================== */
+/* 5. FOOTER & MEDIA QUERIES            */
+/* ==================================== */
+
 footer {
   background-color: var(--primary-dark);
   color: var(--white);
@@ -473,11 +596,12 @@ footer {
 .footer-section h4 {
   margin-bottom: 1rem;
   font-weight: 600;
+  color: var(--dark); 
 }
 
 .footer-section a {
   display: block;
-  color: #cbd5e1;
+  color: #c9af9f; /* Fixed contrast */
   text-decoration: none;
   margin-bottom: 0.5rem;
   font-size: 0.9rem;
@@ -485,7 +609,7 @@ footer {
 }
 
 .footer-section a:hover {
-  color: var(--white);
+  color: var(--accent);
 }
 
 .footer-bottom {
@@ -494,43 +618,62 @@ footer {
   padding-top: 2rem;
   border-top: 1px solid #a88e85;
   text-align: center;
-  color: #DBC7BB;
+  color: #c9af9f; /* Fixed contrast */
   font-size: 0.9rem;
 }
 
-/* Mobile Menu Toggle */
-.menu-toggle {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  color: var(--dark);
-}
-
+/* Mobile Media Queries (Preserved & Adjusted) */
 @media (max-width: 768px) {
-  .menu-toggle {
-    display: block;
-  }
+    /* Menu Toggle */
+    .menu-toggle {
+        display: block;
+    }
 
-  nav {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    background-color: var(--white);
-    flex-direction: column;
-    gap: 1rem;
-    padding: 1rem 2rem;
-    display: none;
-    border-bottom: 1px solid #e2e8f0;
-  }
+    nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--white);
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem 2rem;
+        display: none;
+        border-bottom: 1px solid #e2e8f0;
+    }
 
-  nav.active {
-    display: flex;
-  }
+    nav.active {
+        display: flex;
+    }
 
-  .section-title {
-    font-size: 1.75rem;
-  }
+    /* Homepage Styles */
+    .community-content {
+        grid-template-columns: 1fr;
+    }
+
+    .community-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+
+    .hero-stats {
+        flex-direction: column;
+    }
+
+    /* Course/General Styles */
+    .section-title {
+        font-size: 1.75rem;
+    }
+    
+    /* Footer */
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .footer-bottom {
+        text-align: center;
+    }
 }
