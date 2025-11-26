@@ -174,6 +174,7 @@ nav a:hover {
   flex-wrap: wrap;
 }
 
+
 .hero .btn-secondary {
   border-color: var(--white);
   color: var(--white);
@@ -227,10 +228,13 @@ nav a:hover {
   transition: all 0.3s ease;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   cursor: pointer;
+
 }
 
 .skill-card:hover {
-  /* Original was empty, keeping it as is */
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  
 }
 
 .skill-icon {
