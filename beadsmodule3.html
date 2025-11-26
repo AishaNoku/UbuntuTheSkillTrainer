@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 3- Selling Your Beads</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">Ubuntu</a>
+        <nav id="nav-menu">
+            <a href="bead_making.html">Back to Course</a>
+        </nav>
+    </header>
+
+    <section clas="module-content">
+        <h1>Module 3: Finishing, Pricing & Selling</h1>
+        <p>
+            In this module, you will learn how to professionally finish beadwork, 
+        package it attractively, price it for profit, and sell via social media 
+        or local customers. This transforms your skill into a real business.
+        </p>
+
+        <h2>Lesson Video</h2>
+        <iframe width="560" height="315"
+            src="https://www.youtube.com/embed/ZpLa0zF4k8w"
+            frameborder="0" allowfullscreen></iframe>
+
+            <h2>Quick Quiz</h2>
+            <form id="quiz3">
+                <p>1. What is a key step in making beads last longer?</p>
+                <input type="radio" name="q1" value="a">Professional Finishing<br>
+                <input type="radio" name="q2" value="b">Painting them<br>
+                <input type="radio" name="q3" value="c">Selling before finishing<br>
+
+                <p>1. What helps customers trust your business?</p>
+                <input type="radio" name="q1" value="a">Branding and good presentation<br>
+                <input type="radio" name="q2" value="b">Hiding your contact information<br>
+                <input type="radio" name="q3" value="c">Avoiding communication<br>
+
+                <button type="button" onclick="gradeQuiz3()">Submit</button>
+
+            </form>
+
+            <p id="result3"></p>
+    </section>
+    <script>
+        function gradeQuiz3(){
+            let score=0;
+            if(document.querySelector('input[name="q1"]:checked')?.value==="a")score++;
+            if(document.querySelector('input[name="q2"]:checked')?.value==="a")score++;
+            document.getElementById("result3").innerHTML="Your score: "+score+"/2";
+
+        }
+    </script>
+    
+</body>
+</html>
