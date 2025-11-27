@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 1 – Lesson 3: Holding the Hook & Yarn</title>
+    <link rel="stylesheet" href="crochet.css">
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <h1>Lesson 3: How to Hold the Hook & Yarn</h1>
+        <p class="subtitle">Mastering the Two Main Techniques for Smooth Crocheting</p>
+    </header>
+    <!-- Video Section -->
+    <section class="video-section">
+        <h2>Video Tutorial</h2>
+        <div class="video-container">
+            <iframe 
+                src="https://www.youtube.com/embed/rfRG68v0r1I"
+                frameborder="0"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                allowfullscreen>
+            </iframe>
+        </div>
+    </section>
+
+
+    <!-- Lesson Content -->
+    <section class="content">
+
+        <h2>Why Holding Matters</h2>
+        <p>
+            The way you hold your hook and yarn affects your speed, tension, and comfort. 
+            There are two main holding styles used by crocheters around the world.
+            Neither is “better” — choose the one that feels natural for you!
+        </p>
+
+        <h2>Technique 1: The Pencil Grip</h2>
+        <p>
+            This grip looks like the way you hold a writing pencil. It gives excellent control 
+            and is loved by beginners for its stability.
+        </p>
+
+        <div class="img-box">
+            <img src="pencilgrip.webp" alt="Pencil Grip Illustration">
+        </div>
+
+        <ul class="styled-list">
+            <li>Hold the hook as if you're holding a pencil.</li>
+            <li>Your thumb and index finger grip the flat part of the hook (the “thumb rest”).</li>
+            <li>Your other fingers remain relaxed beneath the hook.</li>
+        </ul>
+
+        <div class="note-box">
+            <p><strong>Great for:</strong> people who prefer precise, delicate movements.</p>
+        </div>
+
+        <h2>Technique 2: The Knife Grip</h2>
+        <p>
+            This grip looks like the way you hold a dinner knife. Most crocheters eventually prefer this grip because it offers power and speed.
+        </p>
+
+        <div class="img-box">
+            <img src="knifegrip.webp" alt="Knife Grip Illustration">
+        </div>
+
+        <ul class="styled-list">
+            <li>Place your hand over the hook like you're holding a knife.</li>
+            <li>Your thumb rests on the thumb grip, and your fingers wrap around the hook.</li>
+            <li>Allows smoother wrist rotation for faster stitching.</li>
+        </ul>
+
+        <div class="note-box">
+            <p><strong>Great for:</strong> people who like a firm grip and quicker movements.</p>
+        </div>
+
+        <h2>How to Hold Your Yarn</h2>
+        <p>
+            Yarn tension is key. You control the yarn with your non-dominant hand.
+        </p>
+
+        <div class="img-box1">
+            <img src="holdyarn.webp" alt="Yarn Holding Illustration">
+        </div>
+
+        <ol class="styled-list">
+            <li>Wrap yarn under your pinky finger.</li>
+            <li>Bring it over your ring finger.</li>
+            <li>Lay it across your middle and index fingers.</li>
+            <li>Use your index finger to raise or lower the yarn for tension.</li>
+        </ol>
+
+        <div class="note-box">
+            <p><strong>Remember:</strong> Yarn should glide, not stretch. Comfortable tension = smoother stitches.</p>
+        </div>
+
+    </section>
+
+    <!-- Interactive Exercise -->
+    <section class="exercise">
+        <h2>End of Lesson Practice</h2>
+        <p>Click the correct answer for each question.</p>
+
+        <div class="quiz-box">
+
+            <p><strong>1.</strong> Which grip looks like holding a pencil?</p>
+            <button onclick="checkAnswer('pencil')">Pencil Grip</button>
+            <button onclick="checkAnswer('knife')">Knife Grip</button>
+
+            <p><strong>2.</strong> Which finger helps control yarn tension?</p>
+            <button onclick="checkAnswer('index')">Index Finger</button>
+            <button onclick="checkAnswer('thumb')">Thumb</button>
+
+            <p id="feedback"></p>
+        </div>
+    </section>
+
+    <script>
+        function checkAnswer(ans) {
+            let feedback = document.getElementById("feedback");
+
+            if (ans === "pencil" || ans === "index") {
+                feedback.innerHTML = "Correct! You're getting the hang of it!";
+                feedback.style.color = "green";
+            } else {
+                feedback.innerHTML = "Not quite. Try again!";
+                feedback.style.color = "red";
+            }
+        }
+    </script>
+<div class="next-lesson">
+    <a href="lesson4.html" class="next-lesson-btn">Next Lesson: Making a Slipknot →</a>
+</div>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 1 - Introduction to Crocheting</title>
+    <link rel="stylesheet" href="crochet.css">
+</head>
+<style>
+    body{
+        background: url("crochet3.jpeg");
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+    }
+</style>
+<body>
+    <header>
+        <h1>Module 1: Introduction to Crocheting</h1>
+        <p class="subtitle">Start your crochet journey with the basic foundations.</p>
+    </header>
+
+    <section class="module-description">
+        <h2>About This Module</h2>
+        
+        <section class="video-section">
+        <h2>Video Tutorial</h2>
+        <div class="video-container">
+            <iframe 
+            src="https://www.youtube.com/embed/GcOzdAzmtNM" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allowfullscreen>
+            </iframe>
+        </div>
+        </section>
+
+        <p>
+            In this module, you will learn what crocheting is, understand the tools and materials,
+            learn how to hold the hook and yarn, and create your first slipknot.
+        </p>
+    </section>
+
+    
+    <section class="progress-section">
+        <label>Module Progress</label>
+        <div class="progress-bar">
+            <div id="module1-progress-fill"></div>
+        </div>
+        <p id="module1-progress-text">0% Completed</p>
+    </section>
+
+    
+    <section class="lessons-section">
+        <h2>Lessons</h2>
+
+        <div class="lesson-card" onclick="openLesson(1)">
+            <h3>Lesson 1: What is Crocheting?</h3>
+            <p>Learn the meaning, history, and purpose of crochet.</p>
+        </div>
+
+        <div class="lesson-card" onclick="openLesson(2)">
+            <h3>Lesson 2: Tools & Materials</h3>
+            <p>Understand yarn types, hook sizes, and beginner-friendly materials.</p>
+        </div>
+
+        <div class="lesson-card" onclick="openLesson(3)">
+            <h3>Lesson 3: How to Hold the Hook & Yarn</h3>
+            <p>Master the two main holding techniques for smooth crocheting.</p>
+        </div>
+
+        <div class="lesson-card" onclick="openLesson(4)">
+            <h3>Lesson 4: Making a Slipknot</h3>
+            <p>Learn your first basic skill — creating the slipknot.</p>
+        </div>
+
+    </section>
+
+
+    <!-- End of Module Exercise -->
+<section class="module-exercise">
+    <h2>End of Module 1 Exercise</h2>
+    <p>Complete the tasks below to show your understanding before moving to Module 2.</p>
+
+    
+    <div class="quiz-section">
+        <h3>Quick Quiz</h3>
+        <p><strong>Question:</strong> What is the most recommended yarn type for beginners?</p>
+
+        <input type="text" id="quizAnswer" placeholder="Type your answer here...">
+        <button onclick="checkAnswer()" class="quiz-btn">Check Answer</button>
+
+        <p id="quizFeedback"></p>
+    </div>
+
+    <hr>
+
+    <!-- Practical Task -->
+    <div class="practical-section">
+        <h3>Practical Task</h3>
+        <p>Practice holding the crochet hook and yarn. Upload a picture or short video showing your technique:</p>
+
+        <input type="file" id="uploadFile">
+    </div>
+
+    <hr>
+
+    <!-- Reflection -->
+    <div class="reflection-section">
+        <h3>Reflection</h3>
+        <textarea id="reflectionText" placeholder="Describe your experience learning the basics..."></textarea>
+    </div>
+
+    <button class="submit-exercise-btn" onclick="submitExercise()">Submit Exercise</button>
+
+    <p id="exerciseStatus"></p>
+
+    <button class="complete-module-btn" onclick="completeModule(1)">Mark Module as Complete</button>
+</section>
+
+
+
+
+    <script src="crochet.js"></script>
+</body>
+</html>
