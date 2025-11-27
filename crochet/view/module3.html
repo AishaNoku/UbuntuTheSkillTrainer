@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 3 – Essential Techniques</title>
+    <link rel="stylesheet" href="../assets/css/crochet.css">
+</head>
+
+<body>
+
+<header>
+    <h1>Module 3: Essential Techniques</h1>
+    <p>Master tension, increases, decreases, and pattern reading</p>
+</header>
+
+<div class="container">
+    <div class="lesson-grid">
+    <a href="../view/lesson3-1.html" class="lesson-card">
+            <h3>Lesson 1: Tension & Increases</h3>
+            <p>Learn how to control your yarn tension and create increases
+                 for shaping your work.</p>
+        </a>
+
+        <a href="../view/lesson3-2.html" class="lesson-card">
+            <h3>Lesson 2: Decreases & Reading Patterns</h3>
+            <p>Understand how to reduce stitches and read beginner-friendly crochet patterns.</p>
+        </a>
+        </div>
+
+    <!-- END OF MODULE ASSESSMENT -->
+    <section class="assessment-section">
+        <h2>End of Module Assessment</h2>
+
+        <form id="module3Quiz">
+
+            <div class="question">
+                <p><strong>1. What is the main purpose of increasing stitches?</strong></p>
+                <label><input type="radio" name="q1" value="a"> To make the project smaller</label><br>
+                <label><input type="radio" name="q1" value="b"> To shape and widen the project</label><br>
+                <label><input type="radio" name="q1" value="c"> To tighten the yarn tension</label>
+            </div>
+
+            <div class="question">
+                <p><strong>2. What does “sc2tog” mean in a pattern?</strong></p>
+                <label><input type="radio" name="q2" value="a"> Single crochet into two stitches</label><br>
+                <label><input type="radio" name="q2" value="b"> Single crochet two stitches together</label><br>
+                <label><input type="radio" name="q2" value="c"> Skip two stitches</label>
+            </div>
+
+            <div class="question">
+                <p><strong>3. What helps achieve consistent tension?</strong></p>
+                <label><input type="radio" name="q3" value="a"> Holding the yarn the same way each time</label><br>
+                <label><input type="radio" name="q3" value="b"> Changing hook size randomly</label><br>
+                <label><input type="radio" name="q3" value="c"> Working as fast as possible</label>
+            </div>
+
+            <button type="button" class="button" onclick="checkAnswersModule3()">Submit</button>
+
+            <p id="module3Result"></p>
+            <p id="module3CorrectAnswers" class="correct-answers"></p>
+
+        </form>
+    </section>
+
+</div>
+<button class="complete-module-btn" onclick="completeModule(3)">Mark Module as Complete</button>
+
+<script src="../assets/js/crochet.js"></script>
+
+</body>
+</html>
