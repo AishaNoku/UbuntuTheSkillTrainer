@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Henna Design Course</title>
+  <link rel="stylesheet" href="henna.css" />
+  <style>
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+<div class="app">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="logo">HE</div>
+      <div>
+        <h1>Henna Design</h1>
+        <div class="sub">By Soukouratou Karim</div>
+      </div>
+    </div>
+
+    <div class="modules-title">Modules</div>
+
+    <ul class="module-list">
+      <li class="module-item" data-module="module1">Module 1: Introduction</li>
+      <li class="module-item" data-module="module2">Module 2: Tools & Materials</li>
+      <li class="module-item" data-module="module3">Module 3: Basic Patterns</li>
+    </ul>
+
+    <button class="btn ghost" style="margin-top:auto;">Back to Dashboard</button>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main">
+
+    <!-- TOP NAV -->
+    <div class="topnav">
+      <div class="search">
+        <input placeholder="Search lessons, modules, resources..." />
+      </div>
+      <div class="nav-actions">
+        <div class="avatar">S</div>
+      </div>
+    </div>
+
+    <!-- CONTENT AREA -->
+    <div class="content-wrap">
+
+      <!-- LESSON AREA -->
+      <section class="lesson-area">
+
+        <!-- Course / Dashboard Tabs -->
+        <div class="view-toggle">
+          <div class="chip active" data-view="course">Course</div>
+          <div class="chip" data-view="dashboard">Dashboard</div>
+        </div>
+
+        <!-- WELCOME SECTION -->
+        <div id="welcomeSection" class="card">
+          <h2>Welcome</h2>
+          <p class="meta">Welcome to the Henna Design course. Select a module to begin.</p>
+
+          <video width="440" height="160" controls>
+            <source src="video1.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        </div>
+
+        <!-- MODULE 1 -->
+         
+        <div id="module1" class="card module-content hidden">
+          <h2>Module 1: Introduction of Henna</h2>
+          <div style="display:flex; gap:10px;">
+            <img src="henna_powder.jpg" alt="Henna Design" style="width:50%; height:auto;" />
+            <img src="henna_powder2.jpg" alt="Henna Design" style="width:50%; height:auto;" />
+          </div>
+          <h3>Overview</h3>
+          <p>Henna, also known as Mehndi, is an ancient form of body art that has been practiced for thousands of years across Africa,
+            the Middle East, and South Asia. Made from the powdered leaves of the Lawsonia inermis plant,
+            henna is a natural dye used to create beautiful, meaningful designs on the skin for celebrations, rituals, and personal expression.
+          </p>
+          <p>Henna art combines tradition, creativity, and cultural storytelling. Every pattern, whether floral, geometric, or symbolic, carries history,
+             meaning, and beauty.Today, henna is loved globally for its elegance, versatility, and connection to heritage.
+          </p>
+          <p>This course will guide you through the essentials of henna, from understanding its cultural roots to learning 
+              how to create your own designs with confidence. Whether you are a beginner or simply curious, this is the perfect place 
+              to start your journey into the art of henna.
+          </p>
+          <h3>Learning Objectives</h3>
+          <ul>
+            <li>Understand the traditional concepts of henna</li>
+            <li>Become familiar with types of henna</li>
+            <li>Learn how the course is structured</li>
+            <li>Identify the skills you will develop</li>
+          </ul>
+
+          <!-- MODULE 1 QUIZ -->
+          <h3>Quiz 1</h3>
+
+          <div class="quiz-question">
+            <p><strong>1. Henna has traditionally been used for body art and cultural ceremonies.</strong></p>
+            <label><input type="radio" name="q1" value="true"> True</label><br>
+            <label><input type="radio" name="q1" value="false"> False</label>
+          </div>
+
+          <div class="quiz-question">
+            <p><strong>2. Which plant is used to make natural henna?</strong></p>
+            <label><input type="radio" name="q2" value="a"> Aloe Vera</label><br>
+            <label><input type="radio" name="q2" value="b"> Lawsonia inermis</label><br>
+            <label><input type="radio" name="q2" value="c"> Hibiscus</label>
+          </div>
+
+          <div class="quiz-question">
+            <p><strong>3. The main goal of Module 1 is to introduce you to the basic concepts and structure of the course.</strong></p>
+            <label><input type="radio" name="q3" value="true"> True</label><br>
+            <label><input type="radio" name="q3" value="false"> False</label>
+          </div>
+
+          <div class="quiz-question">
+            <p><strong>4. Which of the following is NOT a reason why henna is culturally important?</strong></p>
+            <label><input type="radio" name="q4" value="a"> It symbolizes joy and beauty</label><br>
+            <label><input type="radio" name="q4" value="b"> It is used in celebrations like weddings</label><br>
+            <label><input type="radio" name="q4" value="c"> It is only used for cooking</label>
+          </div>
+
+          <button class="btn" onclick="gradeModule1Quiz()">Submit Quiz</button>
+          <p id="module1QuizResult" class="meta" style="margin-top:10px;"></p>
+
+        </div>
+
+        <!-- MODULE 2 -->
+        <div id="module2" class="card module-content hidden">
+          <h2>Module 2: Tools & Materials</h2>
+          <img src="henna_MT.jpg" alt="Henna Tools" style="width:80%; height:auto; margin-bottom:15px;" />
+          <h3>Introduction</h3>
+          <p>Working with henna is an art that blends creativity, culture, and technique. 
+            To create clean lines, beautiful designs, and long-lasting stains, it is essential to start with the right tools and materials.
+            In this module, you will explore everything you need to begin your henna journey from the natural ingredients used to create
+            quality paste, to the applicators and accessories that help bring your designs to life.
+          </p>
+          <p>You will learn how to select safe, skin-friendly products, understand the purpose of
+             each tool, and build your own beginner or professional henna kit. Having the proper materials
+              not only makes the process easier but also greatly improves the final results of your work. 
+              By the end of this module, you will know exactly what to use, why it is important, 
+              and how each item contributes to creating beautiful henna art.
+          </p>
+          
+          <h3>Materials for Henna</h3>
+          <p>The quality of your henna design begins with the materials you choose. Natural henna powder is the foundation preferably finely sifted and fresh, with a rich green color that signals good dye content.
+             To create a smooth and effective paste, you will need a liquid such as lemon juice, tea, or water, 
+             along with a natural sugar source to improve consistency and adhesion. Essential oils like lavender or
+              eucalyptus are also commonly added to enhance stain quality and fragrance. 
+              Additional materials such as applicator cones, plastic wrap, gloves, and mixing bowls help you prepare and 
+              apply your paste cleanly and efficiently. Using the right materials ensures not only beautiful 
+              results but also safety and comfort for both the artist and the client.
+          </p>
+          <div style="display:flex; gap:10px;">
+          <img src="henna_MT1.jpg" alt="Henna Tools" style="width:50%; height:auto; margin-bottom:15px;" />
+          <img src="henna_MT2.jpg" alt="Henna Tools" style="width:50%; height:auto; margin-bottom:15px;" />
+          </div>
+          <h3>Tools for Henna</h3>
+          <p>Henna artistry relies on a small but essential set of tools that allow you to create clean, precise, and beautiful designs. 
+            The most important tool is the applicator, usually a henna cone, bottle, or syringe, each offering 
+            different levels of control and comfort for the artist. Fine-tip nozzles and cone tips help 
+            you achieve thin, detailed lines, while larger openings are useful for filling shapes or creating bold 
+            patterns. You may also use tools like spatulas and spoons for mixing paste, strainers for removing lumps, 
+            and scissors for adjusting cone tips. Other helpful items include tissues for correcting mistakes, cotton 
+            swabs for cleaning lines, and sealant sprays to protect the design as it dries. With the right tools, your creativity 
+            can flow more easily, and your designs will look more polished and professional.
+          </p>
+          <h3>How to mix you henna</h3>
+          <div style="display:flex; gap:10px;">
+          <img src="henna_mix.jpg" alt="Mixing Henna" style="width:50%; height:auto; margin-bottom:15px;" />
+          <img src="henna_mix1.jpg" alt="Mixing Henna" style="width:50%; height:auto; margin-bottom:15px;" />
+          </div>
+          <p> To prepare henna paste, start by sifting high-quality henna powder to remove any clumps.
+            In a non-metallic bowl, combine the sifted powder with a liquid such as lemon juice or tea to form a thick,
+            yogurt-like consistency. Add sugar to the mixture to improve adhesion and enhance the stain. Optionally,
+            include a few drops of essential oils like eucalyptus or lavender for better color development
+            and fragrance. Mix thoroughly until smooth, then cover the bowl with plastic wrap and let it sit at room temperature
+            for 12-24 hours to allow the dye to release. After resting, stir the paste again and adjust the consistency with additional 
+            liquid if necessary. Your henna paste is now ready to be filled into applicator cones or bottles for use.
+          </p>
+
+          <div style="display:flex; gap:8px;">
+          <img src="henna_mix2.jpg" alt="Mixing Henna" style="width:50%; height:auto; margin-bottom:10px;" />
+          <img src="henna_mix3.jpg" alt="Mixing Henna" style="width:50%; height:auto; margin-bottom:10px;" />
+          </div>
+          <h3>Conclusion</h3>
+          <p>By understanding the essential tools and materials used in henna artistry, you have taken an important step toward building a strong foundation for your practice.
+            The items you choose whether natural ingredients for your paste or the tools that help you apply it directly influence the quality, safety, and beauty of your designs. 
+            With this knowledge, you are now ready to prepare your own henna kit and work with confidence. In the next modules, 
+            you will begin creating the intricate patterns that make henna such a unique and cherished art form
+          </p>
+
+          <!-- MODULE 2 QUIZ -->
+
+          <h3> Quiz 2</h3>
+
+          <div class="quiz-question">
+            <p><strong>1. The main ingredient in henna paste is henna powder.</strong></p>
+            <label><input type="radio" name="q1m2" value="true"> True</label><br>
+            <label><input type="radio" name="q1m2" value="false"> False</label>
+          </div>
+
+          <div class="quiz-question">
+            <p><strong>2. Which of these liquids can be used to make henna paste?</strong></p>
+            <label><input type="radio" name="q2m2" value="a"> Lemon juice</label><br>
+            <label><input type="radio" name="q2m2" value="b"> Water</label><br>
+            <label><input type="radio" name="q2m2" value="c"> Both A and B</label>
+          </div>
+
+          <div class="quiz-question">
+            <p><strong>3. Essential oils in henna paste help to:</strong></p>
+            <label><input type="radio" name="q3m2" value="a"> Enhance color and fragrance</label><br>
+            <label><input type="radio" name="q3m2" value="b"> Reduce the drying time only</label><br>
+            <label><input type="radio" name="q3m2" value="c"> Make it edible</label>
+          </div>
+
+          <div class="quiz-question">
+            <p><strong>4. Gloves, cones, and applicators are examples of henna tools.</strong></p>
+            <label><input type="radio" name="q4m2" value="true"> True</label><br>
+            <label><input type="radio" name="q4m2" value="false"> False</label>
+          </div>
+
+          <button class="btn" onclick="gradeModule2Quiz()">Submit Quiz</button>
+          <p id="module2QuizResult" class="meta" style="margin-top:10px;"></p>
+        </div>
+
+        <!-- MODULE 3 -->
+        <div id="module3" class="card module-content hidden">
+          <h2>Module 3: Basic Patterns of Henna</h2>
+
+          <p>Henna art is a traditional form of body decoration that uses natural dye to create intricate 
+            and beautiful designs. The patterns range from simple geometric shapes to elaborate 
+            floral and cultural motifs. Understanding the basic patterns is essential for beginners 
+            and enthusiasts alike, as these form the foundation of more complex henna designs.
+          </p>
+          <h3>1. Floral Patterns</h3>
+          <p>Floral patterns often include flowers, petals, and vines arranged in aesthetically pleasing arrangements.
+            These designs symbolize beauty, growth, and joy, and are frequently used in bridal and festive henna.
+          </p>
+          <img src="hennaFloral.jpg" alt="Henna Patterns" style="width:80%; height:auto; margin-bottom:15px;" />
+          <h3>2. Geometric Patterns</h3>
+          <p>Geometric patterns consist of lines, shapes, and symmetry. They can include triangles, 
+            squares, circles, and grids. They are easy to replicate and provide a modern, elegant 
+            look. Geometric designs form the base of more elaborate motifs.
+          </p>
+          <div style="display:flex; gap:10px;">
+            <img src="henna_patGeo.jpg" alt="Henna Patterns" style="width:50%; height:auto; margin-bottom:15px;" />  
+            <img src="henna_patGeo1.jpg" alt="Henna Patterns" style="width:50%; height:auto; margin-bottom:15px;" />
+          </div>
+          <h3>4. Mandala Patterns</h3>
+          <p>Mandala patterns are circular designs representing unity and balance, 
+            created using concentric shapes and detailed patterns radiating from the center.
+          </p>
+          <img src="henna_ Mandala.jpg" alt="Henna Patterns" style="width:80%; height:auto; margin-bottom:15px;" />
+
+          <h3>5. Simple Lines and Dots</h3>
+          <p>For beginners, simple lines, dots, and swirls are foundational patterns. 
+            They are easy to practice and can be combined to create more complex designs, 
+            improving control and precision with the henna applicator.
+          </p>
+          <img src="henna_dot.jpg" alt="Henna Patterns" style="width:80%; height:auto; margin-bottom:15px;" />
+          <h3>Conclusion</h3>
+          <p>Understanding basic patterns is crucial for creating beautiful and meaningful designs. Mastering these allows artists to create intricate, culturally rich, and aesthetically pleasing designs for celebrations, ceremonies, or personal expression.</p>
+        
+          <!-- MODULE 3 QUIZ -->
+
+          <h3>Module 3 Quiz</h3>
+
+          <div class="quiz-question">
+            <p><strong>1. Paisley patterns are teardrop-shaped and symbolic of fertility and luck.</strong></p>
+            <label><input type="radio" name="q1m3" value="true"> True</label><br>
+            <label><input type="radio" name="q1m3" value="false"> False</label>
+          </div>
+
+          <div class="quiz-question">
+            <p><strong>2. Mandala patterns are circular designs representing:</strong></p>
+            <label><input type="radio" name="q2m3" value="a"> Unity and balance</label><br>
+            <label><input type="radio" name="q2m3" value="b"> Speed and movement</label><br>
+            <label><input type="radio" name="q2m3" value="c"> Random shapes</label>
+          </div>
+
+          <div class="quiz-question">
+            <p><strong>3. Simple lines and dots are foundational patterns for beginners.</strong></p>
+            <label><input type="radio" name="q3m3" value="true"> True</label><br>
+            <label><input type="radio" name="q3m3" value="false"> False</label>
+          </div>
+
+          <div class="quiz-question">
+            <p><strong>4. Geometric patterns include shapes like:</strong></p>
+            <label><input type="radio" name="q4m3" value="a"> Triangles and circles</label><br>
+            <label><input type="radio" name="q4m3" value="b"> Flowers only</label><br>
+            <label><input type="radio" name="q4m3" value="c"> None of the above</label>
+          </div>
+
+          <button class="btn" onclick="gradeModule3Quiz()">Submit Quiz</button>
+          <p id="module3QuizResult" class="meta" style="margin-top:10px;"></p>
+        </div>
+        
+      </section>
+
+      <!-- WIDGETS -->
+      <aside class="widgets">
+        <div class="progress card">
+          <h4>Course Progress</h4>
+          <div class="bar"><div class="fill"></div></div>
+        </div>
+
+        <div class="card">
+          <h4>Resources</h4>
+          <p class="meta">Additional resources</p>
+          
+          <li>First Henna by Lare</li>
+          
+          <p>
+            <a href="https://youtu.be/0938GlGBCPM?si=hLQF2wX2xMl4ex1D" target="_blank">
+              Click here 
+            </a>
+          </p>
+          <li>BootCamp</li>
+          <p>
+            <a href="https://hennacaravan.com/pages/bootcamp-basics" target="_blank">
+               Click here
+            </a>
+        </div>
+
+      </aside>
+
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>Ubuntu Skills</h4>
+          <a href="#">About us</a>
+          <a href="#">Blog</a>
+          <a href="#">Press</a>
+        </div>
+
+        <div class="footer-section">
+          <h4>Learning</h4>
+          <a href="#">Browse Skills</a>
+          <a href="#">Paths</a>
+          <a href="#">Certificates</a>
+        </div>
+
+        <div class="footer-section">
+          <h4>Community</h4>
+          <a href="#">Events</a>
+          <a href="#">Forums</a>
+          <a href="#">Opportunities</a>
+        </div>
+
+        <div class="footer-section">
+          <h4>Support</h4>
+          <a href="#">Contact</a>
+          <a href="#">Help Center</a>
+          <a href="#">Privacy</a>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        © 2025 Ubuntu Skills. All rights reserved.
+      </div>
+    </footer>
+
+  </main>
+</div>
+<script src="henna.js"></script>
+</body>
+</html>
