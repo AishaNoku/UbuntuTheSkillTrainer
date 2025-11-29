@@ -647,5 +647,50 @@ button:hover {
   color: #2a9d8f;
 }
 
+.intro, .project-card, .upload-section {
+  width: 90%;
+  margin: 20px auto;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 0 8px rgba(0,0,0,0.1);
+}
 
+.project-options li {
+  margin: 8px 0;
+}
+
+.project-card {
+  background: #fffaf5;
+}
+
+.upload-section input[type="file"] {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+button {
+  background: #2a9d8f;
+  color: white;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+button:hover {
+  background: #21867a;
+}
+
+#completionMessage {
+  margin-top: 10px;
+  font-weight: bold;
+}
+
+img{
+  max-width: 500px;
+  height: 500px;
+  margin: 15px auto;
+}
 

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Module 6 – Final Project</title>
+    <link rel="stylesheet" href="../assets/css/crochet.css">
+</head>
+<body>
+
+<header>
+    <h1>Module 6: Final Project</h1>
+    <p>Complete a full crochet piece and earn your certificate!</p>
+</header>
+
+<section class="intro">
+    <p>
+        Congratulations on reaching the final module!  
+        In this project, you will choose <strong>one</strong> item to crochet:
+    </p>
+
+    <ul class="project-options">
+        <li><strong>✔ Scrunchie</strong> – A fun quick project using basic stitches.</li>
+        <li><strong>✔ Scarf</strong> – Perfect for practicing even tension and long rows.</li>
+        <li><strong>✔ Decorated Slippers</strong> – Add crocheted flowers or borders to slippers.</li>
+    </ul>
+
+    <p>
+        Choose the project that best fits your skill level and interest.  
+        Follow the instructions below, complete your work, and upload a photo of the finished piece.
+    </p>
+</section>
+
+<section class="project-card">
+    <h2>Option 1: Crochet Scrunchie</h2>
+    <p><strong>Materials needed:</strong> Hair elastic, yarn (medium weight), 4mm hook.</p>
+    <ol>
+        <li>Attach your yarn to the hair elastic with a knot.</li>
+        <li>Work single crochets all around the elastic until full.</li>
+        <li>Add more stitches (up to 3 in each) to create a ruffled texture.</li>
+        <li>Slip stitch to finish and weave in ends.</li>
+    </ol>
+    <em>
+        Sample srunchies
+        </em>
+    <img src ="../assets/images/scrunchie.webp" alt="Scrunchie" target="_blank">
+</section>
+
+<section class="project-card">
+    <h2>Option 2: Beginner Scarf</h2>
+    <p><strong>Materials needed:</strong> Yarn (thick/soft), 6mm hook.</p>
+    <ol>
+        <li>Chain 20–25 depending on desired width.</li>
+        <li>Use single, half-double, or double crochet for each row.</li>
+        <li>Crochet until the scarf reaches your preferred length.</li>
+        <li>Add fringe for decoration (optional).</li>
+    </ol>
+    <em>
+        Sample Scarf
+    </em>
+    <img src="../assets/images/scarf.webp" alt="Scarf" target="_blank">
+</section>
+
+<section class="project-card">
+    <h2>Option 3: Decorated Slippers</h2>
+    <p><strong>Materials needed:</strong> Slippers, small amount of yarn, 3–4mm hook.</p>
+    <ol>
+        <li>Crochet small flowers or borders (like scallops).</li>
+        <li>Attach them carefully to the slippers using a needle or slip stitches.</li>
+        <li>Reinforce any loose edges for durability.</li>
+    </ol>
+    <em>
+        Sample Slippers
+    </em>
+    <img src="../assets/images/crochet3.jpeg" alt="Slippers" target="_blank">
+</section>
+
+<section class="upload-section">
+    <h2>Upload Your Finished Work</h2>
+    <p>Once you're done, upload a clear photo of your completed project:</p>
+
+    <input type="file" id="projectUpload" accept="image/*">
+    <p id="fileName"></p>
+
+    <button onclick="markComplete()">Submit Final Project</button>
+    <p id="completionMessage"></p>
+</section>
+
+<script>
+    // Display selected file name
+    document.getElementById("projectUpload").addEventListener("change", function () {
+        let file = this.files[0];
+        document.getElementById("fileName").innerText = file ? "Selected: " + file.name : "";
+    });
+
+    function markComplete() {
+        let file = document.getElementById("projectUpload").files[0];
+
+        if (!file) {
+            document.getElementById("completionMessage").innerHTML =
+                "Please upload an image of your project before submitting.";
+            document.getElementById("completionMessage").style.color = "red";
+            return;
+        }
+
+        document.getElementById("completionMessage").innerHTML =
+            "Project submitted successfully! Your certificate will be processed.";
+        document.getElementById("completionMessage").style.color = "#2a9d8f";
+    }
+</script>
+     <div class="next-btn-container">
+    <button onclick="window.location.href='../crochetHome.html'">⬅ Back to Crochet Home Page</button>
+</div>
+</body>
+</html>
