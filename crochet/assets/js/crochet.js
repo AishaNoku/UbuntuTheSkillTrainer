@@ -4,12 +4,6 @@ let progress = 0;
 document.getElementById("progress-fill").style.width = progress + "%";
 document.getElementById("progress-text").textContent = progress + "% Completed";
 
-// Page redirection for modules 
-function openModule(moduleNumber) {
-    alert("Opening Module " + moduleNumber);
-    window.location.href = "../crochet/view/module" + moduleNumber + ".html";
-
-}
 
 // MODULE 1 PROGRESS
 let module1Progress = 0;
@@ -24,10 +18,6 @@ function startModule() {
     window.location.href = "lesson1.html";
 }
 
-function openLesson(lessonNumber) {
-    alert("Opening Lesson " + lessonNumber);
-    window.location.href = "lesson" + lessonNumber + ".html";
-}
 
 function checkAnswer() {
     const answer = document.getElementById("quizAnswer").value.trim().toLowerCase();

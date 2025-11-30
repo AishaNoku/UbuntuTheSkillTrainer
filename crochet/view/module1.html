@@ -23,16 +23,18 @@
         <h2>About This Module</h2>
         
         <section class="video-section">
-        <h2>Video Tutorial</h2>
-        <div class="video-container">
-            <iframe 
+    <h2>Video Tutorial</h2>
+    <div class="video-container">
+        <iframe 
             src="https://www.youtube.com/embed/GcOzdAzmtNM" 
+            title="Video Tutorial"
             frameborder="0" 
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin"
             allowfullscreen>
-            </iframe>
-        </div>
-        </section>
+        </iframe>
+    </div>
+</section>
 
         <p>
             In this module, you will learn what crocheting is, understand the tools and materials,
@@ -52,25 +54,25 @@
     
     <section class="lessons-section">
         <h2>Lessons</h2>
-        <div class="lesson-card" onclick="openLesson(1)">
+        <a href="../view/lesson1.html" class="lesson-card">
             <h3>Lesson 1: What is Crocheting?</h3>
             <p>Learn the meaning, history, and purpose of crochet.</p>
-        </div>
+        </a>
 
-        <div class="lesson-card" onclick="openLesson(2)">
+        <a href="../view/lesson2.html" class="lesson-card" >
             <h3>Lesson 2: Tools & Materials</h3>
             <p>Understand yarn types, hook sizes, and beginner-friendly materials.</p>
-        </div>
+        </a>
 
-        <div class="lesson-card" onclick="openLesson(3)">
+        <a href="../view/lesson3.html" class="lesson-card" >
             <h3>Lesson 3: How to Hold the Hook & Yarn</h3>
             <p>Master the two main holding techniques for smooth crocheting.</p>
-        </div>
+        </a>
 
-        <div class="lesson-card" onclick="openLesson(4)">
+        <a href="../view/lesson4.html" class="lesson-card" >
             <h3>Lesson 4: Making a Slipknot</h3>
             <p>Learn your first basic skill — creating the slipknot.</p>
-        </div>
+        </a>
 
     </section>
 
@@ -113,10 +115,12 @@
 
     <p id="exerciseStatus"></p>
 
-    <button class="complete-module-btn" onclick="completeModule(1)">Mark Module as Complete</button>
 </section>
 
-
+<div class="button-container">
+    <button class="previous-btn" onclick="window.location.href='../crochetHome.html'">⬅ Modules Overview</button>
+    <button class="next-btn" onclick="window.location.href='module2.html'">Next Module →</button>
+</div>
 
 
     <script src="../assets/js/crochet.js"></script>
