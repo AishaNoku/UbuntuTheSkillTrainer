@@ -108,7 +108,7 @@ nav a:hover {
 }
 
 .btn-primary {
-  background-color: var(--primary);
+  background-color: var(--accent);
   color: var(--white);
 }
 
@@ -459,6 +459,14 @@ nav a:hover {
   font-size: 1rem;
   margin-bottom: 2rem;
   opacity: 0.95;
+}
+.cta .btn-primary{
+  background-color: var(--accent);
+  color: var(--white);
+}
+.cta .btn-primary:hover{
+  background-color: var(--white);
+  color:var(--accent);
 }
 
 
