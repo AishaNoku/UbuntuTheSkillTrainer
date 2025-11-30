@@ -1,12 +1,12 @@
 # Ubuntu Skills - Secure Learning Platform
 
-A fully secured PHP learning management system with enterprise-grade security implementing OWASP Top 10 protections.
+A fully secured PHP learning management system with hands on craft courses, implementing OWASP Top 10 protections.
 
 ## Features
 
 - **Enterprise Security** - Complete OWASP Top 10 protection
 - **User Authentication** - Secure login/signup with Argon2id password hashing
-- **Course Management** - Crochet, Bead Making, Mbira, Henna courses
+- **Courses** - Crochet, Bead Making, Mbira, Henna courses
 - **Progress Tracking** - Track user progress through modules
 - **Session Security** - Anti-hijacking, anti-fixation, automatic timeout
 - **Attack Prevention** - SQL injection, XSS, CSRF protection
@@ -101,18 +101,18 @@ ubuntu_skills/
 
 | Risk | Protection | Status |
 |------|-----------|--------|
-| A01: Broken Access Control | Session validation, server-side checks | ✅ Implemented |
-| A02: Cryptographic Failures | Argon2id hashing, HTTPS ready | ✅ Implemented |
-| A03: Injection (SQL) | PDO prepared statements | ✅ Implemented |
-| A04: Insecure Design | Threat modeling, secure defaults | ✅ Implemented |
-| A05: Security Misconfiguration | Secure headers, proper permissions | ✅ Implemented |
-| A06: Vulnerable Components | Minimal dependencies | ✅ Implemented |
-| A07: Auth Failures | Strong passwords, rate limiting | ✅ Implemented |
-| A08: Data Integrity | CSRF tokens, input validation | ✅ Implemented |
-| A09: Logging Failures | Comprehensive logging | ✅ Implemented |
-| A10: SSRF | N/A (no server requests) | ✅ N/A |
+| A01: Broken Access Control | Session validation, server-side checks | Implemented |
+| A02: Cryptographic Failures | Argon2id hashing, HTTPS ready |Implemented |
+| A03: Injection (SQL) | PDO prepared statements |Implemented |
+| A04: Insecure Design | Threat modeling, secure defaults |Implemented |
+| A05: Security Misconfiguration | Secure headers, proper permissions |Implemented |
+| A06: Vulnerable Components | Minimal dependencies |Implemented |
+| A07: Auth Failures | Strong passwords, rate limiting |Implemented |
+| A08: Data Integrity | CSRF tokens, input validation |Implemented |
+| A09: Logging Failures | Comprehensive logging |Implemented |
+| A10: SSRF | N/A (no server requests) |N/A |
 
-### 🛡️ Key Security Implementations
+### Key Security Implementations
 
 1. **Sessions**
    - Session fixation prevention
@@ -127,7 +127,6 @@ ubuntu_skills/
    - Password policy enforcement
 
 3. **Database**
-   - Least privilege user
    - Prepared statements only
    - Input sanitization
    - No direct SQL concatenation
@@ -174,43 +173,6 @@ ubuntu_skills/
    - Progress automatically saved
    - Resume where you left off
 
-### For Administrators
-
-1. **Monitor Security**
-   ```bash
-   # View recent security events
-   tail -f logs/security.log
-   
-   # Check failed logins
-   grep "Failed login" logs/security.log
-   ```
-
-2. **Database Management**
-   ```sql
-   # View user accounts
-   SELECT username, email, account_status, last_login 
-   FROM users;
-   
-   # Check login attempts
-   SELECT username, COUNT(*) as attempts 
-   FROM login_attempts 
-   GROUP BY username;
-   ```
-
-3. **User Management**
-   ```sql
-   # Unlock user account
-   UPDATE users 
-   SET account_status = 'active', failed_login_attempts = 0 
-   WHERE username = 'username_here';
-   
-   # Reset login attempts
-   DELETE FROM login_attempts 
-   WHERE username = 'username_here';
-   ```
-
----
-
 ## Testing
 
 ### Test Accounts
@@ -245,10 +207,6 @@ After running `secure_database_setup.sql`, you'll have:
 # Login and wait 31 minutes
 # Expected: Redirected to login
 ```
-
----
-
-## 🔧 Configuration Options
 
 ### Session Settings (`config.php`)
 
@@ -349,18 +307,6 @@ DELETE FROM login_attempts WHERE username = 'username';
 TRUNCATE TABLE login_attempts;
 ```
 
----
-
-## Documentation
-
-- **[SECURITY_GUIDE.md](SECURITY_GUIDE.md)** - Complete security documentation
-- **[secure_database_setup.sql](secure_database_setup.sql)** - Database structure with comments
-- **[config.php](config.php)** - Inline code documentation
-
----
-
-## Development vs Production
-
 ### Development (Localhost)
 
 ```php
@@ -395,67 +341,15 @@ define('CSRF_SECRET', 'unique_random_32_char_string');
 - [ ] Change all default passwords
 - [ ] Use strong CSRF_SECRET
 - [ ] Restrict database user permissions
-- [ ] Set proper file permissions (640/750)
-- [ ] Enable firewall
-- [ ] Regular backups configured
-
----
-
-## Updates & Maintenance
-
-### Daily
-```bash
-# Check security logs
-tail -n 100 logs/security.log | grep -i "error\|warning"
-```
-
-### Weekly
-```bash
-# Backup database
-mysqldump -u root -p ubuntu_db > backup_$(date +%Y%m%d).sql
-
-# Review failed logins
-mysql -u root -p -e "SELECT * FROM ubuntu_db.login_attempts WHERE success=0 LIMIT 50;"
-```
-
-### Monthly
-- Update PHP dependencies (if using Composer)
-- Review security logs for patterns
-- Update passwords
-- Check for locked accounts
-
----
-
-## Support
-
-For issues:
-1. Check [SECURITY_GUIDE.md](SECURITY_GUIDE.md)
-2. Review logs: `logs/security.log`
-3. Test with provided test account
-4. Check database connection
-
----
-
-## 📄 License
-
-This project is provided as-is for educational purposes.
-
----
-
-## 👥 Contributors
-
-Built with security-first mindset following OWASP guidelines.
-
+- [ ] Set proper file permissions
 ---
 
 ## Key Takeaways
 
 - **All passwords are hashed** with Argon2id (never stored in plaintext)
 - **All database queries use prepared statements** (SQL injection impossible)
-- **All output is escaped** (XSS protection)
 - **CSRF tokens protect forms** (CSRF attacks prevented)
 - **Rate limiting prevents brute force** (account lockout after attempts)
 - **Sessions are validated** (hijacking prevented)
 - **Complete audit trail** (all security events logged)
 
-**Your platform is production-ready secure! 🎉**
