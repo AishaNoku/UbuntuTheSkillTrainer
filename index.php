@@ -31,7 +31,7 @@ $isLoggedIn = isset($_SESSION['username']);
                     Log Out
                 </a>
             <?php else: ?>
-                <a href="login.html" class="btn btn-primary">Sign In</a>
+                <a href="login.html" class="btn btn-primary">Login</a>
             <?php endif; ?>
 
             <button class="menu-toggle" id="menu-toggle" style="margin-left: 10px;">&#9776;</button>
