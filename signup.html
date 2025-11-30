@@ -52,8 +52,16 @@
                 <input type="email" name="email" required>
 
                 <label>Password</label>
-                <input type="password" name="password" required>
+<input type="password" name="password"
+    required
+    minlength="8"
+    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w]).{8,}"
+    title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+    placeholder="Min 8 chars, 1 number, 1 symbol">
 
+<p style="font-size: 0.8rem; color: #666; margin-top: 5px;">
+    * Password must be 8+ chars, include a number, uppercase letter, and a symbol.
+</p>
                 <button type="submit" class="btn btn-primary" style="width:100%">Sign Up</button>
             </form>
 

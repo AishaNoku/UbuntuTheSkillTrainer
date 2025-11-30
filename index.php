@@ -78,7 +78,7 @@ $isLoggedIn = isset($_SESSION['username']);
                         creativity, and fine motor skills.</p>
                 </div>
                 </a>
-                <a href = "beads/index.html" style = "text-decoration: none;color: inherit;">
+                <a href = "beads/index.php" style = "text-decoration: none;color: inherit;">
                     <div class="skill-card">
                         <div class="skill-icon">&#127912;</div>
                         <h3>Bead Making</h3>
