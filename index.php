@@ -91,9 +91,8 @@ $userId = getUserId();
                             $folder = htmlspecialchars($course['folder_name']);
                             $link = "#";
 
-                            // Determine link based on folder and login status
                             if ($isLoggedIn) {
-                                // Map folders to actual pages
+                                // Map folders topages
                                 $courseLinks = [
                                     'crochet' => 'crochet/crochetHome.html',
                                     'beads' => 'beads/index.php',
@@ -103,7 +102,7 @@ $userId = getUserId();
                                 
                                 $link = isset($courseLinks[$folder]) ? $courseLinks[$folder] : '#';
                             } else {
-                                // Redirect to login, but remember where they wanted to go
+                                // Redirect to login
                                 $link = 'login.php';
                             }
 
@@ -121,7 +120,6 @@ $userId = getUserId();
                         echo '<p>No courses available at the moment.</p>';
                     }
                 } catch (PDOException $e) {
-                    // secureLog('error', 'Error loading courses', ['error' => $e->getMessage()]);
                     echo '<p>Unable to load courses. Please try again later.</p>';
                 }
                 ?>
