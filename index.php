@@ -67,43 +67,46 @@ $isLoggedIn = isset($_SESSION['username']);
         <div class="container">
             <h2 class="section-title">Skills to Learn</h2>
             <p class="section-subtitle">Explore in-demand skills available on this platform</p>
+            
             <div class="skills-grid">
+                <?php
+                include 'db_connect.php';
+                $sql = "SELECT * FROM courses";
+                $result = $conn->query($sql);
 
-                <a href = "../UbuntuTheSkillTrainer/crochet/crochetHome.html" style = "text-decoration: none;color: inherit;">
-                <div class="skill-card">
-                    <div class="skill-icon">🧶</div>
-                    <h3>Crocheting</h3>
-                    <p> Learn how to turn simple yarn into beautiful, 
-                        handmade creations while building patience, 
-                        creativity, and fine motor skills.</p>
-                </div>
-                </a>
-                <a href = "beads/index.php" style = "text-decoration: none;color: inherit;">
-                    <div class="skill-card">
-                        <div class="skill-icon">&#127912;</div>
-                        <h3>Bead Making</h3>
-                        <p>Create stunning handmade beaded jewellery,
-                            learn the art of jewellery design and level
-                            up your craft into a business
-                        </p>
-                    </div>
-                </a>
-                
-                <div class="skill-card">
-                    <div class="skill-icon">&#127925;</div>
-                    <h3>Mbira Tutorials</h3>
-                    <p>Learn to compose, mix, and produce music </p>
-                </div>
-                <a href="Henna/henna.html" style ="text-decoration:none;color:inherit;">
-                <div class="skill-card">
-                    <div class="skill-icon">&#128247;</div>
-                    <h3>Henna Designs</h3>
-                    <p>Master the art of beautiful henna designs,
-                        learn the cultural relavance of the craft and 
-                        how to monetize it.
-                     </p>
-                </div>
-                </a>
+                if ($result->num_rows > 0) {
+                    while($row = $result->fetch_assoc()) {
+                        $folder = $row['folder_name'];
+                        $link = "#"; 
+
+                        if ($isLoggedIn) {
+                            if ($folder == 'crochet') {
+                                $link = "crochet/crochetHome.html";
+                            } elseif ($folder == 'beads') {
+                                $link = "beads/index.php";
+                            } elseif ($folder == 'henna') {
+                                $link = "Henna/henna.html";
+                            } elseif ($folder == 'mbira') {
+                                $link = "#"; 
+                            }
+                        } else {
+                            $link = "login.html"; 
+                        }
+
+                        echo '
+                        <a href="' . $link . '" style="text-decoration: none; color: inherit;">
+                            <div class="skill-card">
+                                <div class="skill-icon">' . $row['icon'] . '</div>
+                                <h3>' . $row['title'] . '</h3>
+                                <p>' . $row['description'] . '</p>
+                            </div>
+                        </a>
+                        ';
+                    }
+                } else {
+                    echo "<p>No courses found in database.</p>";
+                }
+                ?>
             </div>
         </div>
     </section>
