@@ -20,6 +20,10 @@
             border: 1px solid #ccc;
             border-radius: 4px;
         }
+        /* Style to show red border if invalid */
+        input:invalid {
+            border-color: #ffdddd;
+        }
         .auth-switch {
             margin-top: 20px;
             text-align: center;
@@ -52,16 +56,21 @@
                 <input type="email" name="email" required>
 
                 <label>Password</label>
-<input type="password" name="password"
-    required
-    minlength="8"
-    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w]).{8,}"
-    title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
-    placeholder="Min 8 chars, 1 number, 1 symbol">
+                <input type="password" name="password" id="password"
+                    required
+                    minlength="8"
+                    pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[^\w]).{8,}"
+                    title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters"
+                    placeholder="Min 8 chars, 1 number, 1 symbol">
+                
+                <p style="font-size: 0.8rem; color: #666; margin-top: 5px;">
+                    * Password must be 8+ chars, include a number, uppercase letter, and a symbol.
+                </p>
 
-<p style="font-size: 0.8rem; color: #666; margin-top: 5px;">
-    * Password must be 8+ chars, include a number, uppercase letter, and a symbol.
-</p>
+                <label>Confirm Password</label>
+                <input type="password" name="confirm_password" id="confirm_password" 
+                       required placeholder="Type password again">
+
                 <button type="submit" class="btn btn-primary" style="width:100%">Sign Up</button>
             </form>
 
@@ -71,5 +80,24 @@
 
         </div>
     </div>
+
+    <script>
+        const password = document.getElementById("password");
+        const confirm_password = document.getElementById("confirm_password");
+
+        function validatePassword(){
+            if(confirm_password.value && password.value !== confirm_password.value) {
+                confirm_password.setCustomValidity("Passwords Don't Match");
+                confirm_password.style.borderColor = "red";
+            } else {
+                confirm_password.setCustomValidity(''); // Clear error
+                confirm_password.style.borderColor = "#ccc"; // Reset color
+                if(confirm_password.value) confirm_password.style.borderColor = "green";
+            }
+        }
+
+        password.onchange = validatePassword;
+        confirm_password.onkeyup = validatePassword;
+    </script>
 </body>
 </html>

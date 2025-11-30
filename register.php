@@ -7,6 +7,11 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user = $conn->real_escape_string($_POST['username']);
     $email = $conn->real_escape_string($_POST['email']);
     $pass = $_POST['password'];
+    $confirm_pass = $_POST['confirm_password'];
+
+    if ($pass !== $confirm_pass){
+        die("Error: Passwords do not match!");
+    }
 
     $hashed_password = password_hash($pass, PASSWORD_DEFAULT);
 
