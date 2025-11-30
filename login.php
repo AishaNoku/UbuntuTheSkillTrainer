@@ -18,7 +18,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['user_id'] = $row['id'];
             
             echo "<h1>Login Successful! Welcome back, $user</h1>";
-            header("refresh:2;url=index.html"); 
+            header("refresh:2;url=index.php"); 
             
         } else {
             echo "<h1>Incorrect Password</h1>";

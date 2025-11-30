@@ -27,7 +27,7 @@ $isLoggedIn = isset($_SESSION['username']);
                 <span style="font-weight: bold; color: var(--accent);">
                     Hi, <?php echo htmlspecialchars($_SESSION['username']); ?>
                 </span>
-                <a href="logout.php" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">
+                <a href="login.html" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">
                     Log Out
                 </a>
             <?php else: ?>
