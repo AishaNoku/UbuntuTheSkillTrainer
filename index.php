@@ -74,7 +74,6 @@ $isLoggedIn = isset($_SESSION['username']);
                 $sql = "SELECT * FROM courses";
                 $result = $conn->query($sql);
 
-<<<<<<< HEAD
                 if ($result->num_rows > 0) {
                     while($row = $result->fetch_assoc()) {
                         $folder = $row['folder_name'];
@@ -108,7 +107,6 @@ $isLoggedIn = isset($_SESSION['username']);
                     echo "<p>No courses found in database.</p>";
                 }
                 ?>
-=======
                 <a href = "../UbuntuTheSkillTrainer/crochet/crochetHome.html" style = "text-decoration: none;color: inherit;">
                 <div class="skill-card">
                     <div class="skill-icon">🧶</div>
@@ -144,7 +142,6 @@ $isLoggedIn = isset($_SESSION['username']);
                      </p>
                 </div>
                 </a>
->>>>>>> ccbcabe2b0569aec360e22faffdd38f147550901
             </div>
         </div>
     </section>
