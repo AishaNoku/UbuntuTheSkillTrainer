@@ -5,14 +5,12 @@ menuToggle.addEventListener("click", ()=>{
     navMenu.classList.toggle("active")
 })
 
-//close menu when link clicked
 navMenu.querySelector("a").forEach((link)=>{
     link.addEventListener("click",()=>{
         navMenu.classList.remove("active")
     })
 })
 
-//smooth anchor link scrolling
 
 document.querySelectorAll('a[href^="#"]').forEach((link)=>{
     link.addEventListener("click",function (e){
@@ -30,8 +28,6 @@ document.querySelectorAll('a[href^="#"]').forEach((link)=>{
         }
     })
 })
-
-//skill card hover
 
 document.querySelectorAll(".skill-card").forEach((card) => {
     card.addEventListener("mouseenter",function() {
