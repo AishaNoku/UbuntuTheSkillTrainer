@@ -79,45 +79,6 @@ $isLoggedIn = isset($_SESSION['username']);
                 $sql = "SELECT * FROM courses";
                 $result = $conn->query($sql);
 
-<<<<<<< HEAD
-                <a href = "../UbuntuTheSkillTrainer/crochet/crochetHome.html" style = "text-decoration: none;color: inherit;">
-                <div class="skill-card">
-                    <div class="skill-icon">🧶</div>
-                    <h3>Crocheting</h3>
-                    <p> Learn how to turn simple yarn into beautiful, 
-                        handmade creations while building patience, 
-                        creativity, and fine motor skills.</p>
-                </div>
-                </a>
-                <a href = "beads/index.php" style = "text-decoration: none;color: inherit;">
-                    <div class="skill-card">
-                        <div class="skill-icon">&#127912;</div>
-                        <h3>Bead Making</h3>
-                        <p>Create stunning handmade beaded jewellery,
-                            learn the art of jewellery design and level
-                            up your craft into a business
-                        </p>
-                    </div>
-                </a>
-                
-                <a href="../UbuntuTheSkillTrainer/mbira/index.html" style= "text-decoration: none;color: inherit;">
-                    <div class="skill-card">
-                    <div class="skill-icon">&#127925;</div>
-                    <h3>Mbira Tutorials</h3>
-                    <p>Learn to compose, mix, and produce music </p>
-                    </div>
-            </a>
-                <a href="Henna/henna.html" style ="text-decoration:none;color:inherit;">
-                <div class="skill-card">
-                    <div class="skill-icon">&#128247;</div>
-                    <h3>Henna Designs</h3>
-                    <p>Master the art of beautiful henna designs,
-                        learn the cultural relavance of the craft and 
-                        how to monetize it.
-                     </p>
-                </div>
-                </a>
-=======
                 if ($result->num_rows > 0) {
                     while($row = $result->fetch_assoc()) {
                         $folder = $row['folder_name'];
@@ -151,7 +112,6 @@ $isLoggedIn = isset($_SESSION['username']);
                     echo "<p>No courses found in database.</p>";
                 }
                 ?>
->>>>>>> ce8d569de341dd17918980caf85f370e61be7564
             </div>
         </div>
     </section>
