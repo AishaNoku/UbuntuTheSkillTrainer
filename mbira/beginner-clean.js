@@ -1,7 +1,4 @@
-// Beginner Course JavaScript - Clean Version (No Tailwind)
-// Simple white-dominant design with regular CSS
 
-// Course data with all lessons (Modules 0-5: Beginner, Intermediate, Advanced)
 const courseData = {
     modules: [
         {
@@ -367,7 +364,7 @@ function renderSidebar() {
             if (isCompleted) {
                 const check = document.createElement('span');
                 check.className = 'lesson-checkmark';
-                check.textContent = '✓';
+                check.textContent = 'done';
                 button.appendChild(check);
             }
             
@@ -396,10 +393,10 @@ function renderLessonContent() {
 
     // Video Frame card (if frame exists, show embedded video instead of just link)
     if (lesson.frame) {
-        html += '<div class="video-card"><div class="video-header"><div class="video-icon">▶</div><div><h4 class="video-title">' + (lesson.video ? lesson.video.title : 'Video Lesson') + '</h4><p class="video-type">' + (lesson.video ? lesson.video.type : 'Tutorial') + '</p></div></div><div class="video-embed">' + lesson.frame + '</div></div>';
+        html += '<div class="video-card"><div class="video-header"><div class="video-icon"></div><div><h4 class="video-title">' + (lesson.video ? lesson.video.title : 'Video Lesson') + '</h4><p class="video-type">' + (lesson.video ? lesson.video.type : 'Tutorial') + '</p></div></div><div class="video-embed">' + lesson.frame + '</div></div>';
     } else if (lesson.video) {
         // Fallback: if no frame but video exists, show link
-        html += '<div class="video-card"><div class="video-header"><div class="video-icon">▶</div><div><h4 class="video-title">' + lesson.video.title + '</h4><p class="video-type">' + lesson.video.type + '</p></div></div><div class="video-footer"><a href="' + lesson.video.url + '" target="_blank" class="video-link">Open Video →</a></div></div>';
+        html += '<div class="video-card"><div class="video-header"><div class="video-icon"></div><div><h4 class="video-title">' + lesson.video.title + '</h4><p class="video-type">' + lesson.video.type + '</p></div></div><div class="video-footer"><a href="' + lesson.video.url + '" target="_blank" class="video-link">Open Video →</a></div></div>';
     }
 
     // Reading resource card (if present)
@@ -409,7 +406,7 @@ function renderLessonContent() {
 
     // Exercises card
     if (lesson.exercises) {
-        html += '<div class="exercises-card"><h3 class="exercises-title">✦ Practical Exercises</h3><ul class="exercises-list">';
+        html += '<div class="exercises-card"><h3 class="exercises-title">Practical Exercises</h3><ul class="exercises-list">';
         lesson.exercises.forEach(function(ex) {
             html += '<li><span class="exercise-bullet">●</span><span class="exercise-text">' + ex + '</span></li>';
         });
@@ -439,7 +436,7 @@ function renderLessonContent() {
 
     // Completion button
     const completed = state.completedLessons.includes(lesson.id);
-    html += '<div class="completion-section"><button onclick="markComplete(\'' + lesson.id + '\')" class="complete-btn ' + (completed ? 'completed' : 'not-completed') + '">' + (completed ? 'Lesson Completed ✓' : 'Mark as Complete') + '</button></div>';
+    html += '<div class="completion-section"><button onclick="markComplete(\'' + lesson.id + '\')" class="complete-btn ' + (completed ? 'completed' : 'not-completed') + '">' + (completed ? 'Lesson Completed' : 'Mark as Complete') + '</button></div>';
 
     container.innerHTML = html;
 }
