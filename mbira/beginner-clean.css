@@ -1,4 +1,5 @@
 
+@media (min-width: 768px) {
 * {
     margin: 0;
     padding: 0;
@@ -496,7 +497,7 @@ html, body {
 }
 
 /* MOBILE RESPONSIVE */
-@media (max-width: 768px) {
+@media (max-width: 1024px) {
     .mobile-header {
         display: flex;
     }
@@ -542,4 +543,5 @@ html, body {
     .video-embed iframe {
         height: 200px;
     }
+}
 }

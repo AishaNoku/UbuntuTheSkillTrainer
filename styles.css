@@ -1,6 +1,4 @@
-/* ==================================== */
-/* 1. GLOBALS & UTILITIES               */
-/* ==================================== */
+@media (min-width: 768px) {
 
 * {
   margin: 0;
@@ -731,4 +729,739 @@ footer {
         .auth-switch a:hover {
             text-decoration: underline;
         }
+}
+}
+
+@media (min-width: 1024px) {
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+:root {
+  --primary: #F3E9DD;        /* main beige background */
+  --primary-dark: #E8DACB;   /* deeper beige for sections/cards */
+  --secondary: #D9B8A9;      /* peach-tan supporting colour */
+  --accent: #A8603A;         /* rustic burnt sienna for buttons / highlights */
+  --dark: #6B2F14;           /* deep chestnut for titles */
+  --dark-light: #A4532A;     /* warm terracotta for large handwritten text */
+  --gray: #D7C4B8;           /* soft taupe accent */
+  --light: #FCEFE2;          /* pale ivory used in button text / highlights */
+  --white: #ffffff;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  color: var(--dark);
+  background-color: var(--white);
+  line-height: 1.6;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.section-title {
+  text-align: center;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  margin-bottom: 0.5rem;
+  font-weight: 700;
+}
+
+.section-subtitle {
+  text-align: center;
+  color: var(--gray);
+  margin-bottom: 3rem;
+  font-size: 1rem;
+}
+
+/* ==================================== */
+/* 2. HEADER, NAVIGATION & BUTTONS      */
+/* ==================================== */
+
+header {
+  position: sticky;
+  display: flex;
+  justify-content: space-between;
+  align-items: center; 
+  padding: 1rem 2rem; 
+  top: 0;
+  z-index: 100;
+  background-color: var(--white);
+  border-bottom: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+header .btn-primary{
+    margin-left: auto;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--dark);
+  text-decoration: none;
+}
+
+/* Nav Positioning Reverted to original but fixed for display */
+header nav {
+  position: absolute;
+  left:50%;
+  transform: translate(-50%);
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+nav a {
+  color: var(--dark);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+nav a:hover {
+  color: var(--primary);
+}
+
+/* Button Styles */
+.btn {
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-primary {
+  background-color: var(--accent);
+  color: var(--white);
+}
+
+.btn-primary:hover {
+  background-color: var(--dark);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  color: var(--primary);
+  border: 2px solid var(--primary);
+}
+
+.btn-secondary:hover {
+  background-color: var(--primary);
+  color: var(--white);
+}
+
+/* Mobile Menu Toggle */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: var(--dark);
+}
+
+/* ==================================== */
+/* 3. HOMEPAGE SECTIONS (ORIGINAL STYLES) */
+/* ==================================== */
+
+/* Hero Section (Reverted to Original) */
+.hero {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+  url('images/hero_bg.jpg');
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: var(--white);
+  padding: 6rem 2rem;
+  text-align: center;
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  margin-bottom: 1rem;
+  font-weight: 800;
+  line-height: 1.2;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero p {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  opacity: 0.95;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero-buttons {
+  color: var(--white);
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+
+.hero .btn-secondary {
+  border-color: var(--white);
+  color: var(--white);
+}
+
+.hero .btn-secondary:hover {
+  background-color: var(--white);
+  color: var(--primary);
+}
+
+.hero-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 4rem;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.stat {
+  text-align: center;
+}
+
+.stat-number {
+  font-size: 2rem;
+  font-weight: 700;
+  display: block;
+}
+
+.stat-label {
+  font-size: 0.9rem;
+  opacity: 0.9;
+}
+
+/* Featured Skills (Reverted to Original) */
+.featured-skills {
+  padding: 5rem 2rem;
+  background-color: var(--light);
+}
+
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.skill-card {
+  background-color: var(--white);
+  padding: 2rem;
+  border-radius: 0.75rem;
+  text-align: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+
+}
+
+.skill-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+  
+}
+
+.skill-icon {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.skill-card h3 {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.skill-card p {
+  color: var(--gray);
+  font-size: 0.9rem;
+}
+
+/* How It Works (Reverted to Original) */
+.how-it-works {
+  padding: 5rem 2rem;
+  background-color: var(--white);
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.step {
+  position: relative;
+  padding: 2rem;
+}
+
+.step-number {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background-color: var(--primary);
+  color: var(--white);
+  border-radius: 50%;
+  font-weight: 700;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.step h3 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.step p {
+  color: var(--gray);
+  font-size: 0.9rem;
+}
+
+/* Testimonials (Reverted to Original) */
+.testimonials {
+  padding: 5rem 2rem;
+  background: linear-gradient(180deg, var(--primary-dark) 0%, #ffffff 100%);
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.testimonial-card {
+  background-color: var(--white);
+  padding: 2rem;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.stars {
+  color: #fbbf24;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  letter-spacing: 2px;
+}
+
+.testimonial-text {
+  color: var(--dark);
+  margin-bottom: 1rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.testimonial-author {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.author-avatar {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background-color: var(--primary);
+  color: var(--white);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+}
+
+.author-name {
+  font-weight: 600;
+  color: var(--dark);
+}
+
+.author-role {
+  color: var(--gray);
+  font-size: 0.85rem;
+}
+
+/* Community Section (Reverted to Original) */
+.community {
+  padding: 5rem 2rem;
+  background-color: var(--white);
+}
+
+.community-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+}
+
+.community-text h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.community-text p {
+  color: var(--gray);
+  margin-bottom: 1.5rem;
+  line-height: 1.8;
+}
+
+.community-features {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.feature-item {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.feature-icon {
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+.feature-item h4 {
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.feature-item p {
+  color: var(--gray);
+  font-size: 0.9rem;
+}
+
+.community-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2rem;
+}
+
+.community-stat {
+  padding: 1.5rem;
+  background-color: var(--light);
+  border-radius: 0.5rem;
+  text-align: center;
+}
+
+.community-stat-number {
+  font-size: 1.75rem;
+  font-weight: 700;
+  color: var(--primary);
+  display: block;
+  margin-bottom: 0.25rem;
+}
+
+.community-stat-label {
+  color: var(--gray);
+  font-size: 0.85rem;
+}
+
+/* CTA Section (Reverted to Original) */
+.cta {
+  background: linear-gradient(135deg, var(--secondary) 0%, #a88e85 100%);
+  color: var(--white);
+  padding: 4rem 2rem;
+  text-align: center;
+}
+
+.cta h2 {
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+  margin-bottom: 1rem;
+}
+
+.cta p {
+  font-size: 1rem;
+  margin-bottom: 2rem;
+  opacity: 0.95;
+}
+.cta .btn-primary{
+  background-color: var(--accent);
+  color: var(--white);
+}
+.cta .btn-primary:hover{
+  background-color: var(--white);
+  color:var(--accent);
+}
+
+
+/* ==================================== */
+/* 4. COURSE-SPECIFIC STYLES (FIXED)    */
+/* ==================================== */
+
+/* --- Course Home Page (bead_making.html) --- */
+
+.course-content {
+    padding: 5rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.course-content h1 {
+    text-align: center;
+    margin-bottom: 0.5rem;
+    font-size: 2.5rem;
+    color: var(--dark);
+}
+.course-content > p { 
+    text-align: center;
+    margin-bottom: 3rem;
+    font-size: 1.1rem;
+    color: var(--dark-light);
+}
+
+.modules {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); 
+    gap: 3rem; 
+    margin-top: 3rem;
+}
+
+.module-card {
+    background-color: var(--light); 
+    padding: 2.5rem; 
+    border-radius: 1rem; 
+    text-align: left;
+    transition: all 0.3s ease;
+    box-shadow: 0 8px 15px rgba(107, 47, 20, 0.1); 
+    border-left: 5px solid var(--accent); 
+}
+
+.module-card:hover {
+    transform: translateY(-8px); 
+    box-shadow: 0 12px 20px rgba(107, 47, 20, 0.15);
+}
+
+.module-card h2 {
+    font-size: 1.6rem;
+    color: var(--dark);
+    margin-bottom: 1rem;
+    font-weight: 700;
+}
+
+.module-card p {
+    color: var(--dark);
+    margin-bottom: 2rem;
+    font-size: 1rem;
+    line-height: 1.6;
+}
+
+/* --- Individual Module Pages (beadsmoduleX.html) --- */
+
+.module-content {
+    max-width: 900px;
+    margin: 2rem auto;
+    padding: 2.5rem;
+    background-color: var(--light);
+    border-radius: 0.75rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.module-content h1 {
+    font-size: 2.2rem;
+    color: var(--dark);
+    border-bottom: 2px solid var(--secondary);
+    padding-bottom: 0.5rem;
+    margin-bottom: 1.5rem;
+}
+
+.module-content h2 {
+    font-size: 1.6rem;
+    color: var(--dark-light);
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+}
+
+iframe {
+    display: block;
+    width: 100%;
+    max-width: 560px;
+    height: 315px;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin: 1.5rem auto 2.5rem auto;
+}
+
+/* Quiz Styles */
+form {
+    background-color: var(--white);
+    padding: 1.5rem;
+    border-radius: 0.5rem;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+form p {
+    font-weight: 600;
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    color: var(--dark);
+}
+
+input[type="radio"] {
+    margin-right: 0.5rem;
+}
+
+#result, #result2, #result3 {
+    margin-top: 1.5rem;
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--accent);
+    text-align: center;
+}
+
+/* ==================================== */
+/* 5. FOOTER & MEDIA QUERIES            */
+/* ==================================== */
+
+footer {
+  background-color: var(--primary-dark);
+  color: var(--white);
+  padding: 3rem 2rem;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.footer-section h4 {
+  margin-bottom: 1rem;
+  font-weight: 600;
+  color: var(--dark); 
+}
+
+.footer-section a {
+  display: block;
+  color: #c9af9f; /* Fixed contrast */
+  text-decoration: none;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+.footer-section a:hover {
+  color: var(--accent);
+}
+
+.footer-bottom {
+  grid-column: 1/-1;
+  margin: 0 auto;
+  padding-top: 2rem;
+  border-top: 1px solid #a88e85;
+  text-align: center;
+  color: #c9af9f; /* Fixed contrast */
+  font-size: 0.9rem;
+}
+
+/* Mobile Media Queries (Preserved & Adjusted) */
+@media (max-width: 768px) {
+    /* Menu Toggle */
+    .menu-toggle {
+        display: block;
+    }
+
+    nav {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background-color: var(--white);
+        flex-direction: column;
+        gap: 1rem;
+        padding: 1rem 2rem;
+        display: none;
+        border-bottom: 1px solid #e2e8f0;
+    }
+
+    nav.active {
+        display: flex;
+    }
+
+    /* Homepage Styles */
+    .community-content {
+        grid-template-columns: 1fr;
+    }
+
+    .community-stats {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+
+    .hero-stats {
+        flex-direction: column;
+    }
+
+    /* Course/General Styles */
+    .section-title {
+        font-size: 1.75rem;
+    }
+    
+    /* Footer */
+    .footer-content {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .footer-bottom {
+        text-align: center;
+    }
+    .module-nav{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      
+    }
+            .form-box {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 30px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        /* Style for the 'Already have an account' text */
+        .auth-switch {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        .auth-switch a {
+            color: var(--accent); /* Uses your rust color */
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .auth-switch a:hover {
+            text-decoration: underline;
+        }
+}
 }
