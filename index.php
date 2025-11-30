@@ -88,16 +88,22 @@ $isLoggedIn = isset($_SESSION['username']);
                         </p>
                     </div>
                 </a>
+                
                 <div class="skill-card">
                     <div class="skill-icon">&#127925;</div>
                     <h3>Mbira Tutorials</h3>
                     <p>Learn to compose, mix, and produce music </p>
                 </div>
+                <a href="Henna/henna.html" style ="text-decoration:none;color:inherit;">
                 <div class="skill-card">
                     <div class="skill-icon">&#128247;</div>
                     <h3>Henna Designs</h3>
-                    <p>Master the art of capturing perfect moments </p>
+                    <p>Master the art of beautiful henna designs,
+                        learn the cultural relavance of the craft and 
+                        how to monetize it.
+                     </p>
                 </div>
+                </a>
             </div>
         </div>
     </section>
