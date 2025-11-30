@@ -13,7 +13,14 @@
     <h1>Module 3: Essential Techniques</h1>
     <p>Master tension, increases, decreases, and pattern reading</p>
 </header>
-
+<section class="progress-section">
+        <label>Overall Progress</label>
+        <div class="progress-bar">
+            <div id="progress-fill"></div>
+        </div>
+        <p id="progress-text">0% Completed</p>
+        
+    </section>
 <div class="container">
     <div class="lesson-grid">
     <a href="../view/lesson3-1.html" class="lesson-card">
@@ -28,7 +35,7 @@
         </a>
         </div>
 
-    <!-- END OF MODULE ASSESSMENT -->
+
     <section class="assessment-section">
         <h2>End of Module Assessment</h2>
 
@@ -64,12 +71,16 @@
     </section>
 
 </div>
+<button onclick="markModuleComplete(3)">Mark as Complete</button>
+
 <div class="button-container">
     <button class="previous-btn" onclick="window.location.href='module2.html'">⬅ Previous Module</button>
     <button class="next-btn" onclick="window.location.href='module4.html'">Next Module →</button>
 </div>
 
 <script src="../assets/js/crochet.js"></script>
-
+   <script>
+    updateModuleProgress(3);
+</script>
 </body>
 </html>

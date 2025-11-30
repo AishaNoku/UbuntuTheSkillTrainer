@@ -12,7 +12,14 @@
     <h1>Module 2: Crochet Stitches</h1>
     <p class="subtitle2">Learn the essential stitches every crocheter needs</p>
 </header>
-
+<section class="progress-section">
+        <label>Overall Progress</label>
+        <div class="progress-bar">
+            <div id="progress-fill"></div>
+        </div>
+        <p id="progress-text">0% Completed</p>
+        
+    </section>
 
 <section class="lessons-section2">
     <h2>Lessons in This Module</h2>
@@ -83,7 +90,8 @@
         <p id="result"></p>
     </section>
 </section>
-  
+  <button onclick="markModuleComplete(2)">Mark as Complete</button>
+
 <div class="button-container">
     <button class="previous-btn" onclick="window.location.href='module1.html'">⬅ Previous Module</button>
     <button class="next-btn" onclick="window.location.href='module3.html'">Next Module →</button>
@@ -91,6 +99,8 @@
 
 
 <script src="../assets/js/crochet.js"></script>
-
+   <script>
+    updateModuleProgress(2);
+</script>
 </body>
 </html>

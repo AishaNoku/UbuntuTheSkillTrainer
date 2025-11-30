@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         echo "<h1>Success! Account created. </h1>";
         echo "<p>Redirecting to homepage...</p>";
         
-        header("refresh:3;url=index.html");
+        header("refresh:3;url=index.php");
     } else {
         echo "Error: " . $sql . "<br>" . $conn->error;
     }

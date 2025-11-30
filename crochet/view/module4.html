@@ -13,7 +13,14 @@
     <h1>Module 4: Beginner Projects</h1>
     <p>Create fun and simple crochet items to practice your skills!</p>
 </header>
-
+<section class="progress-section">
+        <label>Overall Progress</label>
+        <div class="progress-bar">
+            <div id="progress-fill"></div>
+        </div>
+        <p id="progress-text">0% Completed</p>
+        
+    </section>
 <div class="container">
 
     <section class="lesson-card">
@@ -136,6 +143,7 @@
             <li>Repeat Rows 1 & 2 until desired length.</li>
         </ol>
     </section>
+<button onclick="markModuleComplete(4)">Mark as Complete</button>
 
 <div class="button-container">
     <button class="previous-btn" onclick="window.location.href='module3.html'">⬅ Previous Module</button>
@@ -143,6 +151,9 @@
 </div>
 
 <script src="../assets/js/crochet.js"></script>
+   <script>
+    updateModuleProgress(4);
+</script>
 
 </body>
 </html>
