@@ -1,4 +1,7 @@
-@media (min-width: 768px) {
+/* ==================================== */
+/* BASE STYLES - Apply to all screens  */
+/* ==================================== */
+
 * {
   box-sizing: border-box;
   margin: 0;
@@ -24,12 +27,13 @@ body {
   background: var(--bg);
   color: #333;
   line-height: 1.45;
-  font-size: 1.6rem 
+  font-size: 1rem;
 }
 
 .app {
   display: flex;
   min-height: 100vh;
+  flex-direction: column;
 }
 
 /* ===== SIDEBAR ===== */
@@ -125,6 +129,7 @@ body {
   position: sticky;
   top: 0;
   z-index: 5;
+  background: var(--bg);
 }
 
 .search {
@@ -161,6 +166,11 @@ body {
   justify-content: center;
   box-shadow: 0 1px 4px rgba(16, 24, 40, 0.06);
   cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.icon-btn:hover {
+  transform: translateY(-2px);
 }
 
 .avatar {
@@ -184,36 +194,6 @@ body {
   padding: 22px 28px;
 }
 
-@media (max-width: 1024px) {
-  .content-wrap {
-    grid-template-columns: 1fr 320px;
-  }
-}
-@media (max-width: 880px) {
-  .content-wrap {
-    grid-template-columns: 1fr;
-    padding: 16px;
-  }
-
-  .sidebar {
-    position: relative;
-    height: auto;
-    width: 100%;
-    flex-direction: row;
-    overflow: auto;
-    padding: 12px;
-  }
-
-  .module-list {
-    flex-direction: row;
-  }
-
-  .module-item {
-    white-space: nowrap;
-    padding: 8px 10px;
-  }
-}
-
 /* LESSON AREA */
 .lesson-area {
   display: flex;
@@ -233,6 +213,7 @@ body {
   display: flex;
   gap: 10px;
   align-items: center;
+  flex-wrap: wrap;
 }
 
 .chip {
@@ -243,6 +224,7 @@ body {
   font-weight: 600;
   cursor: pointer;
   transition: background 0.2s, color 0.2s;
+  font-size: 0.9rem;
 }
 
 .chip.active {
@@ -298,6 +280,12 @@ body {
   font-weight: 700;
   background: var(--accent-3);
   color: white;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.btn:hover {
+  background: var(--accent);
+  transform: translateY(-2px);
 }
 
 .btn.ghost {
@@ -346,4 +334,176 @@ footer {
   padding-top: 1rem;
   font-size: 0.9rem;
 }
+
+/* ==================================== */
+/* TABLET STYLES - 768px to 1024px     */
+/* ==================================== */
+
+@media (max-width: 1024px) {
+  .content-wrap {
+    grid-template-columns: 1fr 320px;
+  }
+
+  .sidebar {
+    width: 240px;
+    padding: 20px;
+  }
+
+  .brand .logo {
+    width: 40px;
+    height: 40px;
+  }
+
+  .topnav {
+    padding: 14px 20px;
+  }
+}
+
+/* ==================================== */
+/* MOBILE STYLES - Below 880px         */
+/* ==================================== */
+
+@media (max-width: 880px) {
+  body {
+    font-size: 0.95rem;
+  }
+
+  .app {
+    flex-direction: column;
+  }
+
+  .content-wrap {
+    grid-template-columns: 1fr;
+    padding: 16px;
+  }
+
+  .sidebar {
+    position: relative;
+    height: auto;
+    width: 100%;
+    flex-direction: row;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 12px;
+  }
+
+  .brand {
+    flex-shrink: 0;
+  }
+
+  .brand .logo {
+    width: 36px;
+    height: 36px;
+    font-size: 1rem;
+  }
+
+  .brand h1 {
+    font-size: 0.95rem;
+  }
+
+  .modules-title {
+    display: none;
+  }
+
+  .module-list {
+    flex-direction: row;
+    overflow-x: auto;
+  }
+
+  .module-item {
+    white-space: nowrap;
+    padding: 8px 12px;
+    font-size: 0.85rem;
+  }
+
+  .topnav {
+    padding: 12px 16px;
+    flex-wrap: wrap;
+  }
+
+  .search {
+    order: 3;
+    width: 100%;
+    margin-top: 8px;
+  }
+
+  .nav-actions {
+    margin-left: auto;
+  }
+
+  .widgets {
+    order: -1;
+  }
+
+  .footer-content {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  .lesson-area {
+    gap: 12px;
+  }
+
+  .card {
+    padding: 14px;
+  }
+
+  .view-toggle {
+    gap: 6px;
+  }
+
+  .chip {
+    padding: 6px 10px;
+    font-size: 0.85rem;
+  }
+}
+
+/* ==================================== */
+/* MOBILE STYLES - Below 640px         */
+/* ==================================== */
+
+@media (max-width: 640px) {
+  .sidebar {
+    padding: 10px;
+    gap: 12px;
+  }
+
+  .brand {
+    gap: 8px;
+  }
+
+  .sub {
+    display: none;
+  }
+
+  .topnav {
+    padding: 10px 12px;
+  }
+
+  .content-wrap {
+    padding: 12px;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+
+  .icon-btn {
+    padding: 6px 8px;
+  }
+
+  .avatar {
+    width: 32px;
+    height: 32px;
+    font-size: 0.85rem;
+  }
+
+  .progress {
+    padding: 12px;
+  }
+
+  .progress h4 {
+    font-size: 0.85rem;
+  }
 }

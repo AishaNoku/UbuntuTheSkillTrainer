@@ -14,9 +14,9 @@ if (basename($_SERVER['PHP_SELF']) == basename(__FILE__)) {
 // ============================================
 
 define('DB_HOST', 'localhost');
-define('DB_NAME', 'ubuntu_db');
-define('DB_USER', 'root'); // Change if using a specific user
-define('DB_PASS', '');     // Change to your actual password
+define('DB_NAME', 'webtech_2025A_rachel_murambiwa');
+define('DB_USER', 'rachel.murambiwa'); 
+define('DB_PASS', 'Chacha@1583');     
 define('DB_CHARSET', 'utf8mb4');
 
 function setSecurityHeaders() {
