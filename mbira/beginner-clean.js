@@ -284,7 +284,6 @@ const courseData = {
     ]
 };
 
-// State tracking
 let state = {
     currentModule: 0,
     currentLesson: 0,
@@ -294,7 +293,6 @@ let state = {
 
 let progressChartInstance = null;
 
-// Initialize chart
 function initChart() {
     const ctx = document.getElementById('progressChart').getContext('2d');
     progressChartInstance = new Chart(ctx, {
@@ -319,7 +317,6 @@ function initChart() {
     });
 }
 
-// Update chart
 function updateChart() {
     const totalLessons = courseData.modules.reduce(function(acc, m) { return acc + m.lessons.length; }, 0);
     const completedCount = state.completedLessons.length;
@@ -331,7 +328,6 @@ function updateChart() {
     document.getElementById('progress-text').innerText = percentage + '%';
 }
 
-// Render sidebar
 function renderSidebar() {
     const container = document.getElementById('module-list');
     container.innerHTML = '';
@@ -377,7 +373,6 @@ function renderSidebar() {
     });
 }
 
-// Render lesson
 function renderLessonContent() {
     const mod = courseData.modules[state.currentModule];
     const lesson = mod.lessons[state.currentLesson];
@@ -387,24 +382,23 @@ function renderLessonContent() {
     document.getElementById('main-title').innerText = lesson.id + ': ' + lesson.title;
 
     let html = '';
-    
-    // Main content card
+
     html += '<div class="content-card"><h3 class="card-title">Lesson Overview</h3><div class="lesson-text">' + lesson.content + '</div></div>';
 
-    // Video Frame card (if frame exists, show embedded video instead of just link)
+    
     if (lesson.frame) {
         html += '<div class="video-card"><div class="video-header"><div class="video-icon"></div><div><h4 class="video-title">' + (lesson.video ? lesson.video.title : 'Video Lesson') + '</h4><p class="video-type">' + (lesson.video ? lesson.video.type : 'Tutorial') + '</p></div></div><div class="video-embed">' + lesson.frame + '</div></div>';
     } else if (lesson.video) {
-        // Fallback: if no frame but video exists, show link
+        
         html += '<div class="video-card"><div class="video-header"><div class="video-icon"></div><div><h4 class="video-title">' + lesson.video.title + '</h4><p class="video-type">' + lesson.video.type + '</p></div></div><div class="video-footer"><a href="' + lesson.video.url + '" target="_blank" class="video-link">Open Video →</a></div></div>';
     }
 
-    // Reading resource card (if present)
+
     if (lesson.reading) {
         html += '<div class="video-card"><div class="video-header"><div class="video-icon"></div><div><h4 class="video-title">' + lesson.reading.title + '</h4><p class="video-type">Additional Reading</p></div></div><div class="video-footer"><a href="' + lesson.reading.url + '" target="_blank" class="video-link">Read More →</a></div></div>';
     }
 
-    // Exercises card
+
     if (lesson.exercises) {
         html += '<div class="exercises-card"><h3 class="exercises-title">Practical Exercises</h3><ul class="exercises-list">';
         lesson.exercises.forEach(function(ex) {
@@ -413,7 +407,6 @@ function renderLessonContent() {
         html += '</ul></div>';
     }
 
-    // Quiz card
     if (lesson.quiz && lesson.quiz.length > 0) {
         const isPassed = state.quizScores[lesson.id] === lesson.quiz.length;
         html += '<div class="quiz-card"><h3 class="quiz-title">Knowledge Check</h3>';
@@ -434,14 +427,13 @@ function renderLessonContent() {
         html += '</div>';
     }
 
-    // Completion button
+
     const completed = state.completedLessons.includes(lesson.id);
     html += '<div class="completion-section"><button onclick="markComplete(\'' + lesson.id + '\')" class="complete-btn ' + (completed ? 'completed' : 'not-completed') + '">' + (completed ? 'Lesson Completed' : 'Mark as Complete') + '</button></div>';
 
     container.innerHTML = html;
 }
 
-// Navigation
 function navigateTo(mIndex, lIndex) {
     state.currentModule = mIndex;
     state.currentLesson = lIndex;
@@ -450,7 +442,6 @@ function navigateTo(mIndex, lIndex) {
     updateNavButtons();
 }
 
-// Update nav buttons
 function updateNavButtons() {
     const prevBtn = document.getElementById('prev-btn');
     const nextBtn = document.getElementById('next-btn');
@@ -482,7 +473,6 @@ function updateNavButtons() {
     };
 }
 
-// Mark complete
 function markComplete(lessonId) {
     if (!state.completedLessons.includes(lessonId)) {
         state.completedLessons.push(lessonId);
@@ -492,7 +482,6 @@ function markComplete(lessonId) {
     }
 }
 
-// Submit quiz
 function submitQuiz(e, lessonId) {
     e.preventDefault();
     const mod = courseData.modules[state.currentModule];
@@ -515,13 +504,11 @@ function submitQuiz(e, lessonId) {
     }
 }
 
-// Mobile menu
 document.getElementById('mobile-menu-btn').addEventListener('click', function() {
     const sidebar = document.getElementById('sidebar');
     sidebar.classList.toggle('menu-open');
 });
 
-// Initialize
 window.onload = function() {
     initChart();
     renderSidebar();
