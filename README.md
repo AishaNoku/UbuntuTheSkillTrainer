@@ -344,12 +344,6 @@ define('CSRF_SECRET', 'unique_random_32_char_string');
 - [ ] Set proper file permissions
 ---
 
-## 👥 Contributors
-
-Built with security-first mindset following OWASP guidelines.
-
----
-
 ## Key Takeaways
 
 - **All passwords are hashed** with Argon2id (never stored in plaintext)
@@ -359,4 +353,3 @@ Built with security-first mindset following OWASP guidelines.
 - **Sessions are validated** (hijacking prevented)
 - **Complete audit trail** (all security events logged)
 
-**Your platform is production-ready secure!**
