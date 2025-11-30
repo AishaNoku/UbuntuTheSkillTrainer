@@ -364,7 +364,7 @@ function renderSidebar() {
             if (isCompleted) {
                 const check = document.createElement('span');
                 check.className = 'lesson-checkmark';
-                check.textContent = '✓';
+                check.textContent = 'done';
                 button.appendChild(check);
             }
             
