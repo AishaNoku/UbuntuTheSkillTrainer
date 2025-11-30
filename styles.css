@@ -143,8 +143,13 @@ nav a:hover {
 
 /* Hero Section (Reverted to Original) */
 .hero {
-  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-  color: var(--dark);
+  background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+  url('images/hero_bg.jpg');
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  color: var(--white);
   padding: 6rem 2rem;
   text-align: center;
 }
@@ -159,15 +164,18 @@ nav a:hover {
   margin-bottom: 1rem;
   font-weight: 800;
   line-height: 1.2;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
 .hero p {
   font-size: 1.25rem;
   margin-bottom: 2rem;
   opacity: 0.95;
+  text-shadow: 0 2px 4px rgba(0,0,0,0.5);
 }
 
 .hero-buttons {
+  color: var(--white);
   display: flex;
   gap: 1rem;
   justify-content: center;
