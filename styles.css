@@ -305,7 +305,7 @@ nav a:hover {
 /* Testimonials (Reverted to Original) */
 .testimonials {
   padding: 5rem 2rem;
-  background: linear-gradient(135deg, #E1CEC8 0%, #DED4D1 100%);
+  background: linear-gradient(180deg, var(--primary-dark) 0%, #ffffff 100%);
 }
 
 .testimonials-grid {
