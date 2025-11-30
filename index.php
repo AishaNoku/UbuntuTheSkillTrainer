@@ -92,7 +92,7 @@ $isLoggedIn = isset($_SESSION['username']);
                             } elseif ($folder == 'henna') {
                                 $link = "Henna/henna.html";
                             } elseif ($folder == 'mbira') {
-                                $link = "#"; 
+                                $link = "mbira/index.html"; 
                             }
                         } else {
                             $link = "login.html"; 
@@ -215,9 +215,8 @@ $isLoggedIn = isset($_SESSION['username']);
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2025 Ubuntu Skills. All rights reserved. Empowering learners worldwide</p>
-                <a href="#">About us</a>
-                <a href="#">Blog</a>
-                <a href="#">Press</a>
+                <a href="https://github.com/AishaNoku/UbuntuTheSkillTrainer">UbuntuTheSkillTrainer</a>
+                
             </div>
         </div>
     </footer>
