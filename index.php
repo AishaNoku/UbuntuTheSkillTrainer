@@ -4,9 +4,8 @@
  * Implements: Session validation, access control, XSS protection
  */
 
-
 define('SECURE_ACCESS', true);
-require_once '../config.php';
+require_once 'config.php';
 
 // Check if user is logged in
 $isLoggedIn = isLoggedIn();
@@ -87,41 +86,48 @@ $userId = getUserId();
             
             <div class="skills-grid">
                 <?php
-                include 'db_connect.php';
-                $sql = "SELECT * FROM courses";
-                $result = $conn->query($sql);
+                try {
+                    $pdo = getSecureDBConnection();
+                    $stmt = $pdo->prepare("SELECT * FROM courses WHERE is_active = 1 ORDER BY id");
+                    $stmt->execute();
+                    $courses = $stmt->fetchAll();
 
-                if ($result->num_rows > 0) {
-                    while($row = $result->fetch_assoc()) {
-                        $folder = $row['folder_name'];
-                        $link = "#";
+                    if (count($courses) > 0) {
+                        foreach ($courses as $course) {
+                            $folder = htmlspecialchars($course['folder_name']);
+                            $link = "#";
 
-                        if ($isLoggedIn) {
-                            if ($folder == 'crochet') {
-                                $link = "crochet/crochetHome.html";
-                            } elseif ($folder == 'beads') {
-                                $link = "beads/index.php";
-                            } elseif ($folder == 'henna') {
-                                $link = "Henna/henna.html";
-                            } elseif ($folder == 'mbira') {
-                                $link = "mbira/index.html"; 
+                            // Determine link based on folder and login status
+                            if ($isLoggedIn) {
+                                // Map folders to actual pages
+                                $courseLinks = [
+                                    'crochet' => 'crochet/crochetHome.html',
+                                    'beads' => 'beads/index.php',
+                                    'henna' => 'Henna/henna.html',
+                                    'mbira' => 'mbira/index.html'
+                                ];
+                                
+                                $link = isset($courseLinks[$folder]) ? $courseLinks[$folder] : '#';
+                            } else {
+                                $link = 'login.php?redirect=' . urlencode('course.php?id=' . $course['id']);
                             }
-                        } else {
-                            $link = "login.html"; 
-                        }
 
-                        echo '
-                        <a href="' . $link . '" style="text-decoration: none; color: inherit;">
-                            <div class="skill-card">
-                                <div class="skill-icon">' . $row['icon'] . '</div>
-                                <h3>' . $row['title'] . '</h3>
-                                <p>' . $row['description'] . '</p>
-                            </div>
-                        </a>
-                        ';
+                            echo '
+                            <a href="' . htmlspecialchars($link) . '" style="text-decoration: none; color: inherit;">
+                                <div class="skill-card">
+                                    <div class="skill-icon">' . htmlspecialchars($course['icon']) . '</div>
+                                    <h3>' . htmlspecialchars($course['title']) . '</h3>
+                                    <p>' . htmlspecialchars($course['description']) . '</p>
+                                </div>
+                            </a>
+                            ';
+                        }
+                    } else {
+                        echo '<p>No courses available at the moment.</p>';
                     }
-                } else {
-                    echo "<p>No courses found in database.</p>";
+                } catch (PDOException $e) {
+                    secureLog('error', 'Error loading courses', ['error' => $e->getMessage()]);
+                    echo '<p>Unable to load courses. Please try again later.</p>';
                 }
                 ?>
             </div>
@@ -163,40 +169,47 @@ $userId = getUserId();
         <div class="container">
             <h2 class="section-title">Success Stories</h2>
             <p class="section-subtitle">See how Ubuntu Skills changed their careers and lives</p>
-            
             <div class="testimonials-grid">
-                <?php
-                include_once 'db_connect.php';
-
-                $sql_testi = "SELECT * FROM testimonials";
-                $result_testi = $conn->query($sql_testi);
-
-                if ($result_testi->num_rows > 0) {
-                    while($row = $result_testi->fetch_assoc()) {
-                    
-                        $stars = str_repeat("⭐", $row['rating']);
-
-                        echo '
-                        <div class="testimonial-card">
-                            <div class="stars">' . $stars . '</div>
-                            <p class="testimonial-text">"' . $row['content'] . '"</p>
-                            <div class="testimonial-author">
-                                <div class="author-avatar">' . $row['initials'] . '</div>
-                                <div>
-                                    <div class="author-name">' . $row['name'] . '</div>
-                                    <div class="author-role">' . $row['role'] . '</div>
-                                </div>
-                            </div>
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">I really learnt a lot from Ubuntu skills and I keep learning regularly!</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">TM</div>
+                        <div>
+                            <div class="author-name">Tanya M.</div>
+                            <div class="author-role">UI/UX Specialist</div>
                         </div>
-                        ';
-                    }
-                } else {
-                    echo "<p>No testimonials found.</p>";
-                }
-                ?>
+                    </div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">The bead making course helped me start my own business in Harare!</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SJ</div>
+                        <div>
+                            <div class="author-name">Sarah J.</div>
+                            <div class="author-role">Entrepreneur</div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
+
+    <!--CTA-->
+    <section class="cta">
+        <div class="container">
+            <h2>Ready to Learn a New Skill?</h2>
+            <p>Start your upskilling today for free!</p>
+            <?php if ($isLoggedIn): ?>
+                <a href="#skills" class="btn btn-primary">Browse Courses</a>
+            <?php else: ?>
+                <a href="signup.php" class="btn btn-primary">Get Started</a>
+            <?php endif; ?>
+        </div>
+    </section>
+
     <!--Footer-->
     <footer>
         <div class="footer-content" id="footer">
@@ -226,8 +239,6 @@ $userId = getUserId();
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2025 Ubuntu Skills. All rights reserved. Empowering learners worldwide</p>
-                <a href="https://github.com/AishaNoku/UbuntuTheSkillTrainer">UbuntuTheSkillTrainer</a>
-                
             </div>
         </div>
     </footer>
