@@ -1,0 +1,78 @@
+# Ubuntu Skills - Git Ignore File
+# Prevents committing sensitive files
+
+# ============================================
+# SECURITY - NEVER COMMIT THESE
+# ============================================
+
+# Configuration with passwords
+config.php
+
+# Log files with sensitive data
+logs/
+*.log
+
+# Session files
+sessions/
+
+# Environment files
+.env
+.env.local
+.env.production
+
+# Database backups
+*.sql.gz
+*.sql.zip
+backup_*.sql
+
+# ============================================
+# SYSTEM FILES
+# ============================================
+
+# OS generated
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# ============================================
+# DEPENDENCIES
+# ============================================
+
+# Composer
+/vendor/
+composer.lock
+
+# NPM
+node_modules/
+package-lock.json
+
+# ============================================
+# TEMPORARY FILES
+# ============================================
+
+# Temp uploads
+/uploads/temp/
+/tmp/
+
+# Cache
+/cache/
+*.cache
+
+# ============================================
+# NOTES
+# ============================================
+
+# To track config template without sensitive data:
+# Create config.example.php with placeholder values
+# Users copy config.example.php to config.php and fill in real values

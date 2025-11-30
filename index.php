@@ -1,6 +1,16 @@
-<?php session_start();
+<?php
+/**
+ * SECURE HOME PAGE
+ * Implements: Session validation, access control, XSS protection
+ */
 
-$isLoggedIn = isset($_SESSION['username']);
+define('SECURE_ACCESS', true);
+require_once 'config.php';
+
+// Check if user is logged in
+$isLoggedIn = isLoggedIn();
+$username = getUsername();
+$userId = getUserId();
 
 ?>
 <!DOCTYPE html>
@@ -8,11 +18,11 @@ $isLoggedIn = isset($_SESSION['username']);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ubuntu Skills</title>
+    <title>Ubuntu Skills - Learn Any Skill</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<header>
+    <header>
         <a href="index.php" class="logo">Ubuntu</a>
 
         <nav id="nav-menu">
@@ -23,138 +33,107 @@ $isLoggedIn = isset($_SESSION['username']);
         
         <div class="auth-buttons" style="display: flex; align-items: center; gap: 1rem;">
             
-            <?php if($isLoggedIn): ?>
+            <?php if ($isLoggedIn): ?>
                 <span style="font-weight: bold; color: var(--accent);">
-                    Hi, <?php echo htmlspecialchars($_SESSION['username']); ?>
+                    Hi, <?php echo htmlspecialchars($username); ?>
                 </span>
-                <a href="login.html" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">
+                <a href="logout.php" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">
                     Log Out
                 </a>
             <?php else: ?>
-                <a href="login.html" class="btn btn-primary">Login</a>
+                <a href="login.php" class="btn btn-primary">Login</a>
             <?php endif; ?>
 
             <button class="menu-toggle" id="menu-toggle" style="margin-left: 10px;">&#9776;</button>
         </div>
     </header>
+
     <!--Hero Section-->
     <section class="hero">
-    <div class="hero-content">
-        <h1>Learn Any Skill</h1>
-        <p>Learn from craftmasters and unlock your potential</p>
-        <div class="hero-buttons">
-            <button class="btn btn-primary" onclick="window.location.href='login.html'">
-                Start Learning
-                </button>
-            <a href="#skills">
-            <button class="btn btn-primary">Explore Courses</button>
-            </a>
-
+        <div class="hero-content">
+            <h1>Learn Any Skill</h1>
+            <p>Learn from craftmasters and unlock your potential</p>
+            <div class="hero-buttons">
+                <?php if ($isLoggedIn): ?>
+                    <a href="#skills" class="btn btn-primary">Browse Courses</a>
+                <?php else: ?>
+                    <a href="login.php" class="btn btn-primary">Start Learning</a>
+                    <a href="#skills" class="btn btn-secondary">Explore Courses</a>
+                <?php endif; ?>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">5K+</span>
+                    <span class="stat-label">Learners</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">4</span>
+                    <span class="stat-label">Skills</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">4</span>
+                    <span class="stat-label">Expert Instructors</span>
+                </div>
+            </div>
         </div>
-        <div class=" hero-stats">
-            <div class="stat">
-                <span class="stat-number">5K+</span>
-                <span class="stat-label">Learners</span>
-            </div>
-            <div class="stat">
-                <span class="stat-number">4</span>
-                <span class="stat-label">Skills</span>
-            </div>
-            <div class="stat">
-                <span class="stat-number">4</span>
-                <span class="stat-label">Expert Instructors</span>
-            </div>
-        </div>
-    </div>
     </section>
+
     <!--Featured Skills-->
-    <section class="featured skills" id="skills">
+    <section class="featured-skills" id="skills">
         <div class="container">
             <h2 class="section-title">Skills to Learn</h2>
             <p class="section-subtitle">Explore in-demand skills available on this platform</p>
             
             <div class="skills-grid">
                 <?php
-                include 'db_connect.php';
-                $sql = "SELECT * FROM courses";
-                $result = $conn->query($sql);
+                try {
+                    $pdo = getSecureDBConnection();
+                    $stmt = $pdo->prepare("SELECT * FROM courses WHERE is_active = 1 ORDER BY id");
+                    $stmt->execute();
+                    $courses = $stmt->fetchAll();
 
-<<<<<<< HEAD
-                <a href = "../UbuntuTheSkillTrainer/crochet/crochetHome.html" style = "text-decoration: none;color: inherit;">
-                <div class="skill-card">
-                    <div class="skill-icon">🧶</div>
-                    <h3>Crocheting</h3>
-                    <p> Learn how to turn simple yarn into beautiful, 
-                        handmade creations while building patience, 
-                        creativity, and fine motor skills.</p>
-                </div>
-                </a>
-                <a href = "beads/index.php" style = "text-decoration: none;color: inherit;">
-                    <div class="skill-card">
-                        <div class="skill-icon">&#127912;</div>
-                        <h3>Bead Making</h3>
-                        <p>Create stunning handmade beaded jewellery,
-                            learn the art of jewellery design and level
-                            up your craft into a business
-                        </p>
-                    </div>
-                </a>
-                
-                <a href="../UbuntuTheSkillTrainer/mbira/index.html" style= "text-decoration: none;color: inherit;">
-                    <div class="skill-card">
-                    <div class="skill-icon">&#127925;</div>
-                    <h3>Mbira Tutorials</h3>
-                    <p>Learn to compose, mix, and produce music </p>
-                    </div>
-            </a>
-                <a href="Henna/henna.html" style ="text-decoration:none;color:inherit;">
-                <div class="skill-card">
-                    <div class="skill-icon">&#128247;</div>
-                    <h3>Henna Designs</h3>
-                    <p>Master the art of beautiful henna designs,
-                        learn the cultural relavance of the craft and 
-                        how to monetize it.
-                     </p>
-                </div>
-                </a>
-=======
-                if ($result->num_rows > 0) {
-                    while($row = $result->fetch_assoc()) {
-                        $folder = $row['folder_name'];
-                        $link = "#";
+                    if (count($courses) > 0) {
+                        foreach ($courses as $course) {
+                            $folder = htmlspecialchars($course['folder_name']);
+                            $link = "#";
 
-                        if ($isLoggedIn) {
-                            if ($folder == 'crochet') {
-                                $link = "crochet/crochetHome.html";
-                            } elseif ($folder == 'beads') {
-                                $link = "beads/index.php";
-                            } elseif ($folder == 'henna') {
-                                $link = "Henna/henna.html";
-                            } elseif ($folder == 'mbira') {
-                                $link = "#"; 
+                            // Determine link based on folder and login status
+                            if ($isLoggedIn) {
+                                // Map folders to actual pages
+                                $courseLinks = [
+                                    'crochet' => 'crochet/crochetHome.html',
+                                    'beads' => 'beads/index.php',
+                                    'henna' => 'Henna/henna.html',
+                                    'mbira' => 'mbira/index.html'
+                                ];
+                                
+                                $link = isset($courseLinks[$folder]) ? $courseLinks[$folder] : '#';
+                            } else {
+                                $link = 'login.php?redirect=' . urlencode('course.php?id=' . $course['id']);
                             }
-                        } else {
-                            $link = "login.html"; 
-                        }
 
-                        echo '
-                        <a href="' . $link . '" style="text-decoration: none; color: inherit;">
-                            <div class="skill-card">
-                                <div class="skill-icon">' . $row['icon'] . '</div>
-                                <h3>' . $row['title'] . '</h3>
-                                <p>' . $row['description'] . '</p>
-                            </div>
-                        </a>
-                        ';
+                            echo '
+                            <a href="' . htmlspecialchars($link) . '" style="text-decoration: none; color: inherit;">
+                                <div class="skill-card">
+                                    <div class="skill-icon">' . htmlspecialchars($course['icon']) . '</div>
+                                    <h3>' . htmlspecialchars($course['title']) . '</h3>
+                                    <p>' . htmlspecialchars($course['description']) . '</p>
+                                </div>
+                            </a>
+                            ';
+                        }
+                    } else {
+                        echo '<p>No courses available at the moment.</p>';
                     }
-                } else {
-                    echo "<p>No courses found in database.</p>";
+                } catch (PDOException $e) {
+                    secureLog('error', 'Error loading courses', ['error' => $e->getMessage()]);
+                    echo '<p>Unable to load courses. Please try again later.</p>';
                 }
                 ?>
->>>>>>> ce8d569de341dd17918980caf85f370e61be7564
             </div>
         </div>
     </section>
+
     <!--Getting Started-->
     <section class="how-it-works" id="how">
         <div class="container">
@@ -184,6 +163,7 @@ $isLoggedIn = isset($_SESSION['username']);
             </div>
         </div>
     </section>
+
     <!--Testimonials-->
     <section class="testimonials">
         <div class="container">
@@ -216,16 +196,20 @@ $isLoggedIn = isset($_SESSION['username']);
             </div>
         </div>
     </section>
+
     <!--CTA-->
     <section class="cta">
         <div class="container">
             <h2>Ready to Learn a New Skill?</h2>
             <p>Start your upskilling today for free!</p>
-            <button class="btn btn-primary" onclick="window.location.href='login.html'">
-                Start Learning
-                </button>
+            <?php if ($isLoggedIn): ?>
+                <a href="#skills" class="btn btn-primary">Browse Courses</a>
+            <?php else: ?>
+                <a href="signup.php" class="btn btn-primary">Get Started</a>
+            <?php endif; ?>
         </div>
     </section>
+
     <!--Footer-->
     <footer>
         <div class="footer-content" id="footer">
@@ -237,7 +221,7 @@ $isLoggedIn = isset($_SESSION['username']);
             </div>
             <div class="footer-section">
                 <h4>Learning</h4>
-                <a href="#">browse Skills</a>
+                <a href="#">Browse Skills</a>
                 <a href="#">Paths</a>
                 <a href="#">Certificates</a>
             </div>
@@ -255,13 +239,10 @@ $isLoggedIn = isset($_SESSION['username']);
             </div>
             <div class="footer-bottom">
                 <p>&copy; 2025 Ubuntu Skills. All rights reserved. Empowering learners worldwide</p>
-                <a href="#">About us</a>
-                <a href="#">Blog</a>
-                <a href="#">Press</a>
             </div>
         </div>
     </footer>
-    <script src="script.js"></script>
 
+    <script src="script.js"></script>
 </body>
 </html>
