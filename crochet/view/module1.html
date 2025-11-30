@@ -18,7 +18,14 @@
         <h1>Module 1: Introduction to Crocheting</h1>
         <p class="subtitle">Start your crochet journey with the basic foundations.</p>
     </header>
-
+<section class="progress-section">
+        <label>Overall Progress</label>
+        <div class="progress-bar">
+            <div id="progress-fill"></div>
+        </div>
+        <p id="progress-text">0% Completed</p>
+        
+    </section>
     <section class="module-description">
         <h2>About This Module</h2>
         
@@ -106,6 +113,7 @@
     <p id="exerciseStatus"></p>
 
 </section>
+<button onclick="markModuleComplete(1)">Mark as Complete</button>
 
 <div class="button-container">
     <button class="previous-btn" onclick="window.location.href='../crochetHome.html'">⬅ Modules Overview</button>
@@ -114,5 +122,8 @@
 
 
     <script src="../assets/js/crochet.js"></script>
+       <script>
+    updateModuleProgress(1);
+</script>
 </body>
 </html>

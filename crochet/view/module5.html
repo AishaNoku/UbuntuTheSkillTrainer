@@ -12,7 +12,14 @@
     <h1>Module 5: Intermediate Patterns</h1>
     <p>Magic Ring • Stitching in the Round • Color Changes</p>
 </header>
-
+<section class="progress-section">
+        <label>Overall Progress</label>
+        <div class="progress-bar">
+            <div id="progress-fill"></div>
+        </div>
+        <p id="progress-text">0% Completed</p>
+        
+    </section>
 <section class="lesson">
     <h2>Intermediate Techniques</h2>
     <p>
@@ -47,6 +54,7 @@
         <p>Learn how to switch yarns without leaving bumps or knots.</p>
     </div>
 </section>
+<button onclick="markModuleComplete(5)">Mark as Complete</button>
 
 <div class="button-container">
     <button class="previous-btn" onclick="window.location.href='module4.html'">⬅ Previous Module</button>
@@ -54,5 +62,8 @@
 </div>
 
 <script src="../assets/js/crochet.js"></script>
+   <script>
+    updateModuleProgress(5);
+</script>
 </body>
 </html>

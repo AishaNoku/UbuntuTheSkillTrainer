@@ -1,22 +1,66 @@
-let progress = 0;
+const moduleWeights = {
+    1: 15,
+    2: 15,
+    3: 15,
+    4: 15,
+    5: 15,
+    6: 25
+};
 
-// Change progress bar visually
-document.getElementById("progress-fill").style.width = progress + "%";
-document.getElementById("progress-text").textContent = progress + "% Completed";
+// Mark a module as completed
+function markModuleComplete(moduleNumber) {
+    let progress = JSON.parse(localStorage.getItem("moduleProgress")) || {};
 
+    progress["module" + moduleNumber] = true;
 
-// MODULE 1 PROGRESS
-let module1Progress = 0;
+    localStorage.setItem("moduleProgress", JSON.stringify(progress));
 
-document.getElementById("module1-progress-fill").style.width = module1Progress + "%";
-document.getElementById("module1-progress-text").textContent =
-    module1Progress + "% Completed";
-
-function startModule() {
-    alert("Starting Module 1...");
-    // Redirect to first lesson
-    window.location.href = "lesson1.html";
+    updateTotalProgress();
 }
+
+
+// Calculate total progress
+function calculateProgress() {
+    let progress = JSON.parse(localStorage.getItem("moduleProgress")) || {};
+    let total = 0;
+
+    for (let i = 1; i <= 6; i++) {
+        if (progress["module" + i]) {
+            total += moduleWeights[i];
+        }
+    }
+    return total;
+}
+
+
+// Update main progress bar
+function updateTotalProgress() {
+    let progress = calculateProgress();
+
+    document.getElementById("progress-fill").style.width = progress + "%";
+    document.getElementById("progress-text").textContent =
+        progress + "% Completed";
+}
+
+
+// Update individual module page progress (100% or 0%)
+function updateModuleProgress(moduleNumber) {
+    let progress = JSON.parse(localStorage.getItem("moduleProgress")) || {};
+    let completed = progress["module" + moduleNumber] ? 100 : 0;
+
+    document.getElementById(`module${moduleNumber}-progress-fill`).style.width =
+        completed + "%";
+
+    document.getElementById(`module${moduleNumber}-progress-text`).textContent =
+        completed + "% Completed";
+}
+
+
+// Run updates after page loads
+document.addEventListener("DOMContentLoaded", () => {
+    updateTotalProgress();
+});
+
 
 
 function checkAnswer() {

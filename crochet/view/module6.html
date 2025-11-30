@@ -12,7 +12,14 @@
     <h1>Module 6: Final Project</h1>
     <p>Complete a full crochet piece and earn your certificate!</p>
 </header>
-
+<section class="progress-section">
+        <label>Overall Progress</label>
+        <div class="progress-bar">
+            <div id="progress-fill"></div>
+        </div>
+        <p id="progress-text">0% Completed</p>
+        
+    </section>
 <section class="intro">
     <p>
         Congratulations on reaching the final module!  
@@ -86,7 +93,7 @@
     <p id="completionMessage"></p>
 </section>
 
-<script>
+<script src="../assets/js/crochet.js">
     // Display selected file name
     document.getElementById("projectUpload").addEventListener("change", function () {
         let file = this.files[0];
@@ -107,6 +114,10 @@
             "Project submitted successfully! Your certificate will be processed.";
         document.getElementById("completionMessage").style.color = "#2a9d8f";
     }
+</script>
+<button onclick="markModuleComplete(6)">Mark as Complete</button>
+   <script>
+    updateModuleProgress(6);
 </script>
 
 <div class="button-container">
