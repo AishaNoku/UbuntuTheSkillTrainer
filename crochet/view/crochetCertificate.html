@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crochet Course Certificate</title>
+
+<link rel="stylesheet" href="../assets/css/certificate.css">
+
+<!-- jsPDF + html2canvas -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="wrapper">
+<header>
+    <h1 class="header-title">🧶 Final Crochet Certificate</h1>
+    <p class="subtitle">Enter your name to generate your beautifully crocheted certificate.</p>
+
+    <input type="text" id="username" placeholder="Enter Full Name">
+
+    <button class="generate-btn" onclick="generateCertificate()">Generate Certificate</button>
+</header>
+    <div id="certificate" class="certificate hide">
+
+        <div class="stitch-border">
+
+            <div class="certificate-inner">
+                <h2 class="cert-title">Crochet Certificate of Completion</h2>
+
+                <p class="verify">This certifies that</p>
+
+                <h1 id="certName" class="student-name">Your Name</h1>
+
+                <div class="underline"></div>
+
+                <p class="course-text">has successfully completed the</p>
+                <h3 class="course-name">Crochet Skill Program</h3>
+
+                <div class="seal">Certified Crochet Maker</div>
+
+                <div class="bottom-row">
+                    <div>
+                            <p id="dateToday">
+                            </p>
+                        <span class="label">Date Completed</span>
+                    </div>
+
+                    <div>
+                       <p>Ubuntu Crochet Academy</p>
+                        <span class="label">Instructor Signature</span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+
+    <button id="downloadBtn" class="download-btn hide" onclick="downloadPDF()">Download PDF</button>
+</div>
+
+<script src="../assets/js/certificate.js"></script>
+
+</body>
+</html>
