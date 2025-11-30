@@ -5,10 +5,15 @@ include 'db_connect.php';
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     $user = $conn->real_escape_string($_POST['username']);
-    $email = $conn->real_escape_string($_POST['email']);
+    $email = trim($_POST['email']);
     $pass = $_POST['password'];
     $confirm_pass = $_POST['confirm_password'];
 
+    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            $error = "Invalid email address.";
+        } else {
+
+        }
     if ($pass !== $confirm_pass){
         die("Error: Passwords do not match!");
     }
