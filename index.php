@@ -1,3 +1,8 @@
+<?php session_start();
+
+$isLoggedIn = isset($_SESSION['username']);
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,24 +12,37 @@
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <header>
-        <a href ="#"
-        class = "logo"> Ubuntu</a>
-        <nav id = "nav-menu">
-            <a href = "#skills"> Skills</a>
-            <a href = "#how"> Getting Started</a>
-            <a href = "#footer">Contact Us</a>
+<header>
+        <a href="index.php" class="logo">Ubuntu</a>
+
+        <nav id="nav-menu">
+            <a href="#skills">Skills</a>
+            <a href="#how">Getting Started</a>
+            <a href="#footer">Contact Us</a>
         </nav>
-        <button class="menu-toggle"
-        id = "menu-toggle">&#9776;</button>
-        <button class=" btn btn-primary">Sign In</button>
+        
+        <div class="auth-buttons" style="display: flex; align-items: center; gap: 1rem;">
+            
+            <?php if($isLoggedIn): ?>
+                <span style="font-weight: bold; color: var(--accent);">
+                    Hi, <?php echo htmlspecialchars($_SESSION['username']); ?>
+                </span>
+                <a href="logout.php" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">
+                    Log Out
+                </a>
+            <?php else: ?>
+                <a href="login.html" class="btn btn-primary">Sign In</a>
+            <?php endif; ?>
+
+            <button class="menu-toggle" id="menu-toggle" style="margin-left: 10px;">&#9776;</button>
+        </div>
     </header>
     <!--Hero Section-->
     <section class="hero">
     <div class="hero-content">
         <h1>Learn Any Skill</h1>
         <p>Learn from craftmasters and unlock your potential</p>
-        <div class=""hero-buttons>
+        <div class="hero-buttons">
             <button class = "btn btn-primary">Start Learning</button>
             <button class ="btn btn-primary">Explore Courses</button>
         </div>
@@ -64,7 +82,10 @@
                     <div class="skill-card">
                         <div class="skill-icon">&#127912;</div>
                         <h3>Bead Making</h3>
-                        <p>Create stunning visual content and branding </p>
+                        <p>Create stunning handmade beaded jewellery,
+                            learn the art of jewellery design and level
+                            up your craft into a business
+                        </p>
                     </div>
                 </a>
                 <div class="skill-card">
@@ -112,27 +133,34 @@
     <!--Testimonials-->
     <section class="testimonials">
         <div class="container">
-            <h2 class="section-title">Success Stories from Ubuntu Learners </h2>
+            <h2 class="section-title">Success Stories</h2>
             <p class="section-subtitle">See how Ubuntu Skills changed their careers and lives</p>
             <div class="testimonials-grid">
                 <div class="testimonial-card">
-                    <div class="stars">&#11088;&#11088;&#11088;&#11088;&#11088;</div>
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
                     <p class="testimonial-text">I really learnt a lot from Ubuntu skills and I keep learning regularly!</p>
                     <div class="testimonial-author">
                         <div class="author-avatar">TM</div>
+                        <div>
+                            <div class="author-name">Tanya M.</div>
+                            <div class="author-role">UI/UX Specialist</div>
+                        </div>
                     </div>
-                    <div class="author-role">UI/UX Specialist</div>
+                </div>
+
+                <div class="testimonial-card">
+                    <div class="stars">⭐⭐⭐⭐⭐</div>
+                    <p class="testimonial-text">The bead making course helped me start my own business in Harare!</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">SJ</div>
+                        <div>
+                            <div class="author-name">Sarah J.</div>
+                            <div class="author-role">Entrepreneur</div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="testimonial-card">
-                    <div class="stars">&#11088;&#11088;&#11088;&#11088;&#11088;</div>
-                    <p class="testimonial-text">I really learnt a lot from Ubuntu skills and I keep learning regularly!</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">TM</div>
-                    </div>
-                    <div class="author-role">UI/UX Specialist</div>
-                </div>
     </section>
     <!--CTA-->
     <section class="cta">
