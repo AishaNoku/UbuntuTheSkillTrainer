@@ -22,7 +22,6 @@ header {
     font-size: 17px;
 }
 
-/* Progress Section */
 .progress-section {
     width: 90%;
     margin: 20px auto;
@@ -107,15 +106,10 @@ header {
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1); 
     border-color: #ff7f50; 
     cursor: pointer;
-}
-
-
-.module-card:hover {
     transform: translateY(-3px);
     background-color: #fff6eb;
 }
 
-/* Module Description */
 .module-description {
     width: 90%;
     margin: 20px auto;
@@ -130,7 +124,6 @@ header {
     margin-top: 0;
 }
 
-/* Lesson Cards */
 .lessons-section {
     padding: 20px;
     max-width: 700px;
@@ -162,7 +155,6 @@ header {
     transform: translateY(-3px);
 }
 
-/* Start Button */
 .start-btn {
     display: block;
     width: 90%;
