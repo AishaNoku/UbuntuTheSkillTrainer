@@ -121,7 +121,7 @@ function checkAnswersModule2() {
 
     if (userAnswer === correctAnswers[q]) {
       score++;
-      feedback += `<p><strong>${q.toUpperCase()}:</strong> Correct ✔️</p>`;
+      feedback += `<p><strong>${q.toUpperCase()}:</strong> Correct </p>`;
     } else {
       let correctText = {
         q1: "Chain Stitch",
@@ -131,7 +131,7 @@ function checkAnswersModule2() {
 
       feedback += `
         <p>
-          <strong>${q.toUpperCase()}:</strong> Incorrect ❌ <br>
+          <strong>${q.toUpperCase()}:</strong> Incorrect <br>
           Correct Answer: <strong>${correctText[q]}</strong>
         </p>
       `;
@@ -164,7 +164,7 @@ function checkAnswersModule3() {
     "You scored " + score + " out of 3.";
 
   document.getElementById("module3CorrectAnswers").innerHTML =
-    correct.length === 0 ? "Perfect! All answers correct 🎉" : correct.join("<br>");
+    correct.length === 0 ? "Perfect! All answers correct " : correct.join("<br>");
 }
 
 

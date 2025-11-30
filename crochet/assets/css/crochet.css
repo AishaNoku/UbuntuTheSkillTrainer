@@ -520,6 +520,7 @@ header {
     justify-content: space-between; 
     margin-top: 20px; 
     padding: 0 20px; 
+    
 }
 
 .previous-btn, .next-btn {
@@ -589,6 +590,7 @@ header {
 }
 
 button {
+  justify-content: center;
   background: #ffb870;
   color: black;
   border: none;
