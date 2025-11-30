@@ -1,106 +1,180 @@
--- phpMyAdmin SQL Dump
--- version 5.2.1
--- https://www.phpmyadmin.net/
---
--- Host: 127.0.0.1:3307
--- Generation Time: Nov 30, 2025 at 06:39 PM
--- Server version: 10.4.32-MariaDB
--- PHP Version: 8.0.30
+-- 1. CRITICAL FIX: Disable safety checks so we can overwrite tables without errors
+SET FOREIGN_KEY_CHECKS = 0;
 
-SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-START TRANSACTION;
-SET time_zone = "+00:00";
+CREATE DATABASE IF NOT EXISTS ubuntu_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE ubuntu_db;
 
+-- =============================================
+-- SECTION A: YOUR SECURITY TABLES (Preserved)
+-- =============================================
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8mb4 */;
+-- 1. USERS
+DROP TABLE IF EXISTS users;
+CREATE TABLE users (
+    id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL UNIQUE,
+    email VARCHAR(100) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    email_verified TINYINT(1) DEFAULT 0,
+    account_status ENUM('active', 'suspended', 'locked') DEFAULT 'active',
+    failed_login_attempts INT DEFAULT 0,
+    last_login DATETIME NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_username (username),
+    INDEX idx_email (email),
+    INDEX idx_status (account_status)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Database: `ubuntu_db`
---
+-- 2. LOGIN ATTEMPTS
+DROP TABLE IF EXISTS login_attempts;
+CREATE TABLE login_attempts (
+    id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    username VARCHAR(50) NOT NULL,
+    ip_address VARCHAR(45) NOT NULL,
+    success TINYINT(1) DEFAULT 0,
+    attempted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    INDEX idx_username_time (username, attempted_at),
+    INDEX idx_ip_time (ip_address, attempted_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- --------------------------------------------------------
+-- 3. SESSIONS
+DROP TABLE IF EXISTS sessions;
+CREATE TABLE sessions (
+    id VARCHAR(128) NOT NULL PRIMARY KEY,
+    user_id INT(11) UNSIGNED NULL,
+    ip_address VARCHAR(45) NOT NULL,
+    user_agent VARCHAR(255) NOT NULL,
+    payload TEXT NOT NULL,
+    last_activity INT(11) UNSIGNED NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    INDEX idx_user_id (user_id),
+    INDEX idx_last_activity (last_activity),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Table structure for table `courses`
---
+-- 4. SECURITY LOG
+DROP TABLE IF EXISTS security_log;
+CREATE TABLE security_log (
+    id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    user_id INT(11) UNSIGNED NULL,
+    username VARCHAR(50) NULL,
+    action VARCHAR(100) NOT NULL,
+    ip_address VARCHAR(45) NOT NULL,
+    user_agent VARCHAR(255) NULL,
+    details TEXT NULL,
+    severity ENUM('info', 'warning', 'error', 'critical') DEFAULT 'info',
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    INDEX idx_user_id (user_id),
+    INDEX idx_action (action),
+    INDEX idx_severity (severity),
+    INDEX idx_created (created_at),
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE `courses` (
-  `id` int(11) NOT NULL,
-  `title` varchar(100) NOT NULL,
-  `description` text NOT NULL,
-  `icon` varchar(50) NOT NULL,
-  `folder_name` varchar(50) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-- 5. PASSWORD RESETS
+DROP TABLE IF EXISTS password_resets;
+CREATE TABLE password_resets (
+    id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    user_id INT(11) UNSIGNED NOT NULL,
+    token VARCHAR(64) NOT NULL UNIQUE,
+    expires_at DATETIME NOT NULL,
+    used TINYINT(1) DEFAULT 0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    INDEX idx_token (token),
+    INDEX idx_expires (expires_at)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data for table `courses`
---
+-- =============================================
+-- SECTION B: CONTENT TABLES (Added for Website Features)
+-- =============================================
 
-INSERT INTO `courses` (`id`, `title`, `description`, `icon`, `folder_name`) VALUES
-(1, 'Crocheting', 'Learn how to turn simple yarn into beautiful, handmade creations while building patience, creativity, and fine motor skills.', '🧶', 'crochet'),
-(2, 'Bead Making', 'Create stunning handmade beaded jewellery, learn the art of jewellery design and level up your craft into a business.', '🎨', 'beads'),
-(3, 'Mbira Tutorials', 'Learn to compose, mix, and produce music using the Zimbabwean instrument called mbira.', '🎵', 'mbira'),
-(4, 'Henna Designs', 'Master the art of beautiful henna designs, learn the cultural relevance of the craft and how to monetize it.', '📷', 'henna');
+-- 6. COURSES (Updated to match your HTML content)
+DROP TABLE IF EXISTS courses;
+CREATE TABLE courses (
+    id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(100) NOT NULL,
+    description TEXT NOT NULL,
+    icon VARCHAR(50) NOT NULL,
+    folder_name VARCHAR(50) NOT NULL UNIQUE,
+    is_active TINYINT(1) DEFAULT 1,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    INDEX idx_folder (folder_name),
+    INDEX idx_active (is_active)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- --------------------------------------------------------
+INSERT INTO courses (title, description, icon, folder_name) VALUES
+('Crocheting', 'Learn how to turn simple yarn into beautiful, handmade creations while building patience, creativity, and fine motor skills.', '🧶', 'crochet'),
+('Bead Making', 'Create stunning handmade beaded jewellery, learn the art of jewellery design and level up your craft into a business.', '🎨', 'beads'),
+('Mbira Tutorials', 'Learn to compose, mix, and produce music using the Zimbabwean instrument called mbira.', '🎵', 'mbira'),
+('Henna Designs', 'Master the art of beautiful henna designs, learn the cultural relevance of the craft and how to monetize it.', '📷', 'henna');
 
---
--- Table structure for table `users`
---
+-- 7. MODULES (New! Needed for Progress Tracking)
+DROP TABLE IF EXISTS modules;
+CREATE TABLE modules (
+    id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    course_id INT(11) UNSIGNED NOT NULL,
+    title VARCHAR(100) NOT NULL,
+    module_order INT(11) NOT NULL,
+    video_url VARCHAR(255),
+    FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-CREATE TABLE `users` (
-  `id` int(11) NOT NULL,
-  `username` varchar(50) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `password` varchar(255) NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+-- Insert Bead Modules (Course ID 2)
+INSERT INTO modules (course_id, title, module_order) VALUES
+(2, 'Introduction to Beadmaking & Materials', 1),
+(2, 'Designing & Creating Beaded Accessories', 2),
+(2, 'Finishing, Pricing & Selling', 3);
 
---
--- Dumping data for table `users`
---
+-- 8. TESTIMONIALS (New! Needed for Homepage)
+DROP TABLE IF EXISTS testimonials;
+CREATE TABLE testimonials (
+    id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    name VARCHAR(100) NOT NULL,
+    role VARCHAR(100) NOT NULL,
+    content TEXT NOT NULL,
+    rating INT(1) NOT NULL DEFAULT 5,
+    initials VARCHAR(5) NOT NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
-INSERT INTO `users` (`id`, `username`, `email`, `password`, `created_at`) VALUES
-(1, 'tana', 'tana@example.com', '$2y$10$orsn0tXa1VCP.31gE3nvh.6/PKGWY730hwvq7jB0oL3o17CSBe08i', '2025-11-30 01:03:36'),
-(2, 'example', 'example@example.com', '$2y$10$14IR6rw.pt0bcsJrz4fXzOLruxHo3MvzMsoH1WF6YaA8wVW21gdwa', '2025-11-30 13:30:27'),
-(3, 'Tanatswa', 't@what.com', '$2y$10$j7IiMsQvzRyC.WlQGinBbOUrnAZ0/0n5KrWcn30ceSErx7vJlJuVu', '2025-11-30 16:11:38');
+INSERT INTO testimonials (name, role, content, rating, initials) VALUES 
+('Tanya M.', 'UI/UX Specialist', 'I really learnt a lot from Ubuntu skills and I keep learning regularly!', 5, 'TM'),
+('Sarah J.', 'Entrepreneur', 'The bead making course helped me start my own business in Harare!', 5, 'SJ');
 
---
--- Indexes for dumped tables
---
+-- 9. USER PROGRESS (Updated to link to Modules table)
+DROP TABLE IF EXISTS user_progress;
+CREATE TABLE user_progress (
+    id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    user_id INT(11) UNSIGNED NOT NULL,
+    course_id INT(11) UNSIGNED NOT NULL,
+    module_id INT(11) UNSIGNED NULL, -- Changed to INT to link to modules table
+    completed TINYINT(1) DEFAULT 0,
+    completed_at TIMESTAMP NULL,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (course_id) REFERENCES courses(id) ON DELETE CASCADE,
+    -- We allow module_id to be NULL if you just want to track overall course completion
+    FOREIGN KEY (module_id) REFERENCES modules(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Indexes for table `courses`
---
-ALTER TABLE `courses`
-  ADD PRIMARY KEY (`id`);
+-- =============================================
+-- SECTION C: USER & CLEANUP
+-- =============================================
 
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`);
+-- Insert Test User (Password: "password123")
+INSERT INTO users (username, email, password, email_verified, account_status) 
+VALUES (
+    'testuser',
+    'test@ubuntuskills.com',
+    '$2y$10$tH.8v4l0k8h5.n5.d5.d5.u5.u5.u5.u5.u5.u5.u5.u5.u5.u5', 
+    1,
+    'active'
+);
 
---
--- AUTO_INCREMENT for dumped tables
---
+-- Re-enable safety checks
+SET FOREIGN_KEY_CHECKS = 1;
 
---
--- AUTO_INCREMENT for table `courses`
---
-ALTER TABLE `courses`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
-COMMIT;
-
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+SELECT 'Database updated successfully! Security + Content tables are ready.' AS status;

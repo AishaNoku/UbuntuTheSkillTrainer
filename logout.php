@@ -4,39 +4,41 @@
  * Properly destroys session and clears all session data
  */
 
+// Define this constant so config.php knows it's safe to load
 define('SECURE_ACCESS', true);
+
+// This file starts the session automatically because of your config.php logic
 require_once 'config.php';
 
-// Log the logout action
-if (isset($_SESSION['user_id']) && isset($_SESSION['username'])) {
-    secureLog('info', 'User logged out', [
-        'user_id' => $_SESSION['user_id'],
-        'username' => $_SESSION['username']
-    ]);
-    
+// 1. LOG THE ACTION (Best Effort)
+// We try to save this to the database, but wrap it in try/catch
+// so that if the database fails, the user is STILL logged out.
+if (isset($_SESSION['user_id'])) {
     try {
         $pdo = getSecureDBConnection();
         $stmt = $pdo->prepare("
             INSERT INTO security_log 
-            (user_id, username, action, ip_address, user_agent, severity) 
-            VALUES (?, ?, 'logout', ?, ?, 'info')
+            (user_id, username, action, ip_address, severity) 
+            VALUES (?, ?, 'logout', ?, 'info')
         ");
+        
         $stmt->execute([
             $_SESSION['user_id'],
-            $_SESSION['username'],
-            $_SERVER['REMOTE_ADDR'],
-            $_SERVER['HTTP_USER_AGENT'] ?? 'Unknown'
+            $_SESSION['username'] ?? 'Unknown',
+            $_SERVER['REMOTE_ADDR']
         ]);
-    } catch (PDOException $e) {
-        // Log error but don't stop logout
-        error_log('Logout logging failed: ' . $e->getMessage());
+        
+    } catch (Exception $e) {
+        // Silently fail logging - getting the user logged out is more important!
     }
 }
 
-// Unset all session variables
+// 2. UNSET VARIABLES
+// Clears the $_SESSION array in PHP's memory
 $_SESSION = array();
 
-// Delete session cookie
+// 3. DESTROY THE COOKIE
+// This is the "Key" stored in the user's browser. We must delete it.
 if (ini_get("session.use_cookies")) {
     $params = session_get_cookie_params();
     setcookie(session_name(), '', time() - 42000,
@@ -45,10 +47,12 @@ if (ini_get("session.use_cookies")) {
     );
 }
 
-// Destroy the session
+// 4. DESTROY THE SESSION
+// Deletes the file on the server
 session_destroy();
 
-// Redirect to home page
-header('Location: index.php');
+// 5. REDIRECT
+// Send them back to the homepage
+header("Location: index.php");
 exit();
 ?>

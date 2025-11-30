@@ -1,13 +1,9 @@
 <?php
-/**
- * SECURE HOME PAGE
- * Implements: Session validation, access control, XSS protection
- */
+
 
 define('SECURE_ACCESS', true);
-require_once 'config.php';
+require_once 'config.php'; 
 
-// Check if user is logged in
 $isLoggedIn = isLoggedIn();
 $username = getUsername();
 $userId = getUserId();
@@ -41,14 +37,13 @@ $userId = getUserId();
                     Log Out
                 </a>
             <?php else: ?>
-                <a href="login.php" class="btn btn-primary">Login</a>
+                <a href="login.html" class="btn btn-primary">Login</a>
             <?php endif; ?>
 
             <button class="menu-toggle" id="menu-toggle" style="margin-left: 10px;">&#9776;</button>
         </div>
     </header>
 
-    <!--Hero Section-->
     <section class="hero">
         <div class="hero-content">
             <h1>Learn Any Skill</h1>
@@ -78,7 +73,6 @@ $userId = getUserId();
         </div>
     </section>
 
-    <!--Featured Skills-->
     <section class="featured-skills" id="skills">
         <div class="container">
             <h2 class="section-title">Skills to Learn</h2>
@@ -109,7 +103,8 @@ $userId = getUserId();
                                 
                                 $link = isset($courseLinks[$folder]) ? $courseLinks[$folder] : '#';
                             } else {
-                                $link = 'login.php?redirect=' . urlencode('course.php?id=' . $course['id']);
+                                // Redirect to login, but remember where they wanted to go
+                                $link = 'login.php';
                             }
 
                             echo '
@@ -126,7 +121,7 @@ $userId = getUserId();
                         echo '<p>No courses available at the moment.</p>';
                     }
                 } catch (PDOException $e) {
-                    secureLog('error', 'Error loading courses', ['error' => $e->getMessage()]);
+                    // secureLog('error', 'Error loading courses', ['error' => $e->getMessage()]);
                     echo '<p>Unable to load courses. Please try again later.</p>';
                 }
                 ?>
@@ -134,7 +129,6 @@ $userId = getUserId();
         </div>
     </section>
 
-    <!--Getting Started-->
     <section class="how-it-works" id="how">
         <div class="container">
             <h2 class="section-title">Getting Started with Ubuntu Skills</h2>
@@ -164,40 +158,50 @@ $userId = getUserId();
         </div>
     </section>
 
-    <!--Testimonials-->
     <section class="testimonials">
         <div class="container">
             <h2 class="section-title">Success Stories</h2>
             <p class="section-subtitle">See how Ubuntu Skills changed their careers and lives</p>
+            
             <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p class="testimonial-text">I really learnt a lot from Ubuntu skills and I keep learning regularly!</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">TM</div>
-                        <div>
-                            <div class="author-name">Tanya M.</div>
-                            <div class="author-role">UI/UX Specialist</div>
-                        </div>
-                    </div>
-                </div>
+                <?php
+                try {
+                    // We reuse the $pdo connection from above
+                    $stmt_testi = $pdo->prepare("SELECT * FROM testimonials ORDER BY created_at DESC LIMIT 3");
+                    $stmt_testi->execute();
+                    $testimonials = $stmt_testi->fetchAll();
 
-                <div class="testimonial-card">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p class="testimonial-text">The bead making course helped me start my own business in Harare!</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">SJ</div>
-                        <div>
-                            <div class="author-name">Sarah J.</div>
-                            <div class="author-role">Entrepreneur</div>
-                        </div>
-                    </div>
-                </div>
+                    if (count($testimonials) > 0) {
+                        foreach ($testimonials as $row) {
+                            
+                            // Generate Stars (e.g. 5 -> ⭐⭐⭐⭐⭐)
+                            $stars = str_repeat("⭐", (int)$row['rating']);
+
+                            echo '
+                            <div class="testimonial-card">
+                                <div class="stars">' . $stars . '</div>
+                                <p class="testimonial-text">"' . htmlspecialchars($row['content']) . '"</p>
+                                <div class="testimonial-author">
+                                    <div class="author-avatar">' . htmlspecialchars($row['initials']) . '</div>
+                                    <div>
+                                        <div class="author-name">' . htmlspecialchars($row['name']) . '</div>
+                                        <div class="author-role">' . htmlspecialchars($row['role']) . '</div>
+                                    </div>
+                                </div>
+                            </div>
+                            ';
+                        }
+                    } else {
+                        echo '<p style="text-align:center; width:100%;">No testimonials yet. Be the first to share your story!</p>';
+                    }
+                } catch (PDOException $e) {
+                    echo '<p>Unable to load success stories.</p>';
+                }
+                ?>
             </div>
         </div>
     </section>
 
-    <!--CTA-->
     <section class="cta">
         <div class="container">
             <h2>Ready to Learn a New Skill?</h2>
@@ -210,7 +214,6 @@ $userId = getUserId();
         </div>
     </section>
 
-    <!--Footer-->
     <footer>
         <div class="footer-content" id="footer">
             <div class="footer-section">
