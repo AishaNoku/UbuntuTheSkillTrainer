@@ -43,8 +43,13 @@ $isLoggedIn = isset($_SESSION['username']);
         <h1>Learn Any Skill</h1>
         <p>Learn from craftmasters and unlock your potential</p>
         <div class="hero-buttons">
-            <button class = "btn btn-primary">Start Learning</button>
-            <button class ="btn btn-primary">Explore Courses</button>
+            <button class="btn btn-primary" onclick="window.location.href='login.html'">
+                Start Learning
+                </button>
+            <a href="#skills">
+            <button class="btn btn-primary">Explore Courses</button>
+            </a>
+
         </div>
         <div class=" hero-stats">
             <div class="stat">
@@ -90,9 +95,11 @@ $isLoggedIn = isset($_SESSION['username']);
                 </a>
                 
                 <a href="../UbuntuTheSkillTrainer/mbira/index.html" style= "text-decoration: none;color: inherit;">
+                    <div class="skill-card">
                     <div class="skill-icon">&#127925;</div>
                     <h3>Mbira Tutorials</h3>
                     <p>Learn to compose, mix, and produce music </p>
+                    </div>
             </a>
                 <a href="Henna/henna.html" style ="text-decoration:none;color:inherit;">
                 <div class="skill-card">
@@ -173,7 +180,9 @@ $isLoggedIn = isset($_SESSION['username']);
         <div class="container">
             <h2>Ready to Learn a New Skill?</h2>
             <p>Start your upskilling today for free!</p>
-            <button class="btn btn-primary">Get Started</button>
+            <button class="btn btn-primary" onclick="window.location.href='login.html'">
+                Start Learning
+                </button>
         </div>
     </section>
     <!--Footer-->
