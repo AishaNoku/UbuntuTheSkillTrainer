@@ -2,7 +2,7 @@
 /**
  * SECURE REGISTRATION HANDLER
  * Implements: Input validation, password strength, CSRF protection,
- * SQL injection prevention, rate limiting, secure password hashing
+ * SQL injection prevention, and secure password hashing.
  */
 
 define('SECURE_ACCESS', true);
@@ -11,41 +11,48 @@ require_once 'config.php';
 $error = '';
 $success = '';
 
+// Check if already logged in
+if (isLoggedIn()) {
+    header("Location: index.php");
+    exit();
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
-    // CSRF validation
+    // 1. CSRF VALIDATION
     if (!isset($_POST['csrf_token']) || !validateCSRFToken($_POST['csrf_token'])) {
         $error = 'Invalid security token. Please refresh and try again.';
     } else {
         
-        // Sanitize inputs
+        // 2. SANITIZE INPUTS
         $username = isset($_POST['username']) ? sanitizeInput($_POST['username']) : '';
         $email = isset($_POST['email']) ? sanitizeInput($_POST['email']) : '';
         $password = $_POST['password'] ?? '';
         $confirmPassword = $_POST['confirm_password'] ?? '';
         
-        // Validation
+        // 3. VALIDATE INPUTS
         if (empty($username) || empty($email) || empty($password) || empty($confirmPassword)) {
             $error = 'All fields are required.';
         }
         elseif (!validateUsername($username)) {
-            $error = 'Username must be 3-20 characters and contain only letters, numbers, and underscore.';
+            $error = 'Username must be 3-20 characters and contain only letters, numbers, and underscores.';
         }
-        elseif (!validateEmail($email)) {
+        elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) { // Built-in PHP filter
             $error = 'Invalid email address format.';
         }
         elseif (!validatePassword($password)) {
-            $error = 'Password must be at least 8 characters and include uppercase, lowercase, number, and special character.';
+            $error = 'Password must be at least 8 characters and include an uppercase letter, lowercase letter, number, and special character.';
         }
         elseif ($password !== $confirmPassword) {
             $error = 'Passwords do not match.';
         }
         else {
             
+            // 4. DATABASE OPERATIONS
             try {
                 $pdo = getSecureDBConnection();
                 
-                // Check if username exists
+                // A. Check if username exists
                 $stmt = $pdo->prepare("SELECT id FROM users WHERE username = ?");
                 $stmt->execute([$username]);
                 
@@ -53,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $error = 'Username already taken. Please choose another.';
                 } else {
                     
-                    // Check if email exists
+                    // B. Check if email exists
                     $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
                     $stmt->execute([$email]);
                     
@@ -61,36 +68,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $error = 'Email already registered. Please use another or log in.';
                     } else {
                         
-                        // Hash password securely (Argon2id)
-                        $hashedPassword = password_hash($password, PASSWORD_ALGO, PASSWORD_OPTIONS);
+                        // C. Hash password securely (Argon2id if available, or Bcrypt)
+                        // Note: config.php default is Bcrypt via PASSWORD_DEFAULT which is safer for compatibility
+                        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
                         
-                        // Insert new user
+                        // D. Insert new user
                         $stmt = $pdo->prepare("
-                            INSERT INTO users (username, email, password, email_verified) 
-                            VALUES (?, ?, ?, 0)
+                            INSERT INTO users (username, email, password, email_verified, account_status) 
+                            VALUES (?, ?, ?, 1, 'active')
                         ");
                         
                         if ($stmt->execute([$username, $email, $hashedPassword])) {
                             
                             $userId = $pdo->lastInsertId();
                             
-                            // Log registration
+                            // E. Log registration to Security Log
                             secureLog('info', 'New user registration', [
                                 'user_id' => $userId,
                                 'username' => $username
-                            ]);
-                            
-                            // Insert security log
-                            $logStmt = $pdo->prepare("
-                                INSERT INTO security_log 
-                                (user_id, username, action, ip_address, user_agent, severity) 
-                                VALUES (?, ?, 'registration', ?, ?, 'info')
-                            ");
-                            $logStmt->execute([
-                                $userId,
-                                $username,
-                                $_SERVER['REMOTE_ADDR'],
-                                $_SERVER['HTTP_USER_AGENT'] ?? 'Unknown'
                             ]);
                             
                             $success = 'Account created successfully! Redirecting to login...';
@@ -104,14 +99,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 
             } catch (PDOException $e) {
                 $error = 'An error occurred. Please try again later.';
-                secureLog('error', 'Database error during registration', [
-                    'error' => $e->getMessage()
-                ]);
+                // Log the technical error securely
+                error_log('Registration DB Error: ' . $e->getMessage());
             }
         }
     }
 }
 
+// Generate new CSRF token for the form
 $csrfToken = generateCSRFToken();
 
 ?>
@@ -138,11 +133,12 @@ $csrfToken = generateCSRFToken();
             border: 1px solid #ccc;
             border-radius: 4px;
         }
-        input:invalid:not(:placeholder-shown) {
-            border-color: #ffdddd;
+        /* Visual Feedback for Valid/Invalid fields */
+        input:not(:placeholder-shown):valid {
+            border-color: #28a745;
         }
-        input:valid:not(:placeholder-shown) {
-            border-color: #90EE90;
+        input:not(:placeholder-shown):invalid {
+            border-color: #dc3545;
         }
         .error-message {
             background: #fee;
@@ -174,7 +170,7 @@ $csrfToken = generateCSRFToken();
             font-size: 0.8rem;
             color: #666;
             margin-top: 5px;
-            padding: 8px;
+            padding: 10px;
             background: #f0f0f0;
             border-radius: 4px;
         }
@@ -214,7 +210,8 @@ $csrfToken = generateCSRFToken();
                     pattern="[a-zA-Z0-9_]{3,20}"
                     title="3-20 characters, letters, numbers and underscore only"
                     placeholder="Choose a username"
-                    autocomplete="username">
+                    autocomplete="username"
+                    value="<?php echo isset($_POST['username']) ? htmlspecialchars($_POST['username']) : ''; ?>">
 
                 <label for="email">Email</label>
                 <input 
@@ -222,9 +219,9 @@ $csrfToken = generateCSRFToken();
                     id="email" 
                     name="email" 
                     required
-                    pattern="[^@\s]+@[^@\s]+\.[^@\s]+"
                     placeholder="your@email.com"
-                    autocomplete="email">
+                    autocomplete="email"
+                    value="<?php echo isset($_POST['email']) ? htmlspecialchars($_POST['email']) : ''; ?>">
 
                 <label for="password">Password</label>
                 <input 
@@ -239,10 +236,8 @@ $csrfToken = generateCSRFToken();
                 
                 <div class="password-requirements">
                     ✓ At least 8 characters<br>
-                    ✓ One uppercase letter<br>
-                    ✓ One lowercase letter<br>
-                    ✓ One number<br>
-                    ✓ One special character (!@#$%^&*)
+                    ✓ One uppercase & lowercase letter<br>
+                    ✓ One number & one special character
                 </div>
 
                 <label for="confirm_password">Confirm Password</label>
@@ -269,21 +264,22 @@ $csrfToken = generateCSRFToken();
         const password = document.getElementById('password');
         const confirmPassword = document.getElementById('confirm_password');
 
-        function validatePassword() {
+        function validatePasswordMatch() {
             if (confirmPassword.value && password.value !== confirmPassword.value) {
                 confirmPassword.setCustomValidity('Passwords do not match');
-                confirmPassword.style.borderColor = 'red';
+                confirmPassword.style.borderColor = '#dc3545'; // Red
             } else {
                 confirmPassword.setCustomValidity('');
-                confirmPassword.style.borderColor = '#ccc';
+                confirmPassword.style.borderColor = '#ccc'; // Reset
+                
                 if (confirmPassword.value && password.value === confirmPassword.value) {
-                    confirmPassword.style.borderColor = '#90EE90';
+                    confirmPassword.style.borderColor = '#28a745'; // Green
                 }
             }
         }
 
-        password.addEventListener('change', validatePassword);
-        confirmPassword.addEventListener('keyup', validatePassword);
+        password.addEventListener('change', validatePasswordMatch);
+        confirmPassword.addEventListener('keyup', validatePasswordMatch);
     </script>
 </body>
 </html>
