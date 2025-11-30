@@ -1,9 +1,4 @@
 <?php
-/**
- * SECURE REGISTRATION HANDLER
- * Implements: Input validation, password strength, CSRF protection,
- * SQL injection prevention, and secure password hashing.
- */
 
 define('SECURE_ACCESS', true);
 require_once 'config.php';
@@ -11,7 +6,7 @@ require_once 'config.php';
 $error = '';
 $success = '';
 
-// Check if already logged in
+
 if (isLoggedIn()) {
     header("Location: index.php");
     exit();
@@ -19,18 +14,15 @@ if (isLoggedIn()) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
-    // 1. CSRF VALIDATION
     if (!isset($_POST['csrf_token']) || !validateCSRFToken($_POST['csrf_token'])) {
         $error = 'Invalid security token. Please refresh and try again.';
     } else {
         
-        // 2. SANITIZE INPUTS
         $username = isset($_POST['username']) ? sanitizeInput($_POST['username']) : '';
         $email = isset($_POST['email']) ? sanitizeInput($_POST['email']) : '';
         $password = $_POST['password'] ?? '';
         $confirmPassword = $_POST['confirm_password'] ?? '';
         
-        // 3. VALIDATE INPUTS
         if (empty($username) || empty($email) || empty($password) || empty($confirmPassword)) {
             $error = 'All fields are required.';
         }
@@ -48,11 +40,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         else {
             
-            // 4. DATABASE OPERATIONS
             try {
                 $pdo = getSecureDBConnection();
                 
-                // A. Check if username exists
                 $stmt = $pdo->prepare("SELECT id FROM users WHERE username = ?");
                 $stmt->execute([$username]);
                 
@@ -60,7 +50,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $error = 'Username already taken. Please choose another.';
                 } else {
                     
-                    // B. Check if email exists
                     $stmt = $pdo->prepare("SELECT id FROM users WHERE email = ?");
                     $stmt->execute([$email]);
                     
@@ -68,11 +57,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         $error = 'Email already registered. Please use another or log in.';
                     } else {
                         
-                        // C. Hash password securely (Argon2id if available, or Bcrypt)
-                        // Note: config.php default is Bcrypt via PASSWORD_DEFAULT which is safer for compatibility
                         $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
                         
-                        // D. Insert new user
                         $stmt = $pdo->prepare("
                             INSERT INTO users (username, email, password, email_verified, account_status) 
                             VALUES (?, ?, ?, 1, 'active')
@@ -82,7 +68,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             
                             $userId = $pdo->lastInsertId();
                             
-                            // E. Log registration to Security Log
                             secureLog('info', 'New user registration', [
                                 'user_id' => $userId,
                                 'username' => $username
@@ -99,14 +84,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 
             } catch (PDOException $e) {
                 $error = 'An error occurred. Please try again later.';
-                // Log the technical error securely
+                
                 error_log('Registration DB Error: ' . $e->getMessage());
             }
         }
     }
 }
 
-// Generate new CSRF token for the form
 $csrfToken = generateCSRFToken();
 
 ?>

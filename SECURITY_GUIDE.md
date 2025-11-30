@@ -565,7 +565,7 @@ If you encounter issues:
 
 ---
 
-## 🎓 LEARNING RESOURCES
+## LEARNING RESOURCES
 
 - [OWASP Top 10](https://owasp.org/Top10/)
 - [PHP Security Cheat Sheet](https://cheatsheetseries.owasp.org/cheatsheets/PHP_Configuration_Cheat_Sheet.html)
@@ -574,4 +574,4 @@ If you encounter issues:
 
 ---
 
-**🎉 Your Ubuntu Skills platform is now SECURE!**
+

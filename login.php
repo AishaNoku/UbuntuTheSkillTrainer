@@ -1,9 +1,4 @@
 <?php
-/**
- * SECURE LOGIN HANDLER
- * Implements: Rate limiting, CSRF protection, secure sessions, 
- * SQL injection prevention, XSS protection, logging
- */
 
 // Define secure access constant
 define('SECURE_ACCESS', true);
@@ -15,12 +10,8 @@ require_once 'config.php';
 $error = '';
 $success = '';
 
-// Handle form submission
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    
-    // ============================================
-    // 1. CSRF TOKEN VALIDATION
-    // ============================================
+
     
     if (!isset($_POST['csrf_token']) || !validateCSRFToken($_POST['csrf_token'])) {
         $error = 'Invalid security token. Please refresh and try again.';
@@ -28,10 +19,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'ip' => $_SERVER['REMOTE_ADDR']
         ]);
     } else {
-        
-        // ============================================
-        // 2. INPUT VALIDATION & SANITIZATION
-        // ============================================
         
         $username = isset($_POST['username']) ? sanitizeInput($_POST['username']) : '';
         $password = $_POST['password'] ?? '';
@@ -44,10 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $error = 'Invalid username format.';
         } 
         else {
-            
-            // ============================================
-            // 3. RATE LIMITING CHECK
-            // ============================================
+
             
             if (!checkRateLimit($username)) {
                 $error = 'Too many login attempts. Please try again in 15 minutes.';
@@ -58,10 +42,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 ]);
             } 
             else {
-                
-                // ============================================
-                // 4. DATABASE QUERY (PARAMETERIZED)
-                // ============================================
+
                 
                 try {
                     $pdo = getSecureDBConnection();
@@ -77,9 +58,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $stmt->execute([$username]);
                     $user = $stmt->fetch();
                     
-                    // ============================================
-                    // 5. PASSWORD VERIFICATION
-                    // ============================================
                     
                     if ($user && password_verify($password, $user['password'])) {
                         
@@ -96,11 +74,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             
                         } else {
                             
-                            // ============================================
-                            // 6. SUCCESSFUL LOGIN - CREATE SECURE SESSION
-                            // ============================================
-                            
-                            // Regenerate session ID to prevent fixation
                             session_regenerate_id(true);
                             
                             // Set session variables
@@ -140,10 +113,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                 $_SERVER['HTTP_USER_AGENT'] ?? 'Unknown'
                             ]);
                             
-                            // Redirect to dashboard or intended page
+                            // Redirect to home
                             $redirect = isset($_GET['redirect']) ? $_GET['redirect'] : 'index.php';
                             
-                            // Sanitize redirect URL to prevent open redirect
+                            // Sanitize redirect URL 
                             if (!preg_match('/^[a-zA-Z0-9_\-\.\/]+\.php$/', $redirect)) {
                                 $redirect = 'index.php';
                             }
@@ -154,10 +127,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         
                     } else {
                         
-                        // ============================================
-                        // 7. FAILED LOGIN - RECORD ATTEMPT
-                        // ============================================
-                        
                         $error = 'Invalid username or password.';
                         
                         // Record failed login attempt
@@ -166,7 +135,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                         // Update failed attempts counter if user exists
                         if ($user) {
                             $failStmt = $pdo->prepare("
-                                UPDATE users 
+                                UPDATE users
                                 SET failed_login_attempts = failed_login_attempts + 1 
                                 WHERE id = ?
                             ");
@@ -212,10 +181,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Generate new CSRF token for the form
+
 $csrfToken = generateCSRFToken();
 
-// Check if user came from timeout
 $timedOut = isset($_GET['timeout']) ? true : false;
 
 ?>
@@ -293,7 +261,7 @@ $timedOut = isset($_GET['timeout']) ? true : false;
             
             <form action="login.php<?php echo isset($_GET['redirect']) ? '?redirect=' . urlencode($_GET['redirect']) : ''; ?>" method="POST">
                 
-                <!-- CSRF Token (Hidden) -->
+               
                 <input type="hidden" name="csrf_token" value="<?php echo $csrfToken; ?>">
                 
                 <label for="username">Username</label>
