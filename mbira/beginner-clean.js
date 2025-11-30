@@ -436,7 +436,7 @@ function renderLessonContent() {
 
     // Completion button
     const completed = state.completedLessons.includes(lesson.id);
-    html += '<div class="completion-section"><button onclick="markComplete(\'' + lesson.id + '\')" class="complete-btn ' + (completed ? 'completed' : 'not-completed') + '">' + (completed ? 'Lesson Completed ' : 'Mark as Complete') + '</button></div>';
+    html += '<div class="completion-section"><button onclick="markComplete(\'' + lesson.id + '\')" class="complete-btn ' + (completed ? 'completed' : 'not-completed') + '">' + (completed ? 'Lesson Completed' : 'Mark as Complete') + '</button></div>';
 
     container.innerHTML = html;
 }
