@@ -1,6 +1,16 @@
-<?php session_start();
+<?php
+/**
+ * SECURE HOME PAGE
+ * Implements: Session validation, access control, XSS protection
+ */
 
-$isLoggedIn = isset($_SESSION['username']);
+define('SECURE_ACCESS', true);
+require_once 'config.php';
+
+// Check if user is logged in
+$isLoggedIn = isLoggedIn();
+$username = getUsername();
+$userId = getUserId();
 
 ?>
 <!DOCTYPE html>
@@ -8,11 +18,11 @@ $isLoggedIn = isset($_SESSION['username']);
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ubuntu Skills</title>
+    <title>Ubuntu Skills - Learn Any Skill</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<header>
+    <header>
         <a href="index.php" class="logo">Ubuntu</a>
 
         <nav id="nav-menu">
@@ -23,52 +33,53 @@ $isLoggedIn = isset($_SESSION['username']);
         
         <div class="auth-buttons" style="display: flex; align-items: center; gap: 1rem;">
             
-            <?php if($isLoggedIn): ?>
+            <?php if ($isLoggedIn): ?>
                 <span style="font-weight: bold; color: var(--accent);">
-                    Hi, <?php echo htmlspecialchars($_SESSION['username']); ?>
+                    Hi, <?php echo htmlspecialchars($username); ?>
                 </span>
-                <a href="login.html" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">
+                <a href="logout.php" class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">
                     Log Out
                 </a>
             <?php else: ?>
-                <a href="login.html" class="btn btn-primary">Login</a>
+                <a href="login.php" class="btn btn-primary">Login</a>
             <?php endif; ?>
 
             <button class="menu-toggle" id="menu-toggle" style="margin-left: 10px;">&#9776;</button>
         </div>
     </header>
+
     <!--Hero Section-->
     <section class="hero">
-    <div class="hero-content">
-        <h1>Learn Any Skill</h1>
-        <p>Learn from craftmasters and unlock your potential</p>
-        <div class="hero-buttons">
-            <button class="btn btn-primary" onclick="window.location.href='login.html'">
-                Start Learning
-                </button>
-            <a href="#skills">
-            <button class="btn btn-primary">Explore Courses</button>
-            </a>
-
+        <div class="hero-content">
+            <h1>Learn Any Skill</h1>
+            <p>Learn from craftmasters and unlock your potential</p>
+            <div class="hero-buttons">
+                <?php if ($isLoggedIn): ?>
+                    <a href="#skills" class="btn btn-primary">Browse Courses</a>
+                <?php else: ?>
+                    <a href="login.php" class="btn btn-primary">Start Learning</a>
+                    <a href="#skills" class="btn btn-secondary">Explore Courses</a>
+                <?php endif; ?>
+            </div>
+            <div class="hero-stats">
+                <div class="stat">
+                    <span class="stat-number">5K+</span>
+                    <span class="stat-label">Learners</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">4</span>
+                    <span class="stat-label">Skills</span>
+                </div>
+                <div class="stat">
+                    <span class="stat-number">4</span>
+                    <span class="stat-label">Expert Instructors</span>
+                </div>
+            </div>
         </div>
-        <div class=" hero-stats">
-            <div class="stat">
-                <span class="stat-number">5K+</span>
-                <span class="stat-label">Learners</span>
-            </div>
-            <div class="stat">
-                <span class="stat-number">4</span>
-                <span class="stat-label">Skills</span>
-            </div>
-            <div class="stat">
-                <span class="stat-number">4</span>
-                <span class="stat-label">Expert Instructors</span>
-            </div>
-        </div>
-    </div>
     </section>
+
     <!--Featured Skills-->
-    <section class="featured skills" id="skills">
+    <section class="featured-skills" id="skills">
         <div class="container">
             <h2 class="section-title">Skills to Learn</h2>
             <p class="section-subtitle">Explore in-demand skills available on this platform</p>
@@ -115,6 +126,7 @@ $isLoggedIn = isset($_SESSION['username']);
             </div>
         </div>
     </section>
+
     <!--Getting Started-->
     <section class="how-it-works" id="how">
         <div class="container">
@@ -144,46 +156,44 @@ $isLoggedIn = isset($_SESSION['username']);
             </div>
         </div>
     </section>
+
     <!--Testimonials-->
     <section class="testimonials">
         <div class="container">
             <h2 class="section-title">Success Stories</h2>
             <p class="section-subtitle">See how Ubuntu Skills changed their careers and lives</p>
+            
             <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p class="testimonial-text">I really learnt a lot from Ubuntu skills and I keep learning regularly!</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">TM</div>
-                        <div>
-                            <div class="author-name">Tanya M.</div>
-                            <div class="author-role">UI/UX Specialist</div>
-                        </div>
-                    </div>
-                </div>
+                <?php
+                include_once 'db_connect.php';
 
-                <div class="testimonial-card">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p class="testimonial-text">The bead making course helped me start my own business in Harare!</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">SJ</div>
-                        <div>
-                            <div class="author-name">Sarah J.</div>
-                            <div class="author-role">Entrepreneur</div>
+                $sql_testi = "SELECT * FROM testimonials";
+                $result_testi = $conn->query($sql_testi);
+
+                if ($result_testi->num_rows > 0) {
+                    while($row = $result_testi->fetch_assoc()) {
+                    
+                        $stars = str_repeat("⭐", $row['rating']);
+
+                        echo '
+                        <div class="testimonial-card">
+                            <div class="stars">' . $stars . '</div>
+                            <p class="testimonial-text">"' . $row['content'] . '"</p>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">' . $row['initials'] . '</div>
+                                <div>
+                                    <div class="author-name">' . $row['name'] . '</div>
+                                    <div class="author-role">' . $row['role'] . '</div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                        ';
+                    }
+                } else {
+                    echo "<p>No testimonials found.</p>";
+                }
+                ?>
             </div>
-        </div>
-    </section>
-    <!--CTA-->
-    <section class="cta">
-        <div class="container">
-            <h2>Ready to Learn a New Skill?</h2>
-            <p>Start your upskilling today for free!</p>
-            <button class="btn btn-primary" onclick="window.location.href='login.html'">
-                Start Learning
-                </button>
         </div>
     </section>
     <!--Footer-->
@@ -197,7 +207,7 @@ $isLoggedIn = isset($_SESSION['username']);
             </div>
             <div class="footer-section">
                 <h4>Learning</h4>
-                <a href="#">browse Skills</a>
+                <a href="#">Browse Skills</a>
                 <a href="#">Paths</a>
                 <a href="#">Certificates</a>
             </div>
@@ -220,7 +230,7 @@ $isLoggedIn = isset($_SESSION['username']);
             </div>
         </div>
     </footer>
-    <script src="script.js"></script>
 
+    <script src="script.js"></script>
 </body>
 </html>
