@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign Up - Ubuntu</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        .form-box {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 30px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .auth-switch {
+            margin-top: 20px;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+        .auth-switch a {
+            color: var(--accent); 
+            font-weight: bold;
+            text-decoration: none;
+        }
+        .auth-switch a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <a href="index.html" class="logo">Ubuntu</a>
+    </header>
+
+    <div class="container">
+        <div class="form-box">
+            <h2 class="section-title">Create Account</h2>
+            
+            <form action="register.php" method="POST">
+                <label>Username</label>
+                <input type="text" name="username" required>
+
+                <label>Email</label>
+                <input type="email" name="email" required>
+
+                <label>Password</label>
+                <input type="password" name="password" required>
+
+                <button type="submit" class="btn btn-primary" style="width:100%">Sign Up</button>
+            </form>
+
+            <div class="auth-switch">
+                <p>Already have an account? <a href="login.html">Log In</a></p>
+            </div>
+
+        </div>
+    </div>
+</body>
+</html>

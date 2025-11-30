@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Course Completion - Ubuntu</title>
+    <link rel="stylesheet" href="../styles.css">
+    <style>
+        /* --- Certificate Specific Styles --- */
+        .cert-wrapper {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* The actual piece of paper */
+        #certificate {
+            width: 800px;
+            height: 600px;
+            padding: 40px;
+            background-color: #fffcf5; /* Creamy paper color */
+            border: 10px solid var(--dark); /* Your brand color */
+            outline: 5px solid var(--accent); /* Double border effect */
+            margin: 2rem auto;
+            position: relative;
+            display: none; /* Hidden until they type their name */
+            color: var(--dark);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        .cert-header {
+            font-size: 3rem;
+            font-family: serif; /* Looks official */
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .cert-sub {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: var(--dark-light);
+        }
+
+        .student-name {
+            font-size: 2.5rem;
+            font-weight: bold;
+            border-bottom: 2px solid var(--dark);
+            display: inline-block;
+            min-width: 400px;
+            margin: 1rem 0;
+            padding-bottom: 0.5rem;
+            font-family: cursive; /* Looks like handwriting */
+            color: var(--accent);
+        }
+
+        .cert-footer {
+            margin-top: 4rem;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .signature-line {
+            border-top: 1px solid var(--dark);
+            padding-top: 0.5rem;
+            width: 200px;
+            font-size: 0.9rem;
+        }
+
+        /* --- Print Styles (The Magic Part) --- */
+        /* This runs only when the user tries to Print or Save as PDF */
+        @media print {
+            body * {
+                visibility: hidden; /* Hide everything (Header, nav, buttons) */
+            }
+            #certificate, #certificate * {
+                visibility: visible; /* Show only the certificate */
+                display: block !important;
+            }
+            #certificate {
+                position: absolute;
+                left: 0;
+                top: 0;
+                width: 100%;
+                margin: 0;
+                box-shadow: none;
+                border: 5px solid var(--dark); /* Thinner border for print */
+            }
+            .input-section {
+                display: none; /* Double check hiding the input box */
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="../index.html" class="logo">Ubuntu</a>
+        <nav>
+            <a href="index.html">Back to Beads Course</a>
+        </nav>
+    </header>
+
+    <div class="container cert-wrapper">
+        <div class="input-section">
+            <h1>Congratulations! 🎉</h1>
+            <p>You have completed the Bead Making Course.</p>
+            <p>Enter your name below to generate your official certificate.</p>
+            
+            <input type="text" id="userName" placeholder="Type your full name" 
+                   style="padding: 10px; font-size: 1.2rem; width: 300px; margin-top: 1rem;">
+            <br><br>
+            <button class="btn btn-primary" onclick="generateCert()">Get Certificate</button>
+        </div>
+
+        <div id="certificate">
+            <div class="cert-header">Certificate of Completion</div>
+            <div class="cert-sub">This verifies that</div>
+            
+            <div class="student-name" id="display-name">[Student Name]</div>
+            
+            <div class="cert-sub">Has successfully completed the module</div>
+            <h2>Professional Bead Making & Business</h2>
+            
+            <div class="cert-footer">
+                <div class="signature">
+                    <p id="date-display">Date</p>
+                    <div class="signature-line">Date Completed</div>
+                </div>
+                <div class="signature">
+                    <p style="font-family: cursive; font-size: 1.2rem;">Ubuntu Team</p>
+                    <div class="signature-line">Instructor Signature</div>
+                </div>
+            </div>
+        </div>
+        
+        <button id="printBtn" class="btn btn-secondary" style="display:none; margin: 2rem auto;" onclick="window.print()">Download / Print PDF</button>
+    </div>
+
+    <script>
+        function generateCert() {
+            const inputName = document.getElementById("userName").value;
+            
+            if(inputName.trim() === "") {
+                alert("Please enter your name first!");
+                return;
+            }
+
+            // 1. Put the name on the certificate
+            document.getElementById("display-name").innerText = inputName;
+
+            // 2. Put today's date on the certificate
+            const today = new Date();
+            const dateString = today.toLocaleDateString();
+            document.getElementById("date-display").innerText = dateString;
+
+            // 3. Show the certificate and the print button
+            document.getElementById("certificate").style.display = "block";
+            document.getElementById("printBtn").style.display = "inline-block";
+        }
+    </script>
+</body>
+</html>
