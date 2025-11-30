@@ -4,8 +4,9 @@
  * Implements: Session validation, access control, XSS protection
  */
 
+
 define('SECURE_ACCESS', true);
-require_once 'config.php';
+require_once '../config.php';
 
 // Check if user is logged in
 $isLoggedIn = isLoggedIn();
