@@ -114,4 +114,28 @@ function gradeModule3Quiz() {
     result.innerHTML = `You scored <strong>${score}/4</strong>.`;
     result.style.color = score === 4 ? "green" : "red";
 }
+// PROGRESS BAR UPDATING
+
+const progressBar = document.getElementById("progressBar");
+const totalModules = 3; // total number of modules
+let completedModules = 0;
+
+// Select all complete buttons
+const completeButtons = document.querySelectorAll(".complete-btn");
+
+completeButtons.forEach(btn => {
+  btn.addEventListener("click", () => {
+    // Check if module already completed
+    if (btn.dataset.completed === "false") {
+      btn.dataset.completed = "true";
+      btn.textContent = "Completed ✅";
+      completedModules++;
+
+      // Update progress bar
+      let progressPercent = (completedModules / totalModules) * 100;
+      progressBar.style.width = progressPercent + "%";
+    }
+  });
+});
+
 

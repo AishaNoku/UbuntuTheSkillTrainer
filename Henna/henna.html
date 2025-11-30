@@ -129,6 +129,7 @@
           <button class="btn" onclick="gradeModule1Quiz()">Submit Quiz</button>
           <p id="module1QuizResult" class="meta" style="margin-top:10px;"></p>
 
+          <button class="complete-btn" data-module="1" data-completed="false">Mark as Complete</button>
         </div>
 
         <!-- MODULE 2 -->
@@ -228,6 +229,7 @@
 
           <button class="btn" onclick="gradeModule2Quiz()">Submit Quiz</button>
           <p id="module2QuizResult" class="meta" style="margin-top:10px;"></p>
+          <button class="complete-btn" data-module="2" data-completed="false">Mark as Complete</button>
         </div>
 
         <!-- MODULE 3 -->
@@ -300,16 +302,18 @@
 
           <button class="btn" onclick="gradeModule3Quiz()">Submit Quiz</button>
           <p id="module3QuizResult" class="meta" style="margin-top:10px;"></p>
+          <button class="complete-btn" data-module="3" data-completed="false">Mark as Complete</button>
         </div>
         
       </section>
 
       <!-- WIDGETS -->
       <aside class="widgets">
-        <div class="progress card">
-          <h4>Course Progress</h4>
-          <div class="bar"><div class="fill"></div></div>
+        <div id="progressBarContainer" style="width: 100%; background-color: #ddd; height: 25px; border-radius:5px; overflow:hidden;">
+          <div id="progressBar" style="width:0%; height:100%; background-color:#4caf50; display:flex; align-items:center; justify-content:center; color:white; font-weight:bold;">
+          </div>
         </div>
+
 
         <div class="card">
           <h4>Resources</h4>
