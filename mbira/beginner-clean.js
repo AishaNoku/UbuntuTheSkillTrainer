@@ -1,7 +1,4 @@
-// Beginner Course JavaScript - Clean Version (No Tailwind)
-// Simple white-dominant design with regular CSS
 
-// Course data with all lessons (Modules 0-5: Beginner, Intermediate, Advanced)
 const courseData = {
     modules: [
         {
