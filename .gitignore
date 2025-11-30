@@ -1,12 +1,3 @@
-# Ubuntu Skills - Git Ignore File
-# Prevents committing sensitive files
-
-# ============================================
-# SECURITY - NEVER COMMIT THESE
-# ============================================
-
-
-
 # Log files with sensitive data
 logs/
 *.log
