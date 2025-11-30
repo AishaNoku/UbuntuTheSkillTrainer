@@ -77,7 +77,7 @@ $isLoggedIn = isset($_SESSION['username']);
                 if ($result->num_rows > 0) {
                     while($row = $result->fetch_assoc()) {
                         $folder = $row['folder_name'];
-                        $link = "#"; 
+                        $link = "#";
 
                         if ($isLoggedIn) {
                             if ($folder == 'crochet') {
