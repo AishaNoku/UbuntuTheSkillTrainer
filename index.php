@@ -149,41 +149,38 @@ $isLoggedIn = isset($_SESSION['username']);
         <div class="container">
             <h2 class="section-title">Success Stories</h2>
             <p class="section-subtitle">See how Ubuntu Skills changed their careers and lives</p>
+            
             <div class="testimonials-grid">
-                <div class="testimonial-card">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p class="testimonial-text">I really learnt a lot from Ubuntu skills and I keep learning regularly!</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">TM</div>
-                        <div>
-                            <div class="author-name">Tanya M.</div>
-                            <div class="author-role">UI/UX Specialist</div>
-                        </div>
-                    </div>
-                </div>
+                <?php
+                include_once 'db_connect.php';
 
-                <div class="testimonial-card">
-                    <div class="stars">⭐⭐⭐⭐⭐</div>
-                    <p class="testimonial-text">The bead making course helped me start my own business in Harare!</p>
-                    <div class="testimonial-author">
-                        <div class="author-avatar">SJ</div>
-                        <div>
-                            <div class="author-name">Sarah J.</div>
-                            <div class="author-role">Entrepreneur</div>
+                $sql_testi = "SELECT * FROM testimonials";
+                $result_testi = $conn->query($sql_testi);
+
+                if ($result_testi->num_rows > 0) {
+                    while($row = $result_testi->fetch_assoc()) {
+                    
+                        $stars = str_repeat("⭐", $row['rating']);
+
+                        echo '
+                        <div class="testimonial-card">
+                            <div class="stars">' . $stars . '</div>
+                            <p class="testimonial-text">"' . $row['content'] . '"</p>
+                            <div class="testimonial-author">
+                                <div class="author-avatar">' . $row['initials'] . '</div>
+                                <div>
+                                    <div class="author-name">' . $row['name'] . '</div>
+                                    <div class="author-role">' . $row['role'] . '</div>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                        ';
+                    }
+                } else {
+                    echo "<p>No testimonials found.</p>";
+                }
+                ?>
             </div>
-        </div>
-    </section>
-    <!--CTA-->
-    <section class="cta">
-        <div class="container">
-            <h2>Ready to Learn a New Skill?</h2>
-            <p>Start your upskilling today for free!</p>
-            <button class="btn btn-primary" onclick="window.location.href='login.html'">
-                Start Learning
-                </button>
         </div>
     </section>
     <!--Footer-->
