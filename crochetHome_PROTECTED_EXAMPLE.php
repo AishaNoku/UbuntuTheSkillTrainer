@@ -9,12 +9,7 @@
 <body>
 
 <?php
-/**
- * PROTECTED COURSE PAGE EXAMPLE
- * Shows how to add authentication to course pages
- */
 
-// Include security configuration at the TOP of the file
 define('SECURE_ACCESS', true);
 require_once '../config.php';
 
@@ -25,24 +20,23 @@ requireLogin();
 $userId = getUserId();
 $username = getUsername();
 
-// Optional: Log course access
+
 secureLog('info', 'User accessed Crochet course', [
     'user_id' => $userId,
     'username' => $username,
     'course' => 'crochet'
 ]);
 
-// Optional: Track user progress
+
 try {
     $pdo = getSecureDBConnection();
     
-    // Get course ID
+
     $stmt = $pdo->prepare("SELECT id FROM courses WHERE folder_name = 'crochet' LIMIT 1");
     $stmt->execute();
     $course = $stmt->fetch();
     $courseId = $course['id'] ?? null;
     
-    // Get user's progress for this course
     if ($courseId) {
         $stmt = $pdo->prepare("
             SELECT module_id, completed 
@@ -74,8 +68,7 @@ try {
         <label>Overall Progress</label>
         <div class="progress-bar">
             <div id="progress-fill" style="width: <?php 
-                // Calculate progress percentage
-                $totalModules = 6; // Modules 1-6
+                $totalModules = 6;
                 $completedModules = count($progress);
                 $percentage = ($completedModules / $totalModules) * 100;
                 echo round($percentage);
@@ -147,53 +140,4 @@ try {
 </html>
 
 <?php
-/**
- * HOW TO ADD THIS SECURITY TO YOUR OTHER COURSE PAGES:
- * 
- * 1. RENAME FILES:
- *    - crochetHome.html → crochetHome.php
- *    - module1.html → module1.php
- *    (All course pages that need protection)
- * 
- * 2. ADD AT THE TOP OF EACH FILE (before <!DOCTYPE html>):
- * 
- *    <?php
- *    define('SECURE_ACCESS', true);
- *    require_once '../config.php';  // or '../../config.php' depending on folder depth
- *    requireLogin();
- *    $username = getUsername();
- *    ?>
- * 
- * 3. DISPLAY USERNAME IN HTML (optional):
- * 
- *    <span>Welcome, <?php echo htmlspecialchars($username); ?>!</span>
- * 
- * 4. ADD LOGOUT LINK (optional):
- * 
- *    <a href="../logout.php">Logout</a>
- * 
- * 5. TRACK MODULE COMPLETION (optional):
- * 
- *    Add at the end of module page:
- *    
- *    <?php
- *    // Mark module as completed
- *    if (isset($_POST['complete_module'])) {
- *        $pdo = getSecureDBConnection();
- *        $stmt = $pdo->prepare("
- *            INSERT INTO user_progress (user_id, course_id, module_id, completed, completed_at)
- *            VALUES (?, ?, ?, 1, NOW())
- *            ON DUPLICATE KEY UPDATE completed = 1, completed_at = NOW()
- *        ");
- *        $stmt->execute([getUserId(), $courseId, 'module1']);
- *    }
- *    ?>
- * 
- *    And add a button in HTML:
- *    <form method="POST">
- *        <button type="submit" name="complete_module">Mark as Complete</button>
- *    </form>
- * 
- * THAT'S IT! Your pages are now protected and only accessible to logged-in users.
- */
 ?>
