@@ -89,11 +89,11 @@ $isLoggedIn = isset($_SESSION['username']);
                     </div>
                 </a>
                 
-                <div class="skill-card">
+                <a href="../UbuntuTheSkillTrainer/mbira/index.html" style= "text-decoration: none;color: inherit;">
                     <div class="skill-icon">&#127925;</div>
                     <h3>Mbira Tutorials</h3>
                     <p>Learn to compose, mix, and produce music </p>
-                </div>
+            </a>
                 <a href="Henna/henna.html" style ="text-decoration:none;color:inherit;">
                 <div class="skill-card">
                     <div class="skill-icon">&#128247;</div>
