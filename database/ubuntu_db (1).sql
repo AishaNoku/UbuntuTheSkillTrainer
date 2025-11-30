@@ -1,90 +1,21 @@
--- 1. CRITICAL FIX: Disable safety checks so we can overwrite tables without errors
-SET FOREIGN_KEY_CHECKS = 0;
+-- phpMyAdmin SQL Dump
+-- version 5.2.1
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1:3307
+-- Generation Time: Nov 30, 2025 at 06:39 PM
+-- Server version: 10.4.32-MariaDB
+-- PHP Version: 8.0.30
 
-CREATE DATABASE IF NOT EXISTS ubuntu_db CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
-USE ubuntu_db;
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
 
--- =============================================
--- SECTION A: YOUR SECURITY TABLES (Preserved)
--- =============================================
 
--- 1. USERS
-DROP TABLE IF EXISTS users;
-CREATE TABLE users (
-    id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50) NOT NULL UNIQUE,
-    email VARCHAR(100) NOT NULL UNIQUE,
-    password VARCHAR(255) NOT NULL,
-    email_verified TINYINT(1) DEFAULT 0,
-    account_status ENUM('active', 'suspended', 'locked') DEFAULT 'active',
-    failed_login_attempts INT DEFAULT 0,
-    last_login DATETIME NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-    INDEX idx_username (username),
-    INDEX idx_email (email),
-    INDEX idx_status (account_status)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- 2. LOGIN ATTEMPTS
-DROP TABLE IF EXISTS login_attempts;
-CREATE TABLE login_attempts (
-    id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    username VARCHAR(50) NOT NULL,
-    ip_address VARCHAR(45) NOT NULL,
-    success TINYINT(1) DEFAULT 0,
-    attempted_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    INDEX idx_username_time (username, attempted_at),
-    INDEX idx_ip_time (ip_address, attempted_at)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- 3. SESSIONS
-DROP TABLE IF EXISTS sessions;
-CREATE TABLE sessions (
-    id VARCHAR(128) NOT NULL PRIMARY KEY,
-    user_id INT(11) UNSIGNED NULL,
-    ip_address VARCHAR(45) NOT NULL,
-    user_agent VARCHAR(255) NOT NULL,
-    payload TEXT NOT NULL,
-    last_activity INT(11) UNSIGNED NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    INDEX idx_user_id (user_id),
-    INDEX idx_last_activity (last_activity),
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- 4. SECURITY LOG
-DROP TABLE IF EXISTS security_log;
-CREATE TABLE security_log (
-    id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    user_id INT(11) UNSIGNED NULL,
-    username VARCHAR(50) NULL,
-    action VARCHAR(100) NOT NULL,
-    ip_address VARCHAR(45) NOT NULL,
-    user_agent VARCHAR(255) NULL,
-    details TEXT NULL,
-    severity ENUM('info', 'warning', 'error', 'critical') DEFAULT 'info',
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    INDEX idx_user_id (user_id),
-    INDEX idx_action (action),
-    INDEX idx_severity (severity),
-    INDEX idx_created (created_at),
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE SET NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- 5. PASSWORD RESETS
-DROP TABLE IF EXISTS password_resets;
-CREATE TABLE password_resets (
-    id INT(11) UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    user_id INT(11) UNSIGNED NOT NULL,
-    token VARCHAR(64) NOT NULL UNIQUE,
-    expires_at DATETIME NOT NULL,
-    used TINYINT(1) DEFAULT 0,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
-    INDEX idx_token (token),
-    INDEX idx_expires (expires_at)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
 -- =============================================
 -- SECTION B: CONTENT TABLES (Added for Website Features)

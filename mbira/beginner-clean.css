@@ -1,4 +1,5 @@
 
+@media (min-width: 768px) {
 * {
     margin: 0;
     padding: 0;
@@ -16,13 +17,11 @@ html, body {
     line-height: 1.55;
 }
 
-/* MAIN LAYOUT */
 .main-layout {
     display: flex;
     height: 100vh;
 }
 
-/* SIDEBAR */
 .sidebar {
     width: 300px;
     background: rgba(255,255,255,0.88);
@@ -45,7 +44,6 @@ html, body {
     gap: 24px;
 }
 
-/* MODULE BLOCK */
 .module-block {
     padding: 18px;
     background: rgba(245,245,245,0.85);
@@ -54,13 +52,11 @@ html, body {
     box-shadow: 0 3px 8px rgba(0,0,0,0.06);
 }
 
-/* NO BULLETS */
 .module-block ul {
     list-style: none;
     padding-left: 0;
 }
 
-/* LESSON BUTTON */
 .lesson-button {
     width: 100%;
     border: none;
@@ -84,7 +80,7 @@ html, body {
     background: rgba(0,0,0,0.12);
 }
 
-/* PROGRESS */
+
 .progress-section {
     margin-top: 28px;
 }
@@ -120,7 +116,6 @@ html, body {
     font-size: 16px;
 }
 
-/* CONTENT AREA */
 .content-area {
     flex: 1;
     display: flex;
@@ -148,7 +143,6 @@ html, body {
     font-weight: 600;
 }
 
-/* NAV BUTTONS */
 .nav-buttons {
     display: flex;
     gap: 8px;
@@ -176,14 +170,12 @@ html, body {
     cursor: not-allowed;
 }
 
-/* CONTENT SCROLL */
 .content-scroller {
     flex: 1;
     overflow-y: auto;
     padding: 42px;
 }
 
-/* CARD LAYOUT */
 .lesson-container {
     max-width: 900px;
     margin: 0 auto;
@@ -203,14 +195,12 @@ html, body {
     box-shadow: 0 4px 10px rgba(0,0,0,0.08);
 }
 
-/* TITLES */
 .card-title {
     font-size: 17px;
     font-weight: bold;
     margin-bottom: 22px;
 }
 
-/* TEXT */
 .lesson-text p {
     margin-bottom: 24px;
     line-height: 1.55;
@@ -226,7 +216,6 @@ html, body {
     margin-bottom: 10px;
 }
 
-/* VIDEO CARD */
 .video-header {
     display: flex;
     align-items: center;
@@ -284,7 +273,6 @@ html, body {
     text-decoration: underline;
 }
 
-/* EXERCISES CARD */
 .exercises-title {
     font-size: 16px;
     font-weight: 600;
@@ -319,7 +307,6 @@ html, body {
     line-height: 1.5;
 }
 
-/* QUIZ */
 .quiz-title {
     font-size: 16px;
     font-weight: 600;
@@ -391,7 +378,6 @@ html, body {
     flex: 1;
 }
 
-/* BUTTONS */
 .submit-btn,
 .complete-btn {
     margin-top: 20px;
@@ -423,7 +409,6 @@ html, body {
     text-align: center;
 }
 
-/* INFO BOX */
 .info-box {
     padding: 20px;
     background: rgba(59, 130, 246, 0.05);
@@ -443,7 +428,6 @@ html, body {
     line-height: 1.6;
 }
 
-/* MOBILE */
 .mobile-header {
     display: none;
     background: rgba(255,255,255,0.88);
@@ -465,7 +449,6 @@ html, body {
     cursor: pointer;
 }
 
-/* SIDEBAR HEADER ELEMENTS */
 .sidebar-main-title {
     font-size: 24px;
     font-weight: bold;
@@ -495,8 +478,12 @@ html, body {
     margin-left: 8px;
 }
 
+<<<<<<< HEAD
 /* MOBILE RESPONSIVE */
+@media (max-width: 1024px) {
+=======
 @media (max-width: 768px) {
+>>>>>>> e0f7dbd1233c4028f1a58046a74c88807b5529a5
     .mobile-header {
         display: flex;
     }
@@ -542,4 +529,5 @@ html, body {
     .video-embed iframe {
         height: 200px;
     }
+}
 }

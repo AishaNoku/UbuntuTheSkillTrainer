@@ -1,3 +1,4 @@
+@media (min-width: 768px) {
 body {
   margin: 0;
   padding: 0;
@@ -143,19 +144,181 @@ body {
   font-size: 13px;
   color: #a86446;
 }
-.button-container {
-    display: flex;
-    justify-content: space-between; 
-    margin-top: 20px; 
-    padding: 0 20px; 
-    
-}
+
 button{
- padding: 12px 20px;
+  padding: 12px 20px;
   background: #2a9d8f;
   border: none;
   color: white;
   border-radius: 8px;
   cursor: pointer;
   font-size: 16px;
+  transition: 0.3s;
+}
+
+.button-container:hover{
+  transition: 0.3s ease-in;
+}
+}
+@media (min-width: 768px) {
+body {
+  margin: 0;
+  padding: 0;
+  background: url('../images/crochet2.jpg');
+  background-size: cover;
+  background-attachment: scroll;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.wrapper header {
+    text-align: center;
+    padding: 30px 20px;
+    background-color: #ffe7c7;
+    border-bottom: 3px solid pink;
+}
+
+.wrapper {
+  text-align: center;
+  padding: 30px;
+}
+
+.header-title {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 70px;
+  color: black;
+}
+
+.subtitle {
+  font-size: 35px;
+  margin-bottom: 20px;
+  color: black;
+}
+
+#username {
+  padding: 12px;
+  width: 290px;
+  border-radius: 10px;
+  border: 2px solid #cfa58a;
+  background: #fff7f1;
+  font-size: 16px;
+}
+
+.generate-btn,
+.download-btn {
+  background: #cfa58a;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 17px;
+  border-radius: 10px;
+  margin-top: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.generate-btn:hover,
+.download-btn:hover {
+  background: white;
+  color: #cfa58a;
+}
+
+.hide {
+  display: none;
+}
+
+
+.certificate {
+  margin: 40px auto;
+  width: 85%;
+  border: #b67850;
+}
+
+
+
+.certificate-inner {
+  background: #fffaf3;
+  padding: 35px;
+  border-radius: 16px;
+  border: 4px solid #e6c7ac;
+}
+
+.cert-title {
+  font-size: 34px;
+  color: #a86446;
+  font-family:Arial, Helvetica, sans-serif;
+  margin-bottom: 10px;
+}
+
+.verify {
+  font-size: 20px;
+}
+
+.student-name {
+  font-size: 42px;
+  font-weight: 600;
+  margin: 5px 0;
+  color: #a86446;
+}
+
+.underline {
+  width: 350px;
+  height: 3px;
+  background: #a86446;
+  margin: 6px auto 20px;
+}
+
+.course-text {
+  font-size: 19px;
+}
+
+.course-name {
+  font-size: 25px;
+  margin-top: 10px;
+  color: #a86446;
+}
+
+.seal {
+  margin: 30px auto;
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  border: 6px dotted #c38c66;
+  background: #ffe9d6;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  color: #8a5438;
+  text-align: center;
+  padding: 10px;
+  font-weight: 600;
+  font-family: "Poppins", sans-serif;
+  box-shadow: inset 0 0 10px #e6c1a3;
+}
+
+.bottom-row {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 40px;
+}
+
+.label {
+  font-size: 13px;
+  color: #a86446;
+}
+
+button{
+  padding: 12px 20px;
+  background: #2a9d8f;
+  border: none;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: 0.3s;
+}
+
+.button-container:hover{
+  transition: 0.3s ease-in;
+}
 }

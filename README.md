@@ -1,21 +1,21 @@
-# 🎓 Ubuntu Skills - Secure Learning Platform
+# Ubuntu Skills - Secure Learning Platform
 
 A fully secured PHP learning management system with enterprise-grade security implementing OWASP Top 10 protections.
 
-## ✨ Features
+## Features
 
-- 🔐 **Enterprise Security** - Complete OWASP Top 10 protection
-- 👤 **User Authentication** - Secure login/signup with Argon2id password hashing
-- 📚 **Course Management** - Crochet, Bead Making, Mbira, Henna courses
-- 📊 **Progress Tracking** - Track user progress through modules
-- 🛡️ **Session Security** - Anti-hijacking, anti-fixation, automatic timeout
-- 🚫 **Attack Prevention** - SQL injection, XSS, CSRF protection
-- 📝 **Security Logging** - Complete audit trail of all security events
-- ⏱️ **Rate Limiting** - Prevent brute force attacks
+- **Enterprise Security** - Complete OWASP Top 10 protection
+- **User Authentication** - Secure login/signup with Argon2id password hashing
+- **Course Management** - Crochet, Bead Making, Mbira, Henna courses
+- **Progress Tracking** - Track user progress through modules
+- **Session Security** - Anti-hijacking, anti-fixation, automatic timeout
+- **Attack Prevention** - SQL injection, XSS, CSRF protection
+- **Security Logging** - Complete audit trail of all security events
+- **Rate Limiting** - Prevent brute force attacks
 
 ---
 
-## 🚀 QUICK START (5 Minutes)
+## QUICK START (5 Minutes)
 
 ### Prerequisites
 - PHP 7.4+ (8.0+ recommended)
@@ -61,43 +61,43 @@ http://localhost:8000/index.php
 
 ---
 
-## 📁 File Structure
+## File Structure
 
 ```
 ubuntu_skills/
 │
-├── 📘 README.md                      # This file
-├── 📕 SECURITY_GUIDE.md              # Comprehensive security documentation
+├── README.md                      # This file
+├── SECURITY_GUIDE.md              # Comprehensive security documentation
 │
-├── 🔒 config.php                     # Main configuration (create from template)
-├── 📋 config.example.php             # Configuration template (safe to commit)
-├── 🗄️ secure_database_setup.sql     # Complete database structure
+├── config.php                     # Main configuration (create from template)
+├── config.example.php             # Configuration template (safe to commit)
+├── secure_database_setup.sql     # Complete database structure
 │
-├── 🔑 login.php                      # Secure login handler
-├── ✍️ signup.php                     # Secure registration
-├── 🚪 logout.php                     # Logout handler
-├── 🏠 index.php                      # Main homepage
+├── login.php                      # Secure login handler
+├── signup.php                     # Secure registration
+├── logout.php                     # Logout handler
+├── index.php                      # Main homepage
 │
-├── 📝 logs/                          # Security & error logs (auto-created)
+├── logs/                          # Security & error logs (auto-created)
 │   ├── security.log
 │   └── php-errors.log
 │
-├── 📚 Course Folders/
+├── Course Folders/
 │   ├── crochet/
 │   ├── beads/
 │   ├── mbira/
 │   └── henna/
 │
-└── 🎨 assets/
+└── assets/
     ├── styles.css
     └── script.js
 ```
 
 ---
 
-## 🔐 Security Features
+## Security Features
 
-### ✅ OWASP Top 10 Protected
+### OWASP Top 10 Protected
 
 | Risk | Protection | Status |
 |------|-----------|--------|
@@ -147,7 +147,7 @@ ubuntu_skills/
 
 ---
 
-## 📖 Usage Guide
+## Usage Guide
 
 ### For Students
 
@@ -211,7 +211,7 @@ ubuntu_skills/
 
 ---
 
-## 🧪 Testing
+## Testing
 
 ### Test Accounts
 
@@ -287,7 +287,7 @@ define('PASSWORD_ALGO', PASSWORD_ARGON2ID);
 
 ---
 
-## 📊 Database Schema
+## Database Schema
 
 ### Main Tables
 
@@ -308,7 +308,7 @@ The database includes event schedulers that auto-delete:
 
 ---
 
-## 🚨 Troubleshooting
+## Troubleshooting
 
 ### "Database connection error"
 
@@ -351,7 +351,7 @@ TRUNCATE TABLE login_attempts;
 
 ---
 
-## 📚 Documentation
+## Documentation
 
 - **[SECURITY_GUIDE.md](SECURITY_GUIDE.md)** - Complete security documentation
 - **[secure_database_setup.sql](secure_database_setup.sql)** - Database structure with comments
@@ -359,7 +359,7 @@ TRUNCATE TABLE login_attempts;
 
 ---
 
-## 🛠️ Development vs Production
+## Development vs Production
 
 ### Development (Localhost)
 
@@ -401,7 +401,7 @@ define('CSRF_SECRET', 'unique_random_32_char_string');
 
 ---
 
-## 🔄 Updates & Maintenance
+## Updates & Maintenance
 
 ### Daily
 ```bash
@@ -426,7 +426,7 @@ mysql -u root -p -e "SELECT * FROM ubuntu_db.login_attempts WHERE success=0 LIMI
 
 ---
 
-## 📞 Support
+## Support
 
 For issues:
 1. Check [SECURITY_GUIDE.md](SECURITY_GUIDE.md)
@@ -448,7 +448,7 @@ Built with security-first mindset following OWASP guidelines.
 
 ---
 
-## ⭐ Key Takeaways
+## Key Takeaways
 
 - **All passwords are hashed** with Argon2id (never stored in plaintext)
 - **All database queries use prepared statements** (SQL injection impossible)

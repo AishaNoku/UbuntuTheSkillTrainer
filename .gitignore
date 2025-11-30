@@ -5,8 +5,7 @@
 # SECURITY - NEVER COMMIT THESE
 # ============================================
 
-# Configuration with passwords
-config.php
+
 
 # Log files with sensitive data
 logs/
