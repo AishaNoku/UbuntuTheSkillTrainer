@@ -412,7 +412,7 @@ function renderLessonContent() {
         html += '<div class="quiz-card"><h3 class="quiz-title">Knowledge Check</h3>';
         
         if (isPassed) {
-            html += '<div class="quiz-passed">Quiz Passed! ✓</div>';
+            html += '<div class="quiz-passed">Quiz Passed</div>';
         } else {
             html += '<form class="quiz-form" onsubmit="submitQuiz(event, \'' + lesson.id + '\')">';
             lesson.quiz.forEach(function(q, idx) {
