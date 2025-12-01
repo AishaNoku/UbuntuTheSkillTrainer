@@ -236,9 +236,15 @@ $timedOut = isset($_GET['timeout']) ? true : false;
             font-weight: bold;
             text-decoration: none;
         }
+        .background
+        {
+            background: url("elegant-modern-vase-design.jpg") no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+        }
     </style>
 </head>
-<body>
+<body class ="background">
     <header>
         <a href="index.php" class="logo">Ubuntu</a>
     </header>
