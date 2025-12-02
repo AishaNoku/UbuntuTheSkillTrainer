@@ -158,9 +158,15 @@ $csrfToken = generateCSRFToken();
             background: #f0f0f0;
             border-radius: 4px;
         }
+        .background
+        {
+            background: url("elegant-modern-vase-design.jpg") no-repeat center center fixed;
+            background-size: cover;
+            min-height: 100vh;
+        }
     </style>
 </head>
-<body>
+<body class ="background">
     <header>
         <a href="index.php" class="logo">Ubuntu</a>
     </header>
