@@ -1,0 +1,147 @@
+@startuml
+' ---------- styling ----------
+' Make it look neat
+skinparam linetype ortho
+skinparam shadowing false
+skinparam classAttributeIconSize 0
+
+' ---------- entities / tables ----------
+entity "users" as users {
+  * id : INT <<PK>>
+  --
+  username : VARCHAR(50)
+  email : VARCHAR(100)
+  password : VARCHAR(255)
+  email_verified : TINYINT
+  account_status : ENUM
+  failed_login_attempts : INT
+  last_login : DATETIME
+  created_at : TIMESTAMP
+  updated_at : TIMESTAMP
+}
+
+entity "courses" as courses {
+  * id : INT <<PK>>
+  --
+  title : VARCHAR(100)
+  description : TEXT
+  icon : VARCHAR(50)
+  folder_name : VARCHAR(50) <<UQ>>
+  is_active : TINYINT
+  created_at : TIMESTAMP
+  updated_at : TIMESTAMP
+}
+
+entity "modules" as modules {
+  * id : INT <<PK>>
+  --
+  course_id : INT <<FK>>
+  title : VARCHAR(100)
+  module_order : INT
+  video_url : VARCHAR(255)
+}
+
+entity "user_progress" as user_progress {
+  * id : INT <<PK>>
+  --
+  user_id : INT <<FK>>
+  course_id : INT <<FK>>
+  module_id : INT <<FK>>
+  completed : TINYINT
+  completed_at : TIMESTAMP
+  created_at : TIMESTAMP
+}
+
+entity "login_attempts" as login_attempts {
+  * id : INT <<PK>>
+  --
+  username : VARCHAR(50)
+  ip_address : VARCHAR(45)
+  success : TINYINT
+  attempted_at : TIMESTAMP
+}
+
+entity "sessions" as sessions {
+  * id : VARCHAR(128) <<PK>>
+  --
+  user_id : INT <<FK>>
+  ip_address : VARCHAR(45)
+  user_agent : VARCHAR(255)
+  payload : TEXT
+  last_activity : INT
+  created_at : TIMESTAMP
+}
+
+entity "password_resets" as password_resets {
+  * id : INT <<PK>>
+  --
+  user_id : INT <<FK>>
+  token : VARCHAR(64) <<UQ>>
+  expires_at : DATETIME
+  used : TINYINT
+  created_at : TIMESTAMP
+}
+
+entity "security_log" as security_log {
+  * id : INT <<PK>>
+  --
+  user_id : INT <<FK>> NULL
+  username : VARCHAR(50)
+  action : VARCHAR(100)
+  ip_address : VARCHAR(45)
+  user_agent : VARCHAR(255)
+  details : TEXT
+  severity : ENUM
+  created_at : TIMESTAMP
+}
+
+entity "testimonials" as testimonials {
+  * id : INT <<PK>>
+  --
+  name : VARCHAR(100)
+  role : VARCHAR(100)
+  content : TEXT
+  rating : INT
+  initials : VARCHAR(5)
+  created_at : TIMESTAMP
+}
+
+' ---------- relationships ----------
+' courses 1 - * modules
+courses ||--o{ modules : "has >"
+
+' modules 1 - * user_progress
+modules ||--o{ user_progress : "referenced by >"
+
+' courses 1 - * user_progress
+courses ||--o{ user_progress : "has progress >"
+
+' users 1 - * user_progress
+users ||--o{ user_progress : "owns >"
+
+' users 1 - * sessions
+users ||--o{ sessions : "has session >"
+
+' users 1 - * login_attempts (username-based)
+users ||--o{ login_attempts : "login attempts >"
+
+' users 1 - * password_resets
+users ||--o{ password_resets : "reset tokens >"
+
+' users 1 - * security_log
+users ||--o{ security_log : "audit logs >"
+
+' testimonials are standalone (no FK)
+
+' ---------- notes ----------
+note left of user_progress
+  Unique constraint:
+  (user_id, course_id, module_id)
+end note
+
+note right of sessions
+  last_activity stored as UNIX timestamp (INT)
+end note
+
+@enduml
+

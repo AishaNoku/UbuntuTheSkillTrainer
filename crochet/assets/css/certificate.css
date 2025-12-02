@@ -257,3 +257,20 @@ button:hover {
     font-size: 28px;
   }
 }
+
+#username {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+    font-size: 16px;
+}
+
+@media (max-width: 768px) {
+    #username {
+        width: 100%;
+        max-width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        margin: 0;
+    }
+}
